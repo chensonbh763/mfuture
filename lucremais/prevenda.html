@@ -7,15 +7,16 @@
   <title>Grupo Secreto no Telegram: Acesso Exclusivo aos Melhores Airdrops e Plataformas que Pagam</title>
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLFW5CXBJW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<!-- Tag do Google (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLFW5CXBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'G-SLFW5CXBJW');
-  </script>
+  gtag('config', 'G-SLFW5CXBJW');
+</script>
+
 
   <!-- Meta Pixel Code -->
   <script>
@@ -378,7 +379,8 @@
       "btn-checkout-mensal",
       "btn-checkout-tri",
       "btn-checkout-semestral",
-      "btn-checkout-anual"
+      "btn-checkout-anual",
+      "btn-checkout-vitalicio" // novo botão incluído
     ];
 
     // Função para definir cookie
@@ -400,7 +402,7 @@
       const params = new URLSearchParams(window.location.search);
       ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
         if (params.has(param)) {
-          setCookie(param, params.get(param), 7); // 7 dias de validade
+          setCookie(param, params.get(param), 7);
         }
       });
     }
@@ -422,7 +424,7 @@
     // Executa ao carregar
     getUTMParamsFromURL();
 
-    // Aplica UTMs dos cookies nos links + eventos de rastreamento
+    // Aplica UTMs e dispara eventos
     const utmString = getUTMStringFromCookies();
     botoes.forEach(id => {
       const botao = document.getElementById(id);
@@ -445,6 +447,7 @@
     });
   });
 </script>
+
 
 
 
