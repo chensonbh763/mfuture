@@ -100,3 +100,22 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 
 fbq('init', '2415912548743308'); // Seu ID do Pixel
 fbq('track', 'PageView');
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const botoesCheckout = [
+      "btn-checkout-mensal",
+      "btn-checkout-trimestral",
+      "btn-checkout-semestral",
+      "btn-checkout-anual"
+    ];
+
+    botoesCheckout.forEach(id => {
+      const botao = document.getElementById(id);
+      if (botao) {
+        botao.addEventListener("click", function() {
+          fbq('track', 'InitiateCheckout');
+        });
+      }
+    });
+  });
+</script>
