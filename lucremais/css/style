@@ -75,38 +75,3 @@ section ul li {
   color: #999999;
   font-size: 18px;
 }
-
-
-
-
-/* Estilo para destacar as seções ao passar o cursor */
-.section {
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.section.highlight {
-    background-color: #228b22;  /* Cor de destaque */
-    transform: scale(1.05); /* Efeito de leve aumento */
-}
-
-/* Estilo para revelar os itens com animação suave */
-.reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-/* Quando os itens entrarem na área visível, eles ficam opacos e deslizam */
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 40px;
-  color: #999999;
-  font-size: 14px;
-}
