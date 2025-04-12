@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -236,7 +237,13 @@ src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"
       <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
         Ideal para quem quer começar sem compromisso e testar todos os benefícios!
       </p>
-      <a href="https://pay.cakto.com.br/37zp4tv_323493" target="_blank" style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">Assinar Plano Mensal</a>
+      <a href="https://pay.cakto.com.br/37zp4tv_323493" 
+   target="_blank" 
+   id="btn-checkout"
+   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
+   Assinar Plano Mensal
+</a>
+
     </div>
 
     <!-- Plano Trimestral -->
@@ -245,7 +252,13 @@ src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"
       <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
         Economize R$ 9,80 — equivale a apenas R$ 16,63 por mês!
       </p>
-      <a href="https://pay.cakto.com.br/fjtipnq" target="_blank" style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">Assinar Plano Trimestral</a>
+     <a href="https://pay.cakto.com.br/fjtipnq" 
+   target="_blank" 
+   id="btn-checkout-tri"
+   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
+   Assinar Plano Trimestral
+</a>
+
     </div>
 
     <!-- Plano Semestral -->
@@ -254,7 +267,13 @@ src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"
       <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
         Economia de R$ 29,50 — você paga apenas R$ 14,98 por mês!
       </p>
-      <a href="https://pay.cakto.com.br/zwt3jo3" target="_blank" style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">Assinar Plano Semestral</a>
+    <a href="https://pay.cakto.com.br/zwt3jo3" 
+   target="_blank" 
+   id="btn-checkout-sem"
+   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
+   Assinar Plano Semestral
+</a>
+
     </div>
 <!-- Plano Anual -->
     <div style="background-color: #000000; border: 2px solid #228b22; border-radius: 10px; padding: 30px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
@@ -262,7 +281,13 @@ src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"
       <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
         O melhor custo-benefício: apenas R$ 13,32 por mês e economia de R$ 79,90 ao ano!
       </p>
-      <a href="https://pay.cakto.com.br/495wyhq" target="_blank" style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">Assinar Plano Anual</a>
+    <a href="https://pay.cakto.com.br/495wyhq" 
+   target="_blank" 
+   id="btn-checkout-anual"
+   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
+   Assinar Plano Anual
+</a>
+
     </div>
 </section>
 
@@ -373,5 +398,26 @@ src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"
   </footer>
 
   <script src="js/script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const botoesCheckout = [
+      "btn-checkout-mensal",
+      "btn-checkout-trimestral",
+      "btn-checkout-semestral",
+      "btn-checkout-anual"
+    ];
+
+    botoesCheckout.forEach(id => {
+      const botao = document.getElementById(id);
+      if (botao) {
+        botao.addEventListener("click", function() {
+          fbq('track', 'InitiateCheckout');
+        });
+      }
+    });
+  });
+</script>
+
+  
 </body>
 </html>
