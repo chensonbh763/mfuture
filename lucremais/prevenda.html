@@ -422,7 +422,7 @@
     // Executa ao carregar
     getUTMParamsFromURL();
 
-    // Aplica UTMs dos cookies nos links + evento pixel
+    // Aplica UTMs dos cookies nos links + eventos de rastreamento
     const utmString = getUTMStringFromCookies();
     botoes.forEach(id => {
       const botao = document.getElementById(id);
@@ -431,12 +431,21 @@
         botao.href = hrefBase + utmString;
 
         botao.addEventListener("click", function () {
+          // Meta Pixel
           fbq('track', 'InitiateCheckout');
+
+          // Google Analytics 4
+          gtag('event', 'click_assinatura', {
+            'event_category': 'Conversão',
+            'event_label': id,
+            'value': 1
+          });
         });
       }
     });
   });
 </script>
+
 
 
   
