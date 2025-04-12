@@ -1,0 +1,48 @@
+// Animação de destaque das seções ao passar o cursor
+document.addEventListener("DOMContentLoaded", function() {
+    const sections = document.querySelectorAll(".section");
+
+    // Adiciona a animação de destaque ao passar o cursor
+    sections.forEach(section => {
+        section.addEventListener("mouseenter", () => {
+            section.classList.add("highlight");
+        });
+
+        section.addEventListener("mouseleave", () => {
+            section.classList.remove("highlight");
+        });
+    });
+
+    // Revelação suave dos itens ao rolar a página
+    const revealItems = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+        const windowHeight = window.innerHeight;
+        
+        revealItems.forEach(item => {
+            const itemTop = item.getBoundingClientRect().top;
+
+            // Se o item estiver visível na tela, adiciona a classe 'visible'
+            if (itemTop < windowHeight - 100) {
+                item.classList.add("visible");
+            } else {
+                item.classList.remove("visible");
+            }
+        });
+    }
+
+    // Evento de scroll otimizado com debounce
+    let isScrolling = false;
+    window.addEventListener("scroll", function() {
+        if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(function() {
+                revealOnScroll();
+                isScrolling = false;
+            });
+        }
+    });
+
+    // Chama a função de revelação ao carregar a página para os itens já visíveis
+    revealOnScroll();
+});
