@@ -23,13 +23,13 @@ header {
 }
 
 header h1 {
-  font-size: 28px;
+  font-size: 2em;
   margin-bottom: 15px;
   color: #000000;
 }
 
 header p {
-  font-size: 18px;
+  font-size: 1.125em;
   color: #000000;
   margin-bottom: 25px;
 }
@@ -64,17 +64,18 @@ section {
 section h2 {
   color: #228b22;
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 1.5em;
 }
 
 section ul {
   list-style-type: none;
+  padding-left: 0;
 }
 
 section ul li {
   margin-bottom: 12px;
   color: #999999;
-  font-size: 18px;
+  font-size: 1.125em;
 }
 
 /* Estilo para destacar as seções ao passar o cursor */
@@ -105,5 +106,60 @@ footer {
   text-align: center;
   margin-top: 40px;
   color: #999999;
-  font-size: 14px;
+  font-size: 0.875em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  header {
+    padding: 30px 15px;
+  }
+
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  header p {
+    font-size: 1em;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+
+  section {
+    padding: 20px 15px;
+  }
+
+  section h2 {
+    font-size: 1.3em;
+  }
+
+  section ul li {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.3em;
+  }
+
+  header p {
+    font-size: 0.95em;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  section h2 {
+    font-size: 1.2em;
+  }
+
+  section ul li {
+    font-size: 0.95em;
+  }
 }
