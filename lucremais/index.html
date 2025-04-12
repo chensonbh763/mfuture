@@ -399,24 +399,71 @@ src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"
 
   <script src="js/script.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const botoesCheckout = [
+  document.addEventListener("DOMContentLoaded", function () {
+    const botoes = [
       "btn-checkout-mensal",
-      "btn-checkout-trimestral",
+      "btn-checkout-tri",
       "btn-checkout-semestral",
       "btn-checkout-anual"
     ];
 
-    botoesCheckout.forEach(id => {
+    // Função para definir cookie
+    function setCookie(name, value, days) {
+      const expires = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/";
+    }
+
+    // Função para ler cookie
+    function getCookie(name) {
+      return document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=');
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r
+      }, '');
+    }
+
+    // Captura os UTMs da URL
+    function getUTMParamsFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
+        if (params.has(param)) {
+          setCookie(param, params.get(param), 7); // 7 dias de validade
+        }
+      });
+    }
+
+    // Monta a string de UTM com base nos cookies
+    function getUTMStringFromCookies() {
+      const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+      const params = utmParams
+        .map(param => {
+          const val = getCookie(param);
+          return val ? `${param}=${encodeURIComponent(val)}` : '';
+        })
+        .filter(Boolean)
+        .join('&');
+
+      return params ? `?${params}` : '';
+    }
+
+    // Executa ao carregar
+    getUTMParamsFromURL();
+
+    // Aplica UTMs dos cookies nos links + evento pixel
+    const utmString = getUTMStringFromCookies();
+    botoes.forEach(id => {
       const botao = document.getElementById(id);
       if (botao) {
-        botao.addEventListener("click", function() {
+        const hrefBase = botao.href.split('?')[0];
+        botao.href = hrefBase + utmString;
+
+        botao.addEventListener("click", function () {
           fbq('track', 'InitiateCheckout');
         });
       }
     });
   });
 </script>
+
 
   
 </body>
