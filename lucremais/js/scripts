@@ -1,5 +1,5 @@
 // Animação de destaque das seções ao passar o cursor
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const sections = document.querySelectorAll(".section");
 
     // Adiciona a animação de destaque ao passar o cursor
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function revealOnScroll() {
         const windowHeight = window.innerHeight;
-        
+
         revealItems.forEach(item => {
             const itemTop = item.getBoundingClientRect().top;
 
@@ -33,10 +33,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Evento de scroll otimizado com debounce
     let isScrolling = false;
-    window.addEventListener("scroll", function() {
+    window.addEventListener("scroll", function () {
         if (!isScrolling) {
             isScrolling = true;
-            requestAnimationFrame(function() {
+            requestAnimationFrame(function () {
                 revealOnScroll();
                 isScrolling = false;
             });
@@ -45,4 +45,58 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Chama a função de revelação ao carregar a página para os itens já visíveis
     revealOnScroll();
+
+    // ======== UTM Tracking + Aplicação em Links + Evento Pixel ========
+
+    // Captura UTMs da URL
+    function getUTMs() {
+        const params = new URLSearchParams(window.location.search);
+        const utms = {};
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+            if (params.get(key)) {
+                utms[key] = params.get(key);
+            }
+        });
+        return utms;
+    }
+
+    // Salva UTMs no localStorage
+    const storedUtms = JSON.parse(localStorage.getItem('utm_params') || '{}');
+    const currentUtms = getUTMs();
+    if (Object.keys(currentUtms).length > 0) {
+        localStorage.setItem('utm_params', JSON.stringify(currentUtms));
+    }
+
+    // Aplica UTMs aos links e envia evento Pixel
+    const utms = JSON.parse(localStorage.getItem('utm_params') || '{}');
+    document.querySelectorAll('a').forEach(link => {
+        const originalUrl = new URL(link.href);
+        Object.entries(utms).forEach(([key, value]) => {
+            originalUrl.searchParams.set(key, value);
+        });
+        link.href = originalUrl.toString();
+
+        // Evento do Pixel ao clicar no botão
+        link.addEventListener('click', () => {
+            if (typeof fbq === 'function') {
+                fbq('trackCustom', 'BotaoClicado', {
+                    href: link.href,
+                    utms: utms
+                });
+            }
+        });
+    });
 });
+
+// ======== Facebook Pixel Code (fora do DOMContentLoaded) ========
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '2415912548743308'); // Seu ID do Pixel
+fbq('track', 'PageView');
