@@ -55,16 +55,15 @@
       text-align: center;
     }
   </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLFW5CXBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SLFW5CXBJW');
-</script>
 
-
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLFW5CXBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SLFW5CXBJW');
+  </script>
 </head>
 <body>
 
@@ -80,31 +79,34 @@
   </div>
 
   <script>
- document.getElementById("leadForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
+    document.getElementById("leadForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
 
-  const form = e.target;
-  const formData = new FormData(form);
+      const form = e.target;
+      const formData = new FormData(form);
 
-  const webhookURL = "https://script.google.com/macros/s/AKfycbw0jWdUjxyC4k_ueIkAv2W4y_Cvz9UtCPsqWtRkX0oxWGLX3-cauLRNDLDPDOckDAMEog/exec";
-  const redirectURL = "https://www.mfuture.com.br/lucremais/apps.html"; 
+      const webhookURL = "https://script.google.com/macros/s/AKfycby5jBed37E-pYMnvQmGX7dOcskxSk9n_qrjidwgEF80/dev";
+      const redirectURL = "https://www.mfuture.com.br/lucremais/apps.html"; 
 
-  try {
-    await fetch(webhookURL, {
-      method: "POST",
-      body: formData,
+      try {
+        const response = await fetch(webhookURL, {
+          method: "POST",
+          body: formData
+        });
+
+        const text = await response.text();
+        if (text.trim() === "OK") {
+          document.getElementById("successMsg").style.display = "block";
+          setTimeout(() => {
+            window.location.href = redirectURL;
+          }, 2000);
+        } else {
+          alert("Erro ao enviar os dados. Tente novamente.");
+        }
+      } catch (error) {
+        alert("Ocorreu um erro. Tente novamente.");
+      }
     });
-
-    document.getElementById("successMsg").style.display = "block";
-
-    setTimeout(() => {
-      window.location.href = redirectURL;
-    }, 2000);
-  } catch (error) {
-    alert("Ocorreu um erro. Tente novamente.");
-  }
-});
-
   </script>
 
 </body>
