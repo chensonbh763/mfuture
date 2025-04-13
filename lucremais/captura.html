@@ -80,37 +80,31 @@
   </div>
 
   <script>
-    document.getElementById("leadForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
+ document.getElementById("leadForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
 
-      const form = e.target;
-      const data = {
-        nome: form.nome.value,
-        email: form.email.value,
-        whatsapp: form.whatsapp.value
-      };
+  const form = e.target;
+  const formData = new FormData(form);
 
-      const webhookURL = "https://script.google.com/macros/s/AKfycbw0jWdUjxyC4k_ueIkAv2W4y_Cvz9UtCPsqWtRkX0oxWGLX3-cauLRNDLDPDOckDAMEog/exec";
-      const redirectURL = "https://www.mfuture.com.br/lucremais/apps.html"; 
+  const webhookURL = "https://script.google.com/macros/s/AKfycbw0jWdUjxyC4k_ueIkAv2W4y_Cvz9UtCPsqWtRkX0oxWGLX3-cauLRNDLDPDOckDAMEog/exec";
+  const redirectURL = "https://www.mfuture.com.br/lucremais/apps.html"; 
 
-      try {
-        await fetch(webhookURL, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-
-        document.getElementById("successMsg").style.display = "block";
-
-        setTimeout(() => {
-          window.location.href = redirectURL;
-        }, 2000); // 2 segundos de delay para mostrar a mensagem
-      } catch (error) {
-        alert("Ocorreu um erro. Tente novamente.");
-      }
+  try {
+    await fetch(webhookURL, {
+      method: "POST",
+      body: formData,
     });
+
+    document.getElementById("successMsg").style.display = "block";
+
+    setTimeout(() => {
+      window.location.href = redirectURL;
+    }, 2000);
+  } catch (error) {
+    alert("Ocorreu um erro. Tente novamente.");
+  }
+});
+
   </script>
 
 </body>
