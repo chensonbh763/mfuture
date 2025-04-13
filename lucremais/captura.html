@@ -56,7 +56,7 @@
     }
   </style>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLFW5CXBJW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -95,16 +95,21 @@
         });
 
         const text = await response.text();
+        
         if (text.trim() === "OK") {
+          // Exibe mensagem de sucesso e redireciona
           document.getElementById("successMsg").style.display = "block";
           setTimeout(() => {
             window.location.href = redirectURL;
           }, 2000);
         } else {
-          alert("Erro ao enviar os dados. Tente novamente.");
+          // Trata respostas inesperadas do servidor
+          alert(`Erro: Resposta inesperada do servidor. Detalhes: ${text}`);
         }
       } catch (error) {
-        alert("Ocorreu um erro. Tente novamente.");
+        // Trata erros de comunicação
+        alert("Ocorreu um erro ao enviar os dados. Por favor, tente novamente.");
+        console.error("Erro:", error);
       }
     });
   </script>
