@@ -167,5 +167,28 @@
          Acessar Oferta
       </a>
     </div>
+<script>
+  // Evento para rastrear cliques nos links de aplicativos
+  document.querySelectorAll('.rastreamento-link').forEach(link => {
+    link.addEventListener('click', function() {
+      const appName = this.getAttribute('data-nome');
+      gtag('event', 'clique_app', {
+        'event_category': 'Aplicativos',
+        'event_label': appName,
+        'value': 1
+      });
+    });
+  });
+
+  // Evento para rastrear o início da jornada de conversão
+  document.querySelectorAll('.offer-button').forEach(button => {
+    button.addEventListener('click', function() {
+      gtag('event', 'iniciou_jornada_conversao', {
+        'event_category': 'Conversao',
+        'event_label': 'Pagina Prevenda'
+      });
+    });
+  });
+</script>
 </body>
 </html>
