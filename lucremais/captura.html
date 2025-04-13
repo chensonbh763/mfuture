@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preencha e receba a lista de aplicativos pagantes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .success {
+      color: green;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLFW5CXBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SLFW5CXBJW');
+</script>
+
+
+</head>
+<body>
+
+  <div class="container">
+    <h1>Preencha e receba a lista de aplicativos pagantes</h1>
+    <form id="leadForm">
+      <input type="text" name="nome" placeholder="Seu nome" required />
+      <input type="email" name="email" placeholder="Seu e-mail" required />
+      <input type="text" name="whatsapp" placeholder="Seu WhatsApp" required />
+      <button type="submit">Quero Receber</button>
+      <p class="success" id="successMsg" style="display: none;">Enviado com sucesso! Redirecionando...</p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("leadForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        nome: form.nome.value,
+        email: form.email.value,
+        whatsapp: form.whatsapp.value
+      };
+
+      const webhookURL = "https://script.google.com/macros/s/AKfycbw0jWdUjxyC4k_ueIkAv2W4y_Cvz9UtCPsqWtRkX0oxWGLX3-cauLRNDLDPDOckDAMEog/exec";
+      const redirectURL = "https://www.mfuture.com.br/lucremais/apps.html"; 
+
+      try {
+        await fetch(webhookURL, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        document.getElementById("successMsg").style.display = "block";
+
+        setTimeout(() => {
+          window.location.href = redirectURL;
+        }, 2000); // 2 segundos de delay para mostrar a mensagem
+      } catch (error) {
+        alert("Ocorreu um erro. Tente novamente.");
+      }
+    });
+  </script>
+
+</body>
+</html>
