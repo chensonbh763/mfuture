@@ -48,22 +48,7 @@
     button:hover {
       background: #45a049;
     }
-
-    .success {
-      color: green;
-      margin-top: 15px;
-      text-align: center;
-    }
   </style>
-
-  <!-- Google Tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLFW5CXBJW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-SLFW5CXBJW');
-  </script>
 </head>
 <body>
 
@@ -74,7 +59,6 @@
       <input type="email" name="email" placeholder="Seu e-mail" required />
       <input type="text" name="whatsapp" placeholder="Seu WhatsApp" required />
       <button type="submit">Quero Receber</button>
-      <p class="success" id="successMsg" style="display: none;">Enviado com sucesso! Redirecionando...</p>
     </form>
   </div>
 
@@ -89,27 +73,16 @@
       const redirectURL = "https://www.mfuture.com.br/lucremais/apps.html"; 
 
       try {
-        const response = await fetch(webhookURL, {
+        await fetch(webhookURL, {
           method: "POST",
           body: formData
         });
 
-        const text = await response.text();
-        
-        if (text.trim() === "OK") {
-          // Exibe mensagem de sucesso e redireciona
-          document.getElementById("successMsg").style.display = "block";
-          setTimeout(() => {
-            window.location.href = redirectURL;
-          }, 2000);
-        } else {
-          // Trata respostas inesperadas do servidor
-          alert(`Erro: Resposta inesperada do servidor. Detalhes: ${text}`);
-        }
+        // Redireciona o usuário independentemente do resultado
+        window.location.href = redirectURL;
       } catch (error) {
-        // Trata erros de comunicação
-        alert("Ocorreu um erro ao enviar os dados. Por favor, tente novamente.");
-        console.error("Erro:", error);
+        // Em caso de falha, ainda redireciona
+        window.location.href = redirectURL;
       }
     });
   </script>
