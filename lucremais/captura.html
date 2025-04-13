@@ -49,22 +49,32 @@
       background: #45a049;
     }
   </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-F1M3JXQ7VR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-F1M3JXQ7VR');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1M3JXQ7VR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F1M3JXQ7VR');
+  </script>
+
+  <!-- Script para rastreamento do envio do formulário -->
+  <script>
+    function gtag_report_conversion() {
+      gtag('event', 'formulario_enviado', {
+        'event_category': 'captura',
+        'event_label': 'envio_para_apps'
+      });
+    }
+  </script>
 
 </head>
 <body>
 
   <div class="container">
     <h1>Preencha e receba a lista de aplicativos pagantes</h1>
-    <form id="leadForm">
+    <form id="leadForm" onsubmit="gtag_report_conversion()">
       <input type="text" name="nome" placeholder="Seu nome" required />
       <input type="email" name="email" placeholder="Seu e-mail" required />
       <input type="text" name="whatsapp" placeholder="Seu WhatsApp" required />
@@ -75,6 +85,8 @@
   <script>
     document.getElementById("leadForm").addEventListener("submit", async function(e) {
       e.preventDefault();
+
+      gtag_report_conversion(); // Garante o evento GA antes do redirecionamento
 
       const form = e.target;
       const formData = new FormData(form);
@@ -88,10 +100,8 @@
           body: formData
         });
 
-        // Redireciona o usuário independentemente do resultado
         window.location.href = redirectURL;
       } catch (error) {
-        // Em caso de falha, ainda redireciona
         window.location.href = redirectURL;
       }
     });
