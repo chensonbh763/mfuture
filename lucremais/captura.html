@@ -59,6 +59,25 @@
     gtag('config', 'G-F1M3JXQ7VR');
   </script>
 
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2415912548743308');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
   <!-- Script para rastreamento do envio do formulário -->
   <script>
     function gtag_report_conversion() {
@@ -67,6 +86,10 @@
         'event_label': 'envio_para_apps'
       });
     }
+
+    function fbq_lead_event() {
+      fbq('track', 'Lead');
+    }
   </script>
 
 </head>
@@ -74,7 +97,7 @@
 
   <div class="container">
     <h1>Preencha e receba a lista de aplicativos pagantes</h1>
-    <form id="leadForm" onsubmit="gtag_report_conversion()">
+    <form id="leadForm" onsubmit="gtag_report_conversion(); fbq_lead_event();">
       <input type="text" name="nome" placeholder="Seu nome" required />
       <input type="email" name="email" placeholder="Seu e-mail" required />
       <input type="text" name="whatsapp" placeholder="Seu WhatsApp" required />
@@ -86,7 +109,8 @@
     document.getElementById("leadForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
-      gtag_report_conversion(); // Garante o evento GA antes do redirecionamento
+      gtag_report_conversion(); // GA4
+      fbq_lead_event();         // Facebook Pixel
 
       const form = e.target;
       const formData = new FormData(form);
