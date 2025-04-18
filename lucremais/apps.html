@@ -70,10 +70,30 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ35C5CL5L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-TQ35C5CL5L');
   </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2415912548743308');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
 </head>
 <body>
   <header>
@@ -141,54 +161,25 @@
     <div class="app">
       <h2>PagBank</h2>
       <p>Gerencie seu dinheiro e ganhe vantagens.</p>
-      <a href="https://indicapagbank.page.link/fFvmbxqSsDn6CRvV6" target="_blank"
-         onclick="gtag('event', 'click_app_link', {event_category: 'Aplicativo', event_label: 'PagBank'});">Cadastre-se aqui</a>
+      <a href="https://pagbank.com.br" target="_blank"
+         onclick="gtag('event', 'click_app_link', {event_category: 'Aplicativo', event_label: 'PagBank'});">Acesse agora</a>
     </div>
 
-    <div class="app">
-      <h2>Google Paid Tasks</h2>
-      <p>Ganhe dinheiro realizando tarefas simples.</p>
-      <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks" target="_blank"
-         onclick="gtag('event', 'click_app_link', {event_category: 'Aplicativo', event_label: 'Google Paid Tasks'});">Baixe o app</a>
-    </div>
-
-    <div class="app">
-      <h2>Mercado Pago</h2>
-      <p>💵 Nosso dinheiro rende 105% do CDI com liquidez diária!</p>
-      <a href="https://www.mercadopago.com.br/" target="_blank"
-         onclick="gtag('event', 'click_app_link', {event_category: 'Aplicativo', event_label: 'Mercado Pago'});">Acesse agora</a>
-    </div>
-
-        <div class="promo">
-            <p>Se de graça eu te mostrei <strong>10 aplicativos que pagam</strong>, imagina no <strong>grupo VIP</strong>. Agora você já tem o dinheiro que precisa para entrar e mais uma grana para curtir. Vamos juntos?</p>
-        </div>
+    <!-- Botão com evento de conversão -->
+    <div class="promo">
+      <p><strong>Quer multiplicar seus ganhos?</strong> Aproveite essa oferta exclusiva:</p>
       <a href="https://www.mfuture.com.br/lucremais/prevenda.html" class="offer-button" target="_blank"
-         onclick="gtag('event', 'iniciou_jornada_conversao', {event_category: 'Conversao', event_label: 'Pagina Prevenda'});">
-         Acessar Oferta
-      </a>
+         onclick="
+           gtag('event', 'iniciou_jornada_conversao', {
+             event_category: 'Conversao',
+             event_label: 'Pagina Prevenda'
+           });
+           fbq('trackCustom', 'iniciou_jornada_conversao', {
+             content_name: 'Pagina Prevenda'
+           });
+         ">Acessar Oferta</a>
     </div>
-<script>
-  // Evento para rastrear cliques nos links de aplicativos
-  document.querySelectorAll('.rastreamento-link').forEach(link => {
-    link.addEventListener('click', function() {
-      const appName = this.getAttribute('data-nome');
-      gtag('event', 'clique_app', {
-        'event_category': 'Aplicativos',
-        'event_label': appName,
-        'value': 1
-      });
-    });
-  });
 
-  // Evento para rastrear o início da jornada de conversão
-  document.querySelectorAll('.offer-button').forEach(button => {
-    button.addEventListener('click', function() {
-      gtag('event', 'iniciou_jornada_conversao', {
-        'event_category': 'Conversao',
-        'event_label': 'Pagina Prevenda'
-      });
-    });
-  });
-</script>
+  </div>
 </body>
 </html>
