@@ -1,16 +1,12 @@
 <div class="sidebar">
-  <h3>📂 Categorias</h3>
+  <h3>Categorias</h3>
   <ul>
-    {% assign categories = site.categories | sort %}
-    {% for category in categories %}
-      <li><a href="{{ site.baseurl }}/categories/{{ category[0] }}">{{ category[0] | capitalize }}</a></li>
-    {% endfor %}
+    <li><a href="#">Renda Extra</a></li>
+    <li><a href="#">Marketing Digital</a></li>
+    <li><a href="#">Afiliados</a></li>
   </ul>
-
-  <h3>🕒 Últimos Posts</h3>
+  <h3>Últimos Posts</h3>
   <ul>
-    {% for post in site.posts limit:5 %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
+    <li><a href="#">Como ganhar dinheiro com renda extra em 2025</a></li>
   </ul>
 </div>
