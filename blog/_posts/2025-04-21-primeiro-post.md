@@ -11,4 +11,4 @@ Neste post eu te mostro os primeiros passos para transformar seu tempo livre em 
 2. Crie conteúdos no Instagram, TikTok ou blog como esse.
 3. Use automações para vender enquanto dorme.
 
-Quer acelerar tudo isso? Conheça meu **[Grupo VIP Lucre Mais](/grupo-vip)**!
+Quer acelerar tudo isso? Conheça meu **[Grupo VIP Lucre Mais](/lucremais)**!
