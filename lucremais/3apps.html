@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3 Apps Que Pagam</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    h1 {
+      background: #2ebd59;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    .app {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 20px;
+    }
+    .app h2 {
+      color: #222;
+    }
+    .app p {
+      margin: 5px 0;
+    }
+    .app img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .btn {
+      display: block;
+      text-align: center;
+      background: #28a745;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .vip {
+      background: #2ebd59;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .vip a {
+      background: #0e0e0e;
+      color: #fff;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+  </style>
+
+  <!-- Google Tag Manager (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KNKG4TW9F9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KNKG4TW9F9');
+  </script>
+
+  <!-- Meta Pixel (Facebook) -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '346744528127702');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=346744528127702&ev=PageView&noscript=1"/>
+  </noscript>
+</head>
+
+<body>
+  <div class="container">
+    <h1>3 Aplicativos Que Pagam</h1>
+
+    <div class="app">
+      <h2>1. MODATTA</h2>
+      <p>💸 R$1 por cada indicação</p>
+      <p>✅ Missões pagas diariamente</p>
+      <img src="modatta-comprovante.png" alt="Comprovante de pagamento Modatta" />
+      <a class="btn external-link" href="https://invite.modatta.com/?ref=AUYYYE">Cadastre-se Aqui</a>
+    </div>
+
+    <div class="app">
+      <h2>2. WINZO</h2>
+      <p>🎮 R$60 de bônus para jogar</p>
+      <p>💰 Até R$5 por indicação</p>
+      <img src="winzo-comprovante.png" alt="Comprovante de pagamento Winzo" />
+      <a class="btn external-link" href="https://winzogames.onelink.me/IoIm/mfuture">Baixe Agora</a>
+    </div>
+
+    <div class="app">
+      <h2>3. NGCASH</h2>
+      <p>💵 R$5 no cadastro + R$5 por indicação</p>
+      <p>🚀 Código: <strong>GANHEINDICANDO</strong></p>
+      <img src="ngcash-comprovante.png" alt="Comprovante de pagamento NGCash" />
+      <a class="btn external-link" href="https://ng.cash/invite/GANHEINDICANDO">Cadastrar e Ganhar</a>
+    </div>
+
+    <div class="vip">
+      <h2>Quer Ganhar Ainda Mais?</h2>
+      <p>Esses são só os apps públicos. Os mais lucrativos estão no nosso <strong>Grupo VIP</strong>, com bônus semanais, airdrops, estratégias e muito mais.</p>
+      <p><strong>Acesso vitalício na pré-venda por apenas R$25!</strong></p>
+      <img src="beneficios.png" alt="Benefícios do Grupo VIP" style="max-width:100%; margin: 20px 0; border-radius: 12px;">
+      <a class="external-link" href="https://mfuture.com.br/lucremais/prevenda.html">Quero Acesso Vitalício</a>
+    </div>
+  </div>
+
+  <!-- Script para eventos personalizados ao clicar em links externos -->
+  <script>
+    document.querySelectorAll('a.external-link').forEach(link => {
+      link.addEventListener('click', function() {
+        const url = this.href;
+        gtag('event', 'clique_externo', {
+          'event_category': 'engajamento',
+          'event_label': url,
+          'value': 1
+        });
+        fbq('trackCustom', 'CliqueLink', {
+          link_url: url
+        });
+      });
+    });
+  </script>
+</body>
+        </html>
