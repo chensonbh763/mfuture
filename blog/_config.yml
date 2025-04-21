@@ -1,14 +1,3 @@
-title: "Blog Lucre Mais"
-description: "Dicas de renda extra, marketing digital e infoprodutos"
-baseurl: "" # deixe vazio se estiver na raiz
-url: "https://seunome.github.io" # ou seu domínio customizado
-theme: minima
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
 
-# Permitir markdown
-markdown: kramdown
-
-# SEO básico
-author: Seu Nome
+title: Blog Lucre Mais
+description: Dicas sobre renda extra, marketing digital e afiliação.
