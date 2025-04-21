@@ -1,0 +1,32 @@
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: sans-serif;
+  margin: 0;
+}
+header {
+  background-color: #0044cc;
+  color: white;
+  padding: 1rem;
+}
+header a {
+  color: white;
+  text-decoration: none;
+}
+.main-content {
+  display: flex;
+}
+main {
+  flex: 3;
+  padding: 1rem;
+}
+.sidebar {
+  flex: 1;
+  background-color: #0044cc;
+  padding: 1rem;
+  color: white;
+}
+.sidebar a {
+  color: white;
+}
