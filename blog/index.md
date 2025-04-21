@@ -1,4 +1,3 @@
-
 ---
 layout: default
 title: "Bem-vindo ao Blog Lucre Mais"
