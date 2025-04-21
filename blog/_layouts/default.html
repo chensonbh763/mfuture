@@ -1,18 +1,19 @@
+
+
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}">
-  </head>
-  <body>
-    {% include header.html %}
-    <main>
-      {% include sidebar.html %}
-      <div class="content">
-        {{ content }}
-      </div>
-    </main>
-    {% include footer.html %}
-  </body>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+</head>
+<body>
+  <header>
+    <h1><a href="{{ "/" | relative_url }}">mfuture</a></h1>
+  </header>
+  <div class="main-content">
+    <main>{{ content }}</main>
+    {% include sidebar.html %}
+  </div>
+</body>
 </html>
