@@ -1,12 +1,16 @@
-<div class="sidebar">
-  <h3>Categorias</h3>
+<aside class="sidebar">
+  <h2>Últimos Posts</h2>
   <ul>
-    <li><a href="#">Renda Extra</a></li>
-    <li><a href="#">Marketing Digital</a></li>
-    <li><a href="#">Afiliados</a></li>
+    {% for post in site.posts limit:5 %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
   </ul>
-  <h3>Últimos Posts</h3>
+
+  <h2>Categorias</h2>
   <ul>
-    <li><a href="#">Como ganhar dinheiro com renda extra em 2025</a></li>
+    {% assign categories = site.categories | sort %}
+    {% for category in categories %}
+      <li><a href="/blog/categoria/{{ category[0] | slugify }}/">{{ category[0] }} ({{ category[1].size }})</a></li>
+    {% endfor %}
   </ul>
-</div>
+</aside>
