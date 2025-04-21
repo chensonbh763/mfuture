@@ -1,6 +1,6 @@
 ---
-layout: default
 title: Sobre
+layout: default
 ---
 
-Este blog foi criado para compartilhar ideias e experiências de como ganhar dinheiro na internet, divulgar infoprodutos e viver com mais liberdade financeira.
+Essa é a página sobre o blog.
