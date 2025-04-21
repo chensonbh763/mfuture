@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Receba 3 aplicativos que estão pagando em 2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1M3JXQ7VR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F1M3JXQ7VR');
+  </script>
+
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2415912548743308');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
+  <!-- Script para rastreamento do envio do formulário -->
+  <script>
+    function gtag_report_conversion() {
+      gtag('event', 'formulario_enviado', {
+        'event_category': 'captura',
+        'event_label': 'envio_para_apps'
+      });
+    }
+
+    function fbq_lead_event() {
+      fbq('track', 'Lead');
+    }
+  </script>
+
+</head>
+<body>
+
+  <div class="container">
+    <h1>Receba 3 aplicativos que estão pagando em 2024</h1>
+    <form id="leadForm" onsubmit="gtag_report_conversion(); fbq_lead_event();">
+      <input type="text" name="nome" placeholder="Seu nome" required />
+      <input type="email" name="email" placeholder="Seu e-mail" required />
+      <input type="text" name="whatsapp" placeholder="Seu WhatsApp" required />
+      <button type="submit">Quero Receber</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("leadForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      gtag_report_conversion(); // GA4
+      fbq_lead_event();         // Facebook Pixel
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      const webhookURL = "https://script.google.com/macros/s/AKfycbyzit5BMdIBFbVDhe-QRmW-opNxqskxJ5VuUVg8Xa5QcL2Y7aKdB1AUK6xXimkIr--j/exec";
+      const redirectURL = "https://www.mfuture.com.br/lucremais/3apps.html";
+
+      try {
+        await fetch(webhookURL, {
+          method: "POST",
+          body: formData
+        });
+
+        window.location.href = redirectURL;
+      } catch (error) {
+        window.location.href = redirectURL;
+      }
+    });
+  </script>
+
+</body>
+</html>
