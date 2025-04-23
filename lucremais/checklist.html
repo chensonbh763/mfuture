@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist - LucreMais</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    h1, h2 {
+      color: #4CAF50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    input[type="text"] {
+      width: 90%;
+      padding: 5px;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.2);
+      margin-right: 8px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .note {
+      background-color: #e7f3fe;
+      padding: 10px;
+      border-left: 6px solid #2196F3;
+      margin-top: 15px;
+    }
+    a {
+      color: #2196F3;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Checklist Interativo - Como Faturar de R$30 a R$200 Rápido</h1>
+
+  <div class="section">
+    <h2>📝 Como Usar Este Checklist</h2>
+    <p>Este checklist é simples e ideal para quem está começando. Use a primeira parte para acompanhar tarefas rápidas diárias. Na segunda, marque ações práticas. Preencha os campos e marque as caixas conforme avança. Dica: utilize o navegador Chrome para melhor experiência no celular.</p>
+  </div>
+
+  <div class="section">
+    <h2>✅ Checklist Diário (7 Dias)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dia</th>
+          <th>Tempo reservado para aplicar (✅)</th>
+          <th>Ganhos registrados (R$)</th>
+          <th>Compartilhou links de indicação?</th>
+          <th>Verificou novos grupos no WhatsApp?</th>
+          <th>Agendou posts no Telegram?</th>
+          <th>Testou novo app de renda passiva?</th>
+          <th>Avaliou resultados do dia?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Gerar 7 linhas -->
+        <script>
+          for (let i = 1; i <= 7; i++) {
+            document.write('<tr>');
+            document.write('<td>Dia ' + i + '</td>');
+            for (let j = 0; j < 7; j++) {
+              document.write('<td><input type="text"></td>');
+            }
+            document.write('</tr>');
+          }
+        </script>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>📋 Etapas Práticas (Marque ao Concluir)</h2>
+    <ul>
+      <li><label><input type="checkbox"> Verifique <a href="https://valoresareceber.bcb.gov.br" target="_blank">valores esquecidos no Banco Central</a></label></li>
+      <li><label><input type="checkbox"> Consulte <a href="https://www.gov.br/pt-br/servicos/consultar-beneficios-do-trabalhador" target="_blank">benefícios como PIS ou seguro</a></label></li>
+      <li><label><input type="checkbox"> Cadastre-se em 3 apps que pagam no cadastro</label></li>
+      <li><label><input type="checkbox"> Faça tarefas em apps/sites de microtarefas (ClipClaps, TikTok Lite...)</label></li>
+      <li><label><input type="checkbox"> Baixe e rode 2 apps de renda passiva no celular</label></li>
+      <li><label><input type="checkbox"> Compartilhe links de indicação para ganhar com convites</label></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>💡 Dicas Profissionais Para Maximizar os Ganhos</h2>
+    <ul>
+      <li><strong>Use grupos de WhatsApp:</strong> Acesse <a href="https://drive.google.com/drive/folders/1-UJ3U2uCl7DXrGFnGV2lt-nNjH2GXfk8" target="_blank">esta pasta</a> e filtre os melhores com esta <a href="https://chensonbh763.github.io/verificador-/index.html" target="_blank">ferramenta</a>.</li>
+      <li><strong>Divulgação estratégica:</strong> Compartilhe em 5 grupos por hora. Troque os grupos a cada 3 dias para não saturar.</li>
+      <li><strong>Telegram com agendamento:</strong> No app, segure o botão de envio e agende publicações.</li>
+      <li><strong>Recompensas com Picoworkers:</strong> Crie pequenas tarefas e pague por cadastro com seu link.</li>
+      <li><strong>Persistência diária:</strong> Com apenas 10 minutos por dia você já começa a ver resultados.</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    💬 DICA EXTRA: Combine várias fontes de renda. Mesmo que cada uma pareça pequena, juntas formam um bom valor no fim do mês!
+  </div>
+
+</body>
+</html>
