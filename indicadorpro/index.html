@@ -180,6 +180,21 @@ Você não precisa tentar adivinhar o que dá certo. Nós já testamos e organiz
     });
   });
 </script>
+<script>
+  window.addEventListener('scroll', function() {
+    let scrollTop = window.scrollY;
+    let windowHeight = window.innerHeight;
+    let documentHeight = document.body.offsetHeight;
+    let scrollPercent = (scrollTop + windowHeight) / documentHeight;
+
+    if (scrollPercent > 0.95) { // Se chegou a 95% da página
+      gtag('event', 'leu_ate_o_fim', {
+        'event_category': 'Engajamento',
+        'event_label': 'Usuário leu até o fim da página'
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
