@@ -180,7 +180,9 @@ Você não precisa tentar adivinhar o que dá certo. Nós já testamos e organiz
   <li>✔️ Ferramenta para reduzir bloqueios e aumentar seus ganhos</li>
 </ul>
 
-<a id="botao-compra" class="button" href="https://pay.kirvano.com/90591aef-0acc-45ec-b289-433142538ba9" target="_blank">Quero Garantir Agora!</a>
+<!-- Botão de compra -->
+<a id="botao-compra" class="button" href="#" target="_blank">Quero Garantir Agora!</a>
+
 
 
 
@@ -196,7 +198,9 @@ Você não precisa tentar adivinhar o que dá certo. Nós já testamos e organiz
   <p><strong>3. Funciona para qualquer produto?</strong><br>Sim! As estratégias funcionam em diversos nichos.</p>
   <p><strong>4. Quanto tempo até ter resultados?</strong><br>Com dedicação, é possível ver resultados já nas primeiras semanas.</p>
   <p><strong>5. Como vou receber o conteúdo?</strong><br>Logo após o pagamento, você recebe tudo por e-mail ou WhatsApp.</p>
-<a id="botao-compra" class="button" href="https://pay.kirvano.com/90591aef-0acc-45ec-b289-433142538ba9" target="_blank">Quero Garantir Agora!</a>
+<!-- Botão de compra -->
+<a id="botao-compra" class="button" href="#" target="_blank">Quero Garantir Agora!</a>
+
 <script>
   document.getElementById('botao-compra').addEventListener('click', function() {
     gtag('event', 'clique_botao_compra', {
@@ -222,8 +226,38 @@ Você não precisa tentar adivinhar o que dá certo. Nós já testamos e organiz
   });
 </script>
 <script>
-document.getElementById('botao-compra').addEventListener('click', function() {
+// Função para pegar parâmetros UTM da URL
+function getUTMParams() {
+  const params = new URLSearchParams(window.location.search);
+  let utms = [];
+  params.forEach((value, key) => {
+    if (key.startsWith('utm_')) {
+      utms.push(`${key}=${encodeURIComponent(value)}`);
+    }
+  });
+  return utms.join('&');
+}
+
+// Captura o clique no botão
+document.getElementById('botao-compra').addEventListener('click', function(e) {
+  e.preventDefault(); // Impede o redirecionamento automático
+
+  // Base do seu link de checkout
+  let baseCheckoutLink = 'https://pay.kirvano.com/90591aef-0acc-45ec-b289-433142538ba9';
+
+  // Pega os parâmetros UTM
+  let utmParams = getUTMParams();
+
+  // Se existir UTM, adiciona no link
+  if (utmParams) {
+    baseCheckoutLink += '?' + utmParams;
+  }
+
+  // Dispara o evento do Pixel
   fbq('track', 'InitiateCheckout');
+
+  // Agora redireciona para o link final
+  window.open(baseCheckoutLink, '_blank');
 });
 </script>
 
