@@ -1,470 +1,674 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grupo Secreto no Telegram: Acesso Exclusivo aos Melhores Airdrops e Plataformas que Pagam</title>
-  <link rel="stylesheet" href="css/style.css" />
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2415912548743308');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucre Mais | Pré-venda Exclusiva</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Marker+Hatch&family=Sugar+Pie&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d0d0d;
+    color: #ffffff;
+  }
+  .hero {
+    background: #2d005b;
+    padding: 80px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: #00ffcc;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 30px;
+    color: #ccc;
+  }
+
+  .btn-comprar {
+    background: #00ffcc;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .btn-comprar:hover {
+    background: #00ccaa;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+
+    .btn-comprar {
+      font-size: 1rem;
+      padding: 12px 25px;
+    }
+  }
+.descricao-grupo-vip {
+  background: #0f0f0f
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.descricao-grupo-vip h2 {
+  color: #a84dff;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.descricao-grupo-vip p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+  .beneficios {
+    background-color: #0f0f0f;
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .beneficios h2 {
+    color: #a84dff;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .lista-beneficios {
+    list-style: none;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+    color: #e0e0e0;
+  }
+
+  .lista-beneficios li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.lista-beneficios .icone {
+  margin-right: 8px;
+  font-size: 1.2em;
+  color: #00ff88; /* Verde neon ou personalize */
+}
+
+.lista-beneficios .titulo {
+  color: #00ffcc; /* Verde para o título */
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.lista-beneficios .descricao {
+  color: #ffffff; /* Branco para a descrição */
+}
+
+  /* Demais blocos mantidos sem alteração, mas organizados abaixo */
+  .oferta {
+    background-color: #1a1a1a;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .oferta h2 {
+    color: #00ffcc;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+
+  .preco {
+    color: #a84dff;
+    font-weight: bold;
+  }
+
+  .texto-oferta,
+  .economia {
+    color: #ccc;
+    font-size: 1.1rem;
+    margin: 10px 0;
+  }
+
+  .botao-oferta {
+  margin-top: 30px;
+  display: inline-block;
+  background: #00ffcc;
+  color: #000;
+  padding: 15px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  }
+
+  .botao-oferta:hover {
+    opacity: 0.9;
+  }
+
+  .grid-beneficios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 20px;
+}
+
+.item-beneficio {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.item-beneficio img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.item-beneficio h3 {
+  color: #00ffcc;
+  margin-bottom: 10px;
+}
+.carrossel-wrapper {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0 40px;
+  }
+
+  .carrossel {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.4s ease;
+  }
+
+  .card {
+    min-width: 250px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    flex-shrink: 0;
+    color: #ccc;
+    text-align: center;
+  }
+
+  .card .ilustracao {
+    background: #333;
+    height: 100px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .card h3 {
+    color: #00ffcc;
+    margin-bottom: 10px;
+  }
+
+  .btn-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #00ffcc;
+    color: #000;
+    font-size: 1.5rem;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .btn-nav.esquerda {
+    left: 0;
+  }
+
+  .btn-nav.direita {
+    right: 0;
+  }
+
+  .depoimentos {
+    background-color: #121212;
+    padding: 60px 20px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .depoimentos h2 {
+    font-size: 2rem;
+    color: #a84dff;
+    margin-bottom: 40px;
+  }
+
+  .lista-depoimentos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .depoimento {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #333;
+  }
+
+  .depoimento img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #00ffcc;
+  }
+
+  .depoimento h3 {
+    margin-bottom: 10px;
+    color: #00ffcc;
+    font-size: 1.1rem;
+  }
+
+  .depoimento p {
+    font-size: 0.95rem;
+    color: #ccc;
+  }
+
+  .btn-oferta {
+    background: #00ffcc;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .btn-oferta:hover {
+    background-color: #00e6b8;
+  }
+
+  .galeria-resultados {
+    background-color: #161616;
+    padding: 60px 20px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .galeria-resultados h2 {
+    font-size: 2rem;
+    color: #a84dff;
+    margin-bottom: 40px;
+  }
+
+  .grid-galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .item-galeria {
+    background-color: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .item-galeria img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .item-galeria h3 {
+    padding: 15px;
+    color: #00ffcc;
+    font-size: 1.1rem;
+    background-color: #121212;
+  }
+
+  .item-galeria:hover {
+    transform: scale(1.03);
+  }
+
+  .garantia-faq {
+    background-color: #0e0e0e;
+    padding: 60px 20px;
+    color: #fff;
+  }
+
+  .garantia-faq h2 {
+    color: #a84dff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .garantia {
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .faq {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background-color: #1a1a1a;
+    border-left: 4px solid #00ffcc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+
+  .faq-item h3 {
+    color: #a84dff;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+
+  .faq-item p {
+    color: #ccc;
+    font-size: 1rem;
+  }
+
+  .botao-faq {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .btn-chamada {
+    background: #00ffcc;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .btn-chamada:hover {
+    filter: brightness(1.1);
+  }
+
+  .rodape {
+    background-color: #0b0b0b;
+    color: #ccc;
+    padding: 60px 20px 30px;
+    font-size: 0.95rem;
+  }
+
+  .rodape-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
-<header style="position: relative; background-image: url('sua-imagem-de-fundo.jpg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;">
-  
-  <!-- Sobreposição escura -->
-  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1;"></div>
-  
-  <!-- Conteúdo -->
-  <div style="position: relative; z-index: 2; max-width: 900px; margin: auto;">
-    
-    <!-- LOGO -->
-    <img src="img/logo_lucre_mais_vip.png" alt="Logo Lucre Mais VIP" style="width: 300px; height: auto; margin-bottom: 20px;">
+<!-- Logo no topo -->
 
-    <h1 style="font-size: 2.5em; margin-bottom: 10px;">
-      <span style="color: #22c55e;">Grupo Secreto</span> no Telegram:
-    </h1>
-    <h2 style="font-size: 2em; margin-bottom: 20px;">
-      Acesso <span style="color: #22c55e;">Exclusivo</span> aos Melhores <span style="color: #22c55e;">Airdrops</span> e Plataformas que Pagam 💰
-    </h2>
-    <p style="font-size: 1.2em; color: #dddddd; max-width: 700px; margin: auto;">
-      Junte-se à nossa comunidade e comece a <strong>lucrar com oportunidades reais</strong> na internet. Vagas limitadas para quem quer sair na frente!
-    </p>
+<section class="hero" id="inicio">
+<img src="lucremais.png" alt="Logo Lucre Mais Grupo VIP" style="max-width: 250px; height: auto;">
 
-    <!-- Botão CTA -->
-    <a href="#planos" style="display: inline-block; margin-top: 30px; padding: 14px 30px; background-color: #22c55e; color: white; font-weight: bold; text-decoration: none; border-radius: 8px; font-size: 1.1em;">
-      🚀 Quero Entrar no Grupo VIP
-    </a>
-
-    <!-- Selo -->
-    <p style="margin-top: 20px; font-size: 0.9em; color: #aaaaaa;">
-      🛡️ Seguro e testado | 🎁 Grupo VIP com bônus iniciais para os primeiros membros | ✅ Resultados reais
-    </p>
-
-  </div>
-</header>
-
-
-<section id="grupo-vip" style="padding: 60px 20px; background-color: #111111; color: #ffffff;">
-  <div class="container" style="max-width: 1000px; margin: auto; text-align: center;">
-
-    <h2 style="color: #228b22; font-size: 2em; margin-bottom: 10px;">💎 O que é o nosso Grupo VIP?</h2>
-
-    <p style="color: #cccccc; font-size: 1.1em; margin-bottom: 30px;">
-      O <strong>LUCRE MAIS</strong> é uma comunidade exclusiva criada para quem quer sair da estagnação e começar a <strong>ganhar dinheiro de verdade pela internet</strong>, mesmo sem experiência ou muito tempo disponível.
-    </p>
-
-    <p style="color: #cccccc; font-size: 1.1em; margin-bottom: 30px;">
-      Ao entrar para o grupo, você terá acesso a conteúdos e oportunidades que não são divulgados abertamente, como:
-    </p>
-
-    <ul style="list-style: none; padding: 0; color: #cccccc; font-size: 1em; text-align: left; max-width: 700px; margin: auto auto 40px;">
-      <li>🚀 Sites e aplicativos que realmente pagam</li>
-      <li>📈 Estratégias para criar renda passiva (sem precisar vender nada)</li>
-      <li>🪙 Airdrops e formas de ganhar criptomoedas de graça</li>
-      <li>🎮 Jogos Play-to-Earn e plataformas de mineração</li>
-      <li>🎁 Sorteios, desafios e recompensas exclusivas</li>
-      <li>🤝 Networking com pessoas que também querem crescer financeiramente</li>
-    </ul>
-
-    <p style="color: #cccccc; font-size: 1.1em; margin-bottom: 30px;">
-      Tudo isso em um só lugar, direto no <strong>Telegram</strong>, com atualizações semanais e curadoria especializada, para você não perder tempo com promessas vazias e focar só no que realmente funciona.
-    </p>
-
-    <p style="color: #cccccc; font-size: 1.1em; margin-bottom: 20px;">
-      Este grupo é para você que:
-    </p>
-
-    <ul style="list-style: none; padding: 0; color: #cccccc; font-size: 1em; text-align: left; max-width: 700px; margin: auto auto 40px;">
-      <li>✔ Está cansado de tentar sozinho e não ver resultado.</li>
-      <li>✔ Quer começar a lucrar ainda este mês.</li>
-      <li>✔ Deseja uma renda extra (ou principal) de forma leve, simples e segura.</li>
-      <li>✔ Valoriza estar ao lado de quem está no mesmo caminho.</li>
-    </ul>
-
-    <p style="color: #228b22; font-size: 1.2em; font-weight: bold;">
-      Não é só um grupo. É um atalho. É um portal. É o empurrão que faltava.
-    </p>
-
-  </div>
+  <h1>🔥 LUCRE NA INTERNET SEM INVESTIR!</h1>
+  <p>Entre para o grupo VIP e descubra as formas mais fáceis e reais de ganhar dinheiro online com acesso vitalício por apenas <strong>R$ 9,90</strong>.</p>
+  <a class="btn-comprar" href="https://pay.cakto.com.br/da84tmx" target="_blank">Garanta Agora por R$ 9,90</a>
 </section>
 
-<section id="como-funciona" style="background-color: #000000; padding: 60px 20px; text-align: center; color: #ffffff;">
-  <div style="max-width: 800px; margin: auto;">
-    <h2 style="color: #228b22; font-size: 2em; margin-bottom: 20px;">
-      Como Funciona
-    </h2>
-    <p style="color: #999999; font-size: 1.2em; margin-bottom: 30px;">
-      Separamos as melhores oportunidades para você. Basta entrar no grupo e receber:
-    </p>
-    <h3 style="color: #ffffff; font-size: 1.5em; margin-bottom: 30px;">
-        <ul style="list-style: none; padding-left: 0;">
-    <li style="color: #999999;">🪂 Airdrops de criptomoedas toda semana</li>
-    <li style="color: #999999;">📱 Dicas de aplicativos e sites que realmente pagam</li>
-    <li style="color: #999999;">🎮 Plataformas de jogos e mineradoras para lucrar sem investir</li>
+  <!-- Seção Descritiva sobre o Grupo VIP -->
+<section class="descricao-grupo-vip">
+  <h2>Você também está cansado de promessas vazias?</h2>
+  <p>
+    Todos os dias, milhares de pessoas tentam ganhar dinheiro na internet… mas acabam perdendo tempo em sites que não pagam, golpes disfarçados de oportunidades e métodos que só funcionam para quem já tem audiência. A frustração só cresce, a ansiedade aperta e a sensação de estar ficando para trás aumenta.
+  </p>
+  <p>
+    O <strong>Grupo VIP</strong> nasceu exatamente para isso: te entregar o que realmente funciona. A cada semana, você recebe informações validadas, testadas e com instruções claras – para você aplicar mesmo sem experiência. Aqui você entra em um grupo seleto que está cansado de ser enganado e decidiu finalmente fazer parte de quem ganha de verdade.
+  </p>
+  <p>
+    Você não está sozinho. E a mudança começa agora.
+  </p>
+</section>
+
+<!-- Seção 2 - Benefícios -->
+<section class="beneficios" id="beneficios">
+  <h2>O que você recebe ao entrar no Grupo VIP:</h2>
+  <ul class="lista-beneficios">
+    <li><span class="icone">💸</span><span class="titulo">Airdrops de Criptomoedas:</span> <span class="descricao">tokens gratuitos de projetos reais toda semana.</span></li>
+    <li><span class="icone">🌐</span><span class="titulo">Sites e Plataformas que Pagam:</span> <span class="descricao">acesse o que realmente funciona – já testado.</span></li>
+    <li><span class="icone">📥</span><span class="titulo">Estratégias de Renda Passiva:</span> <span class="descricao">ganhe sem precisar vender ou indicar ninguém.</span></li>
+    <li><span class="icone">🚀</span><span class="titulo">Oportunidades Exclusivas:</span> <span class="descricao">receba atualizações antes de todo mundo.</span></li>
   </ul>
-    </h3>
-    
+</section>
+
+<!-- Seção 4 - Oferta e Urgência -->
+<section class="oferta" id="oferta">
+  <h2>Garanta seu Acesso Vitalício por Apenas <span class="preco">R$ 9,90</span></h2>
+  <p class="texto-oferta">Apenas durante a pré-venda! Depois, o acesso será por assinatura mensal de <strong>R$ 19,90</strong>.</p>
+  <p class="economia">Você economiza R$ 229,90 por ano e ainda tem acesso ilimitado para sempre.</p>
+  <p> </p>
+  <p> </p>
+<div>
+  <a href="https://pay.cakto.com.br/da84tmx" class="botao-oferta">Quero Garantir Agora</a>
   </div>
 </section>
 
-
-<section id="o-que-voce-recebe" style="background-color: #000000; padding: 60px 20px; text-align: center; color: #ffffff;">
-  <div style="max-width: 800px; margin: auto;">
-    <h2 style="color: #228b22; font-size: 2em; margin-bottom: 20px;">
-      O que você recebe no grupo vip
-    </h2>
-    <p style="color: #999999; font-size: 1.2em; margin-bottom: 30px;">
-      No LUCRE MAIS voce terá acesso ao um grupo no telegram com:
-    </p>
-    <h3 style="color: #ffffff; font-size: 1.5em; margin-bottom: 30px;">
-           <ul style="list-style: none; padding-left: 0;">
-    <li style="color: #999999;">✅ Sites e plataformas que realmente pagam</li>
-    <li style="color: #999999;">✅ Acesso a airdrops que permitem ganhar criptomoedas toda semana</li>
-    <li style="color: #999999;">✅ Os melhores jogos Play-to-Earn e mineradoras de criptomoedas</li>
-    <li style="color: #999999;">✅ Como gerar renda passiva sem precisar vender nada!</li>
-  </ul>
-    </h3>
-    
-  </div>
-</section>
-
-
-
-<section id="prints" style="padding: 60px 20px; background-color: #000000; color: #ffffff;">
-  <div class="container" style="max-width: 800px; margin: auto; text-align: center;">
-    <h2 style="color: #228b22; font-size: 2em; margin-bottom: 10px;">Resultados Reais</h2>
-    <p style="color: #999999; font-size: 1.1em; margin-bottom: 40px;">
-      Esses são apenas alguns dos vários resultados que os membros do nosso grupo VIP estão tendo:
-    </p>
-
-    <div class="print-item" style="margin-bottom: 30px;">
-      <img src="img/1.png" alt="Resultado 1" style="width: 100%; border-radius: 10px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.5);">
+<section class="beneficios" id="">
+  <h2>O Que Você Recebe no Grupo VIP</h2>
+  <div class="grid-beneficios">
+    <div class="item-beneficio">
+      <img src="imgs/airdrop-semanal.png" alt="Airdrop Semanal">
+      <h3>Airdrops Semanais</h3>
+      <p>Receba criptomoedas gratuitas toda semana em projetos verificados.</p>
     </div>
-
-    <div class="print-item" style="margin-bottom: 30px;">
-      <img src="img/2.png" alt="Resultado 2" style="width: 100%; border-radius: 10px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.5);">
+    <div class="item-beneficio">
+      <img src="imgs/sites-que-pagam.png" alt="Sites que Pagam">
+      <h3>Sites que Pagam</h3>
+      <p>Testados e aprovados para gerar renda real online.</p>
     </div>
-
-    <div class="print-item">
-      <img src="img/3.png" alt="Resultado 3" style="width: 100%; border-radius: 10px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.5);">
+    <div class="item-beneficio">
+      <img src="imgs/renda-passiva.png" alt="Renda Passiva">
+      <h3>Renda Passiva</h3>
+      <p>Ganhos automáticos com stake, mineração, cashback e mais.</p>
+    </div>
+    <div class="item-beneficio">
+      <img src="imgs/acesso-exclusivo.png" alt="Acesso Exclusivo">
+      <h3>Acesso Exclusivo</h3>
+      <p>Entre nas melhores oportunidades antes de todo mundo.</p>
     </div>
   </div>
 </section>
 
-
-
-<section id="depoimentos" style="padding: 60px 20px; background-color: #111111; color: #ffffff;">
-  <div class="container" style="max-width: 1000px; margin: auto; text-align: center;">
-    <h2 style="color: #228b22; font-size: 2em; margin-bottom: 10px;">O Que Estão Falando</h2>
-    <p style="color: #999999; font-size: 1.1em; margin-bottom: 40px;">
-      Veja como o grupo VIP tem ajudado pessoas reais a lucrarem de verdade com a internet:
-    </p>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
-      
-      <!-- Depoimento 1 -->
-      <div style="background-color: #000000; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
-        <img src="img/pessoa1.jpg" alt="Depoimento 1" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
-        <h3 style="color: #228b22; margin-bottom: 10px;">Amanda M.</h3>
-        <p style="color: #999999; font-size: 0.95em;">"Eu nunca tinha ganhado nada online, mas com as dicas do grupo já consegui minha primeira grana com airdrop!"</p>
-      </div>
-
-      <!-- Depoimento 2 -->
-      <div style="background-color: #000000; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
-        <img src="img/pessoa2.jpg" alt="Depoimento 2" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
-        <h3 style="color: #228b22; margin-bottom: 10px;">Carla S.</h3>
-        <p style="color: #999999; font-size: 0.95em;">"As plataformas que eles indicam realmente funcionam! Já estou com uma renda extra entrando todo mês."</p>
-      </div>
-
-      <!-- Depoimento 3 -->
-      <div style="background-color: #000000; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
-        <img src="img/pessoa3.jpg" alt="Depoimento 3" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
-        <h3 style="color: #228b22; margin-bottom: 10px;">Lucas T.</h3>
-        <p style="color: #999999; font-size: 0.95em;">"Entrei no grupo achando que era só mais uma promessa, mas fui surpreendido! Muita dica boa e gente ajudando."</p>
-      </div>
-
+<!-- Seção 5 - Depoimentos -->
+<section class="depoimentos" id="depoimentos">
+  <h2>Quem Já Está no Grupo VIP</h2>
+  <div class="lista-depoimentos">
+    <div class="depoimento">
+      <img src="img/pessoa3.jpg" alt="Pessoa 1">
+      <h3>Lucas M.</h3>
+      <p>“Já ganhei minhas primeiras moedas com airdrops e descobri formas fáceis de renda extra. Incrível!”</p>
     </div>
+    <div class="depoimento">
+      <img src="img/pessoa1.jpg" alt="Pessoa 2">
+      <h3>Ana S.</h3>
+      <p>“O grupo me trouxe ideias que eu nunca teria achado sozinha. Vale muito mais que o valor pago.”</p>
+    </div>
+    <div class="depoimento">
+      <img src="img/pessoa2.jpg" alt="Pessoa 4">
+      <h3>Camila R.</h3>
+      <p>“Achei que fosse mais uma enganação, mas o conteúdo é direto, útil e prático. Super recomendo.”</p>
+    </div>
+  </div>
+
+  <a href="#oferta" class="btn-oferta">Garanta seu Acesso</a>
+</section>
+
+
+<section class="garantia-faq" id="garantia">
+  <div class="garantia">
+    <h2>Sua Garantia</h2>
+    <p>Você terá acesso imediato e vitalício ao grupo. Se não gostar, devolvemos seu dinheiro em até 7 dias. Sem burocracia, sem perguntas.</p>
+  </div>
+
+  <div class="faq">
+    <h2>Perguntas Frequentes</h2>
+
+    <div class="faq-item">
+      <h3>Preciso vender algo para ganhar dinheiro?</h3>
+      <p>Não. A maioria das estratégias não exige vendas nem investimento inicial.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Como recebo os ganhos?</h3>
+      <p>Diretamente nas plataformas indicadas, via Pix, PayPal ou Criptomoedas.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Funciona no celular?</h3>
+      <p>Sim! A maioria das estratégias pode ser feita direto do seu smartphone.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Quando começo a receber?</h3>
+      <p>Algumas formas são imediatas, outras levam alguns dias. Você será guiado passo a passo.</p>
+    </div>
+
+    <!-- Novas Perguntas -->
+
+    <div class="faq-item">
+      <h3>Esse grupo VIP realmente funciona?</h3>
+      <p>Sim! O grupo é atualizado com oportunidades reais e estratégias testadas. Muitos membros já estão ganhando dinheiro. Basta aplicar o que é ensinado.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Preciso indicar pessoas para lucrar?</h3>
+      <p>Não! As estratégias do grupo não dependem de recrutamento. Você pode ganhar com apps, jogos, mineração, airdrops e muito mais.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Tenho pouco tempo no dia. Mesmo assim vale a pena?</h3>
+      <p>Sim! Dá para começar com apenas 15 minutos por dia. Existem estratégias rápidas e até automáticas para gerar renda passiva.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Por que o acesso é pago?</h3>
+      <p>O valor é simbólico comparado ao que você pode lucrar. Além disso, serve como filtro: só entra quem está realmente comprometido, mantendo a qualidade do grupo.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Tem garantia se eu não gostar?</h3>
+      <p>Sim! Você tem 7 dias para testar. Se não curtir, devolvemos seu dinheiro. Sem perguntas.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>O grupo já está saturado?</h3>
+      <p>Não! Ainda é uma oportunidade pouco explorada. A maioria das pessoas nem sabe que essas formas de lucro existem.</p>
+    </div>
+  </div>
+
+  <div class="botao-faq">
+    <a href="#oferta" class="btn-chamada">Quero Garantir Meu Acesso!</a>
   </div>
 </section>
 
 
-<section id="planos" style="padding: 60px 20px; background-color: #111111; color: #ffffff; font-family: Arial, sans-serif;">
-  <div class="container" style="max-width: 900px; margin: auto; text-align: center;">
-    
-    <!-- Título Chamativo -->
-    <h1 style="font-size: 2.5em; color: #228b22; margin-bottom: 20px;">🔥 Chegou a hora de transformar sua vida financeira! 🔥</h1>
-
-    <!-- Texto Preparatório -->
-    <h2 style="font-size: 1.5em; color: #228b22; margin-bottom: 20px;">Escolha o melhor plano para o seu bolso e aproveite as promoções para lucrar com a gente! 💰</h2>
-    
-    <p style="font-size: 1.1em; color: #999999; margin-bottom: 30px;">
-      Ao se tornar membro do nosso grupo VIP, você terá acesso a oportunidades reais para transformar sua renda online. Em todos os planos, você vai:
-    </p>
-    
-    <ul style="list-style: none; padding: 0; text-align: left; max-width: 600px; margin: 0 auto 30px auto; font-size: 1em; color: #999999;">
-      <li>✅ Descobrir sites e plataformas que realmente pagam.</li>
-      <li>✅ Participar de airdrops e ganhar criptomoedas sem investir nada.</li>
-      <li>✅ Lucrar com jogos Play-to-Earn e mineradoras de criptomoedas.</li>
-      <li>✅ Construir renda passiva sem precisar vender nada!</li>
-    </ul>
-
-    <p style="font-size: 1.05em; color: #999999; margin-bottom: 10px;">
-      💡 <strong style="color: #ffffff;">Bônus exclusivo:</strong> Ebook especial para os primeiros <strong style="color: #ffffff;">50 membros!</strong>
-    </p>
-    <p style="font-size: 1.05em; color: #ff4444;">
-      ⚠️ <strong>Atenção:</strong> Vagas limitadas — não perca essa chance de começar a lucrar ainda hoje!
-    </p>
-
-    <!-- Plano Mensal -->
-    <div style="background-color: #000000; border: 2px solid #228b22; border-radius: 10px; padding: 30px; margin: 30px 0; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
-      <h3 style="color: #228b22; font-size: 1.5em; margin-bottom: 15px;">Plano Mensal - R$ 19,90 por mês</h3>
-      <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
-        Ideal para quem quer começar sem compromisso e testar todos os benefícios!
-      </p>
-      <a href="https://pay.cakto.com.br/37zp4tv_323493" 
-   target="_blank" 
-   id="btn-checkout"
-   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
-   Assinar Plano Mensal
-</a>
-
+<!-- Seção 8 - Rodapé -->
+<footer class="rodape">
+  <div class="rodape-container">
+    <div class="rodape-logo">
+      <h2>Lucre Mais</h2>
+      <p>Renda inteligente e real, direto no seu celular.</p>
     </div>
 
-    <!-- Plano Trimestral -->
-    <div style="background-color: #000000; border: 2px solid #228b22; border-radius: 10px; padding: 30px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
-      <h3 style="color: #228b22; font-size: 1.5em; margin-bottom: 15px;">Plano Trimestral - R$ 49,90 a cada 3 meses</h3>
-      <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
-        Economize R$ 9,80 — equivale a apenas R$ 16,63 por mês!
-      </p>
-     <a href="https://pay.cakto.com.br/fjtipnq" 
-   target="_blank" 
-   id="btn-checkout-tri"
-   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
-   Assinar Plano Trimestral
-</a>
-
+    <div class="rodape-links">
+      <h3>Links Rápidos</h3>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#oferta">Oferta</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#garantia">Garantia</a></li>
+      </ul>
     </div>
 
-    <!-- Plano Semestral -->
-    <div style="background-color: #000000; border: 2px solid #228b22; border-radius: 10px; padding: 30px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
-      <h3 style="color: #228b22; font-size: 1.5em; margin-bottom: 15px;">Plano Semestral - R$ 89,90 a cada 6 meses</h3>
-      <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
-        Economia de R$ 29,50 — você paga apenas R$ 14,98 por mês!
-      </p>
-    <a href="https://pay.cakto.com.br/zwt3jo3" 
-   target="_blank" 
-   id="btn-checkout-sem"
-   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
-   Assinar Plano Semestral
-</a>
-
+    <div class="rodape-contato">
+      <h3>Contato</h3>
+      <p>Email: suporte@mfuture.com.br</p>
+      <p>Instagram: @mfuture.oficial</p>
     </div>
-<!-- Plano Anual -->
-    <div style="background-color: #000000; border: 2px solid #228b22; border-radius: 10px; padding: 30px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(34, 139, 34, 0.3);">
-      <h3 style="color: #228b22; font-size: 1.5em; margin-bottom: 15px;">Plano Anual - R$ 159,90 por ano</h3>
-      <p style="color: #999999; font-size: 1.1em; margin-bottom: 20px;">
-        O melhor custo-benefício: apenas R$ 13,32 por mês e economia de R$ 79,90 ao ano!
-      </p>
-    <a href="https://pay.cakto.com.br/495wyhq" 
-   target="_blank" 
-   id="btn-checkout-anual"
-   style="background-color: #228b22; color: #ffffff; padding: 12px 30px; border-radius: 8px; font-weight: bold; text-decoration: none;">
-   Assinar Plano Anual
-</a>
-
-    </div>
-</section>
-
-
-
-
-
-<section id="faq" style="padding: 60px 20px; background-color: #0f0f0f; color: #ffffff;">
-  <div class="container" style="max-width: 1000px; margin: auto;">
-    <h2 style="color: #228b22; font-size: 2em; text-align: center; margin-bottom: 40px;">❓ Perguntas Frequentes</h2>
-
-    <div style="margin-bottom: 30px;">
-      <h3 style="color: #ffffff;">1. “Esse grupo VIP realmente funciona?”</h3>
-      <p style="color: #cccccc;">
-        Sim! O grupo é atualizado constantemente com oportunidades REAIS e estratégias testadas. Muitos membros já estão lucrando com o que aprendem lá. Se você aplicar, você colhe. Nada de promessas milagrosas — só ferramentas que funcionam de verdade.
-      </p>
-    </div>
-
-    <div style="margin-bottom: 30px;">
-      <h3 style="color: #ffffff;">2. “Preciso vender algo ou indicar pessoas pra ganhar?”</h3>
-      <p style="color: #cccccc;">
-        Não! A proposta do grupo é justamente mostrar formas de <strong>lucrar sem precisar vender ou recrutar ninguém</strong>. Você pode ganhar com apps, jogos, airdrops, mineração, entre outras estratégias — tudo explicado passo a passo.
-      </p>
-    </div>
-
-    <div style="margin-bottom: 30px;">
-      <h3 style="color: #ffffff;">3. “E se eu não tiver muito tempo por dia?”</h3>
-      <p style="color: #cccccc;">
-        Sem problema! As oportunidades são separadas por nível de dedicação. Você pode começar com 15 minutos por dia e já ver resultados. E o melhor: como são formas de renda passiva, quanto mais você planta, mais colhe no automático.
-      </p>
-    </div>
-
-    <div style="margin-bottom: 30px;">
-      <h3 style="color: #ffffff;">4. “Por que o acesso é pago?”</h3>
-      <p style="color: #cccccc;">
-        O acesso é simbólico comparado ao que você pode ganhar. E justamente por ser pago, conseguimos manter a qualidade e evitar curiosos. É um filtro. Quem entra está comprometido. E o conteúdo lá dentro vale muito mais do que o valor do plano.
-      </p>
-    </div>
-
-    <div style="margin-bottom: 30px;">
-      <h3 style="color: #ffffff;">5. “Tem garantia? E se eu não gostar?”</h3>
-      <p style="color: #cccccc;">
-        Sim! Você tem 7 dias para testar sem risco. Se não achar que é pra você, é só pedir reembolso. Preferimos perder um cliente a manter alguém insatisfeito. Mas te avisamos: a maioria fica, porque os resultados falam por si.
-      </p>
-    </div>
-
-    <div style="margin-bottom: 30px;">
-      <h3 style="color: #ffffff;">6. “Tem muita gente no grupo? Já não está saturado?”</h3>
-      <p style="color: #cccccc;">
-        Não está nem perto disso! A maioria das pessoas nem sabe que essas oportunidades existem. Enquanto uns perdem tempo com promessas falsas, você vai estar um passo à frente, no lugar certo, com as pessoas certas.
-      </p>
-    </div>
-
-    <div style="text-align: center; margin-top: 50px;">
-      <p style="color: #ffcc00; font-size: 1.2em;">⚠️ As vagas são limitadas para manter a qualidade. Aproveite enquanto ainda está aberto!</p>
-      <a href="#planos" style="margin-top: 20px; display: inline-block; background-color: #228b22; color: #ffffff; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-        Escolher meu plano agora
-      </a>
-    </div>
-
   </div>
-</section>
 
-
-
-
-<section id="garantia" style="background-color: #000000; padding: 60px 20px; text-align: center; color: #ffffff;">
-  <div style="max-width: 800px; margin: auto;">
-    <h2 style="color: #228b22; font-size: 2em; margin-bottom: 20px;">
-      ✅ Você está 100% protegido!
-    </h2>
-    <p style="color: #999999; font-size: 1.2em; margin-bottom: 30px;">
-      Se em até 7 dias você sentir que o Clube Lucre+ não é pra você, devolvemos 100% do seu dinheiro. <br>
-      Sem perguntas, sem burocracia. Sua satisfação é prioridade!
-    </p>
-    <h3 style="color: #ffffff; font-size: 1.5em; margin-bottom: 30px;">
-      Não perca mais tempo... Comece agora a sua jornada rumo à liberdade financeira!
-    </h3>
-    <a href="#planos" style="margin-top: 20px; display: inline-block; background-color: #228b22; color: #ffffff; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-        Escolher meu plano agora
-      </a>
+  <div class="rodape-copy">
+    <p>&copy; 2025 Lucre Mais. Todos os direitos reservados.</p>
+    <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a>
   </div>
-</section>
+</footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <footer>
-    <p>&copy; 2025 Lucre Mais - Todos os direitos reservados.</p>
-  </footer>
-
-  <script src="js/script.js"></script>
+</body>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const botoes = [
-      "btn-checkout-mensal",
-      "btn-checkout-tri",
-      "btn-checkout-semestral",
-      "btn-checkout-anual"
-    ];
+  const carrossel = document.querySelector('.carrossel');
+  const btnEsq = document.querySelector('.btn-nav.esquerda');
+  const btnDir = document.querySelector('.btn-nav.direita');
 
-    // Função para definir cookie
-    function setCookie(name, value, days) {
-      const expires = new Date(Date.now() + days * 864e5).toUTCString();
-      document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/";
-    }
+  let scrollAmount = 0;
+  const scrollStep = 270;
 
-    // Função para ler cookie
-    function getCookie(name) {
-      return document.cookie.split('; ').reduce((r, v) => {
-        const parts = v.split('=');
-        return parts[0] === name ? decodeURIComponent(parts[1]) : r
-      }, '');
-    }
+  btnEsq.addEventListener('click', () => {
+    scrollAmount = Math.max(scrollAmount - scrollStep, 0);
+    carrossel.style.transform = `translateX(-${scrollAmount}px)`;
+  });
 
-    // Captura os UTMs da URL
-    function getUTMParamsFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
-        if (params.has(param)) {
-          setCookie(param, params.get(param), 7); // 7 dias de validade
-        }
-      });
-    }
-
-    // Monta a string de UTM com base nos cookies
-    function getUTMStringFromCookies() {
-      const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-      const params = utmParams
-        .map(param => {
-          const val = getCookie(param);
-          return val ? `${param}=${encodeURIComponent(val)}` : '';
-        })
-        .filter(Boolean)
-        .join('&');
-
-      return params ? `?${params}` : '';
-    }
-
-    // Executa ao carregar
-    getUTMParamsFromURL();
-
-    // Aplica UTMs dos cookies nos links + evento pixel
-    const utmString = getUTMStringFromCookies();
-    botoes.forEach(id => {
-      const botao = document.getElementById(id);
-      if (botao) {
-        const hrefBase = botao.href.split('?')[0];
-        botao.href = hrefBase + utmString;
-
-        botao.addEventListener("click", function () {
-          fbq('track', 'InitiateCheckout');
-        });
-      }
-    });
+  btnDir.addEventListener('click', () => {
+    scrollAmount += scrollStep;
+    carrossel.style.transform = `translateX(-${scrollAmount}px)`;
   });
 </script>
-
-
-  
-</body>
 </html>
