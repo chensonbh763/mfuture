@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lucre Mais | Pré-venda Exclusiva</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Marker+Hatch&family=Sugar+Pie&display=swap" rel="stylesheet">
-
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "rpjvfuhn3k");
+</script>
 <style>
   body {
     margin: 0;
@@ -497,7 +503,7 @@
   <p> </p>
   <p> </p>
 <div>
-  <a href="https://pay.cakto.com.br/da84tmx" class="botao-oferta">Quero Garantir Agora</a>
+<a class="btn-comprar" id="botao-comprar" href="https://pay.cakto.com.br/da84tmx" target="_blank">Garanta Agora por R$ 9,90</a>
   </div>
 </section>
 
@@ -653,7 +659,31 @@
 </footer>
 
 
+<script>
+  function getUTMParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    let query = '';
 
+    utmParams.forEach(param => {
+      if (urlParams.has(param)) {
+        query += `&${param}=${encodeURIComponent(urlParams.get(param))}`;
+      }
+    });
+
+    return query;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const botao = document.getElementById('botao-comprar');
+    const baseUrl = botao.getAttribute('href').split('?')[0];
+    const utmQuery = getUTMParams();
+
+    if (utmQuery) {
+      botao.setAttribute('href', `${baseUrl}?${utmQuery.substring(1)}`);
+    }
+  });
+</script>
 
 
 
