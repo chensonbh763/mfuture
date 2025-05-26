@@ -467,7 +467,7 @@
 
   <h1>🔥 LUCRE NA INTERNET SEM INVESTIR!</h1>
   <p>Entre para o grupo VIP e descubra as formas mais fáceis e reais de ganhar dinheiro online com acesso vitalício por apenas <strong>R$ 9,90</strong>.</p>
-  <a class="btn-comprar" href="https://pay.cakto.com.br/da84tmx" target="_blank">Garanta Agora por R$ 9,90</a>
+  <a class="btn-comprar" id="botao-topo" href="https://pay.cakto.com.br/da84tmx?btn=topo" target="_blank">Acesso Imediato</a>
 </section>
 
   <!-- Seção Descritiva sobre o Grupo VIP -->
@@ -675,16 +675,26 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const botao = document.getElementById('botao-comprar');
-    const baseUrl = botao.getAttribute('href').split('?')[0];
+    const botoes = [
+      { id: 'botao-comprar', identificador: 'meio' },
+      { id: 'botao-topo', identificador: 'topo' }
+    ];
+
     const utmQuery = getUTMParams();
 
-    if (utmQuery) {
-      botao.setAttribute('href', `${baseUrl}?${utmQuery.substring(1)}`);
-    }
+    botoes.forEach(({ id, identificador }) => {
+      const botao = document.getElementById(id);
+      const baseUrl = 'https://pay.cakto.com.br/da84tmx';
+      let finalUrl = `${baseUrl}?btn=${identificador}`;
+
+      if (utmQuery) {
+        finalUrl += utmQuery;
+      }
+
+      botao.setAttribute('href', finalUrl);
+    });
   });
 </script>
-
 
 
 
