@@ -75,7 +75,7 @@
     }
   }
 .descricao-grupo-vip {
-  background: #0f0f0f
+  background: #0f0f0f;
   color: #fff;
   padding: 40px 20px;
   text-align: center;
@@ -457,6 +457,25 @@
   }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src='https://connect.facebook.net/en_US/fbevents.js';
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script');
+
+  fbq('init', '2415912548743308'); // Seu Pixel ID
+  fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2415912548743308&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
 
 </head>
 <body>
@@ -719,5 +738,15 @@
     scrollAmount += scrollStep;
     carrossel.style.transform = `translateX(-${scrollAmount}px)`;
   });
+<script>
+  // Captura todos os botões com a classe .btn-comprar e .btn-oferta
+  document.querySelectorAll('.btn-comprar, .btn-oferta').forEach(function(button) {
+    button.addEventListener('click', function() {
+      // Substitua 'PurchaseIntent' por um nome de evento que você quiser rastrear
+      fbq('track', 'checkout');
+    });
+  });
+</script>
+
 </script>
 </html>
