@@ -1,55 +1,454 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indicador Pro - Comece a Lucrar com Indicações</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background-color: #f5f5f5;
-      color: #333;
-      padding: 20px;
-      max-width: 700px;
-      margin: auto;
-    }
-    h1, h2, h3 {
-      color: #4B0082;
-    }
-    .button {
-      display: block;
-      text-align: center;
-      background-color: #4B0082;
-      color: #fff;
-      padding: 15px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
-      margin: 20px 0;
-    }
-    .destaque {
-      background-color: #e0dfff;
-      padding: 10px;
-      border-left: 5px solid #4B0082;
-      margin: 20px 0;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #f0f0f0;
-    }
-  </style>
+  <title>Indicador Pro - Venda sem Vender</title>
+<style>
+    
+.hero {
+  background-color: #0c0c0c;
+  padding: 80px 20px;
+  text-align: center;
+  color: #fff;
+}
 
-<!-- Google tag (gtag.js) -->
+.headline {
+  font-family: 'Poppins', sans-serif;
+  color: #00FF66;
+  font-size: 2.5rem;
+}
+
+.subheadline {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 1rem;
+  color: #FFFFFF;
+}
+
+.preco .original {
+  color: #FF4D4D;
+  text-decoration: line-through;
+  font-weight: bold;
+}
+
+.preco .atual {
+  color: #00FF66;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.botao {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: linear-gradient(90deg, #00FF66, #00FF99);
+  padding: 1rem 2rem;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.botao:hover {
+  background: #00CC66;
+  color: #fff;
+}
+.beneficios {
+  background-color: #0a0a0a;
+  padding: 60px 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.titulo .azul {
+  color: #00C0FF;
+}
+
+.titulo .verde {
+  color: #00FF99;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.1);
+}
+
+.card img {
+  width: 50px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  color: #00FF99;
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+}
+
+.card p {
+  font-family: 'Roboto', sans-serif;
+  color: #CCCCCC;
+}
+.depoimentos {
+  background-color: #0c0c0c;
+  padding: 60px 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.titulo .verde {
+  color: #00FF66;
+}
+.titulo .azul {
+  color: #00C0FF;
+}
+
+.grid-depoimentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.1);
+  text-align: left;
+}
+
+.card .icone {
+  width: 30px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #CCCCCC;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 20px;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.perfil img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.perfil .info span {
+  font-size: 0.85rem;
+  color: #00FF99;
+}
+
+
+.bonus {
+  background-color: #0c0c0c;
+  padding: 60px 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.titulo .azul {
+  color: #00C0FF;
+}
+.titulo .verde {
+  color: #00FF99;
+}
+
+.grid-bonus {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
+  text-align: left;
+}
+
+.card h3 {
+  color: #00FF66;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.card .preco {
+  color: #FF6666;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.riscado {
+  text-decoration: line-through;
+}
+
+.card p {
+  color: #CCCCCC;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 8px;
+}
+.garantia {
+  background-color: #0c0c0c;
+  padding: 60px 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.card-garantia {
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.08);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.card-garantia .icone {
+  width: 50px;
+  margin-bottom: 20px;
+}
+
+.titulo .azul {
+  color: #00C0FF;
+}
+
+.titulo .verde {
+  color: #00FF99;
+}
+
+.card-garantia p {
+  font-family: 'Roboto', sans-serif;
+  color: #CCCCCC;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.criador {
+  background-color: #0c0c0c;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.grid-criador {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.imagem img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.08);
+}
+
+.texto .titulo .azul {
+  color: #00C0FF;
+}
+
+.texto .titulo .verde {
+  color: #00FF99;
+}
+
+.texto p {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 1rem;
+  color: #CCCCCC;
+  line-height: 1.6;
+}
+
+.lista {
+  margin-top: 20px;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.lista li {
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  color: #00FF66;
+}
+
+
+.criador {
+  background-color: #0c0c0c;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.grid-criador {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.imagem img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.08);
+}
+
+.texto .titulo .azul {
+  color: #00C0FF;
+}
+
+.texto .titulo .verde {
+  color: #00FF99;
+}
+
+.texto p {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 1rem;
+  color: #CCCCCC;
+  line-height: 1.6;
+}
+
+.lista {
+  margin-top: 20px;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.lista li {
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  color: #00FF66;
+}
+
+.faq {
+  background-color: #0a0a0a;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.titulo .azul {
+  color: #00C0FF;
+}
+
+.titulo .verde {
+  color: #00FF99;
+}
+
+.faq {
+  background-color: #0a0a0a;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.titulo .azul {
+  color: #00C0FF;
+}
+
+.titulo .verde {
+  color: #00FF99;
+}
+
+.faq-item {
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.pergunta {
+  color: #00FF66;
+  font-size: 1.2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.resposta {
+  font-family: 'Roboto', sans-serif;
+  color: #CCCCCC;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+
+.cta {
+  background-color: #0c0c0c;
+  padding: 80px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.titulo .verde {
+  color: #00FF66;
+}
+
+.titulo .riscado {
+  color: #FF6666;
+  text-decoration: line-through;
+}
+
+.titulo .preco-final {
+  color: #00FF66;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.texto-chamada {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #CCCCCC;
+}
+
+.botao-cta {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: linear-gradient(90deg, #00FF66, #00FF99);
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.botao-cta:hover {
+  background: #00CC66;
+  color: #fff;
+}
+
+.aviso {
+  margin-top: 15px;
+  color: #00C0FF;
+  font-size: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+</style>
+
+  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FS2DM85CQ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -83,140 +482,283 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=912704440903072&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-
-
 </head>
 <body>
-<h1>😩 Tá difícil vender alguma coisa na internet?</h1>
-<img src="frustrated-person.jpg" alt="Pessoa frustrada olhando para um computador" style="width: 100%; max-width: 700px; border-radius: 8px; margin: 20px 0;">
-<p>Você tenta, posta, insiste... e mesmo assim nada de resultados. Já pensou que talvez o problema não seja você, mas a falta de estratégia?</p>
-<ul>
-  <li> ❌ Você não tem experiência </li>
-  <li> ❌ Não sabe o que divulgar, nem onde </li>
-  <li> ❌ Já tentou, mas não teve resultado </li>
-  <li> ❌ E o pior: o dinheiro tá curto e você precisa começar a lucrar o quanto antes </li>
-</ul>
   
-  <h2>⚠️ A real é que SEM ESTRATÉGIA, você só vai perder tempo.</h2>
-  <p> Indicar qualquer produto, de qualquer jeito, em qualquer lugar... isso não funciona!
-Se fosse fácil assim, todo mundo já estaria ganhando dinheiro online.
-
-Você não precisa tentar adivinhar o que dá certo. Nós já testamos e organizamos tudo pra você.</p>
-
-<h2>🚀 Apresentamos: <strong>INDICADOR PRO</strong></h2>
-<img src="indicador-pro-mockup.png" alt="Mockup do Indicador Pro" style="width: 100%; max-width: 300px; display: block; margin: 20px auto; border-radius: 8px;">
-<div class="destaque">
-  <p>📦 <strong>Indicador Pro</strong> é a solução definitiva para você começar a lucrar na internet com rapidez e eficiência. Criado pensando em quem não tem experiência, ele reúne estratégias testadas e validadas para que você alcance resultados sem precisar investir em anúncios. Tudo o que você precisa é de um celular e conexão à internet!</p>
-  <p>💼 No Indicador Pro, você encontrará um passo a passo claro, ferramentas exclusivas e métodos eficazes que funcionam para qualquer nicho, mesmo que você esteja começando do zero. Não perca tempo tentando adivinhar o que funciona – nós já fizemos isso por você!</p>
-</div>
-
-  <h2>🤯 Mas por que começar com indicação ao invés de venda direta?</h2>
-  <table>
-    <tr><th>Pra vender...</th><th>Pra indicar...</th></tr>
-    <tr><td>Precisa criar estrutura</td><td>Recebe tudo pronto</td></tr>
-    <tr><td>Montar página de vendas</td><td>Link com página pronta</td></tr>
-    <tr><td>Script de atendimento</td><td>Empresa faz isso por você</td></tr>
-    <tr><td>Cliente precisa pagar</td><td>Indicações geralmente são gratuitas</td></tr>
-    <tr><td>Tem que quebrar objeções</td><td>Menos resistência</td></tr>
-    <tr><td>Exige copy e tráfego</td><td>Basta indicar da forma certa</td></tr>
-  </table>
-
-  <h2>💡 O que você vai encontrar dentro do Indicador Pro:</h2>
-  <ul>
-    <li>✅ Estratégias validadas e testadas</li>
-    <li>✅ Estratégias avançadas para resultados rápidos</li>
-    <li>✅ Ferramentas exclusivas de divulgação</li>
-    <li>✅ Métodos que funcionam com vários produtos e nichos</li>
-  </ul>
-
-  <h2>💥 Com o Indicador Pro você:</h2>
-  <ul>
-    <li>💰 Cria novas fontes de renda com seus links de indicações</li>
-    <li>🚀 Começa sem precisar investir em anúncios</li>
-    <li>📱 Só precisa de um celular e internet</li>
-  </ul>
-  
-<h2>📣 O que nossos clientes estão dizendo:</h2>
-<div class="destaque">
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="amanda.jpg" alt="Amanda S." style="width: 50px; height: 50px; border-radius: 50%;">
-    <p><strong>⭐⭐⭐⭐⭐ "O Indicador Pro superou minhas expectativas! Eu consegui gerar minha primeira renda online em menos de uma semana."</strong><br>- Amanda S., São Paulo</p>
+<section class="hero">
+  <div class="container">
+    <h1 class="headline">🤑 Ganhe Dinheiro Online Indicando Produtos Mesmo Sem Experiência!</h1>
+    <p class="subheadline">Descubra como começar do zero e criar uma fonte de renda diária apenas com o celular.</p>
+    <p class="preco">
+      <span class="original">De R$ 272,00</span>
+      <span class="atual">Por apenas R$ 10,00!</span>
+    </p>
+   <a href="#" id="botao-hero" class="botao">👉 Quero Começar com o Indicador Pro!</a>
+    <p class="oferta">⏳ Oferta por tempo limitado!</p>
   </div>
-</div>
-<div class="destaque">
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="rafael.jpg" alt="Rafael C." style="width: 50px; height: 50px; border-radius: 50%;">
-    <p><strong>⭐⭐⭐⭐⭐ "Sempre achei que seria muito difícil ganhar dinheiro online, mas com as estratégias do Indicador Pro foi mais fácil do que imaginei!"</strong><br>- Rafael C., Rio de Janeiro</p>
+</section>
+<section class="beneficios">
+  <div class="container">
+    <h2 class="titulo">
+      <span class="azul">🎯 Benefícios</span> <span class="verde">Exclusivos</span>
+    </h2>
+    <div class="grid-cards">
+      <div class="card">
+        <img src="icone1.svg" alt="Acesso" />
+        <h3>Acesso Imediato</h3>
+        <p>Receba tudo no mesmo instante após o pagamento.</p>
+      </div>
+      <div class="card">
+        <img src="icone2.svg" alt="Garantia" />
+        <h3>Garantia de 7 Dias</h3>
+        <p>Teste o método sem riscos. Dinheiro de volta se não curtir.</p>
+      </div>
+      <div class="card">
+        <img src="icone3.svg" alt="Suporte" />
+        <h3>Suporte Dedicado</h3>
+        <p>Dúvidas? Fale direto com o time via WhatsApp ou E-mail.</p>
+      </div>
+      <div class="card">
+        <img src="icone4.svg" alt="Prático" />
+        <h3>100% Prático</h3>
+        <p>Sem teoria enrolada. É aplicar e começar a lucrar.</p>
+      </div>
+    </div>
   </div>
-</div>
-<div class="destaque">
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="julia.jpg" alt="Júlia M." style="width: 50px; height: 50px; border-radius: 50%;">
-    <p><strong>⭐⭐⭐⭐⭐ "Adorei o conteúdo direto e fácil de entender. Já estou recomendando para os meus amigos!"</strong><br>- Júlia M., Belo Horizonte</p>
+</section>
+
+<section class="depoimentos">
+  <div class="container">
+    <h2 class="titulo">
+      <span class="verde">💬 Depoimentos</span> <span class="azul">Reais de Alunos</span>
+    </h2>
+    <div class="grid-depoimentos">
+      
+      <div class="card">
+        <img class="icone" src="quote.svg" alt="aspas" />
+        <p>"O Indicador Pro superou minhas expectativas! Eu consegui gerar minha primeira renda online em menos de uma semana."</p>
+        <div class="perfil">
+          <img src="amanda.jpg" alt="Amanda S." />
+          <div class="info">
+            <strong>Amanda S.</strong><br />
+            <span>São Paulo – Cliente Indicador Pro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img class="icone" src="quote.svg" alt="aspas" />
+        <p>"Sempre achei que seria muito difícil ganhar dinheiro online, mas com as estratégias do Indicador Pro foi mais fácil do que imaginei!"</p>
+        <div class="perfil">
+          <img src="rafael.jpg" alt="Rafael C." />
+          <div class="info">
+            <strong>Rafael C.</strong><br />
+            <span>Rio de Janeiro – Cliente Indicador Pro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img class="icone" src="quote.svg" alt="aspas" />
+        <p>"Adorei o conteúdo direto e fácil de entender. Já estou recomendando para os meus amigos!"</p>
+        <div class="perfil">
+          <img src="julia.jpg" alt="Júlia M." />
+          <div class="info">
+            <strong>Júlia M.</strong><br />
+            <span>Belo Horizonte – Cliente Indicador Pro</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
+</section>
 
-  <h2>💰 Agora, olha isso:</h2>
-  <img src="printresultado.png" alt="Prova de resultado" style="max-width: 100%; border-radius: 12px; margin: 20px 0;">
+<section class="bonus">
+  <div class="container">
+    <h2 class="titulo">
+      <span class="azul">🎁 Bônus</span> <span class="verde">Exclusivos Incluídos</span>
+    </h2>
+    <div class="grid-bonus">
+      <div class="card">
+        <h3>🎯 Estratégia Secreta com Múltiplas Contas</h3>
+        <p class="preco">De <span class="riscado">R$ 97,00</span></p>
+        <p>Aumente seu alcance operando com múltiplas contas de forma segura</p>
+      </div>
+      <div class="card">
+        <h3>📢 Lista de Grupos Prontos para Divulgação</h3>
+        <p class="preco">De <span class="riscado">R$ 49,00</span></p>
+        <p>Acesso a canais testados para divulgar seus links e converter mais rápido</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Ferramenta Anti-Bloqueio para Redes Sociais</h3>
+        <p class="preco">De <span class="riscado">R$ 97,00</span></p>
+        <p>Evite penalizações nas plataformas e mantenha seus perfis ativos</p>
+      </div>
+      <div class="card">
+        <h3>💡 Modelo de Mensagens de Alta Conversão</h3>
+        <p class="preco">De <span class="riscado">R$ 29,00</span></p>
+        <p>Textos prontos que geram cliques e resultados reais</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="garantia">
+  <div class="container">
+    <div class="card-garantia">
+      <img src="garantia-icon.svg" alt="Ícone de Garantia" class="icone" />
+      <h2 class="titulo">
+        <span class="azul">🔒 Garantia</span> <span class="verde">de 7 Dias – Risco Zero!</span>
+      </h2>
+      <p>
+        Experimente o Indicador Pro por <strong>7 dias</strong> sem preocupação.  
+        Se não gostar, <strong>basta pedir o reembolso</strong>.  
+        <br />Sem perguntas. Sem burocracia. Sem risco.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="criador">
+  <div class="container grid-criador">
+    <div class="imagem">
+      <img src="felipe-augusto.jpg" alt="Felipe Augusto – Criador do Indicador Pro" />
+    </div>
+    <div class="texto">
+      <h2 class="titulo">
+        <span class="azul">👨‍🏫 Conheça o Criador:</span> <span class="verde">Felipe Augusto</span>
+      </h2>
+      <p>Especialista em marketing digital com anos de experiência ajudando iniciantes a ganhar dinheiro online sem complicação.</p>
+      <p>Felipe já impactou mais de <strong>5.000 alunos</strong> com métodos simples, práticos e acessíveis — mesmo para quem nunca vendeu nada pela internet.</p>
+      <ul class="lista">
+        <li>✅ Metodologia direta ao ponto</li>
+        <li>✅ Foco em resultados rápidos e consistentes</li>
+        <li>✅ Estratégias validadas por alunos reais</li>
+        <li>✅ Apoio contínuo através do suporte</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <ul>
-    <li>Curso com estratégias validadas: R$ 97,00</li>
-    <li>Ferramentas exclusivas: R$ 49,00</li>
-    <li>Treinamento avançado: R$ 97,00</li>
-    <li>Material didático de simples execução: R$ 29,00</li>
-  </ul>
-  <p><strong>Total real: R$ 272,00</strong></p>
+<section class="faq">
+  <div class="container">
+    <h2 class="titulo">
+      <span class="azul">🤔 Perguntas</span> <span class="verde">Frequentes</span>
+    </h2>
 
-  <h2>🎯 Oferta por tempo extremamente limitado:</h2>
-<p><strong>🔥 Apenas hoje: Leve tudo por R$ <span style="color: red; font-size: 22px;">10,00</span>!</strong></p>
-<p>⏳ Esta oferta expira em <span style="color: red;">menos de 24 horas</span>. Não deixe para depois!</p>
-<p>💸 Aproveite agora e economize R$ 262,00. É sua chance de transformar sua vida sem abrir mão de seu orçamento.</p>
+    <div class="faq-item">
+      <h3 class="pergunta">1. Preciso ter experiência?</h3>
+      <p class="resposta">Não! O método foi criado justamente para quem está começando do zero.</p>
+    </div>
 
-<p>✅ <strong>Ao confirmar sua inscrição agora, você vai receber:</strong></p>
-<ul>
-  <li>✔️ Acesso completo ao Indicador Pro</li>
-  <li>✔️ Estratégia secreta com múltiplas contas (para alcançar mais pessoas)</li>
-  <li>✔️ Lista de grupos prontos para divulgar</li>
-  <li>✔️ Ferramenta para reduzir bloqueios e aumentar seus ganhos</li>
-</ul>
+    <div class="faq-item">
+      <h3 class="pergunta">2. Vou precisar investir em anúncios?</h3>
+      <p class="resposta">Não. Todas as estratégias são 100% orgânicas, sem custo adicional.</p>
+    </div>
 
-<!-- Botão de compra -->
-<a id="botao-compra" class="button" href="#" target="_blank">Quero Garantir Agora!</a>
+    <div class="faq-item">
+      <h3 class="pergunta">3. Em quanto tempo começo a ver resultados?</h3>
+      <p class="resposta">Muitos alunos têm os primeiros resultados já nas primeiras semanas, aplicando o passo a passo corretamente.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="pergunta">4. Como vou receber o acesso?</h3>
+      <p class="resposta">Assim que o pagamento for confirmado, você recebe o link de acesso por e-mail.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="pergunta">5. Funciona com qualquer tipo de produto?</h3>
+      <p class="resposta">Sim! As estratégias funcionam em diversos nichos e tipos de produto.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2 class="titulo">
+      <span class="verde">💥 Última Chance:</span> De <span class="riscado">R$ 272,00</span> por apenas <span class="preco-final">R$ 10,00!</span>
+    </h2>
+    <p class="texto-chamada">Não perca essa oportunidade de começar a lucrar com o **Indicador Pro**! Aproveite agora antes que a oferta acabe. 🚀</p>
+    <a href="#" id="botao-final" class="botao-cta">🔥 Quero Garantir Minha Vaga Agora!</a>
+    <p class="aviso">🔒 Garantia de 7 Dias – Risco Zero!</p>
+  </div>
+</section>
 
 
 
 
-  <h2>🔐 Garantia de 7 Dias</h2>
-<img src="guarantee-seal.jpg" alt="Selo de Garantia de 7 Dias" style="width: 100%; max-width: 150px; border-radius: 8px; display: block; margin: 20px auto;">
-<p>Confiamos tanto na qualidade do conteúdo do Indicador Pro que oferecemos uma garantia incondicional de 7 dias. Você pode adquirir o material e explorar todas as estratégias e ferramentas sem preocupações. Caso não fique satisfeito por qualquer motivo, basta solicitar o reembolso dentro deste prazo.</p>
-<p>✨ Nosso compromisso é fornecer valor e resultados reais, sem riscos para você. Essa garantia elimina qualquer barreira e dá a você a chance de experimentar sem medo de perder seu investimento!</p>
-<p>🛡️ Risco zero e toda segurança. Se você não gostar do conteúdo, reembolsamos 100%. É simples assim!</p>
 
-  <h2>🤔 Dúvidas Frequentes</h2>
-  <p><strong>1. Preciso ter experiência?</strong><br>Não! O Indicador Pro foi feito para iniciantes.</p>
-  <p><strong>2. Vou precisar investir em anúncios?</strong><br>Não. As estratégias são todas orgânicas.</p>
-  <p><strong>3. Funciona para qualquer produto?</strong><br>Sim! As estratégias funcionam em diversos nichos.</p>
-  <p><strong>4. Quanto tempo até ter resultados?</strong><br>Com dedicação, é possível ver resultados já nas primeiras semanas.</p>
-  <p><strong>5. Como vou receber o conteúdo?</strong><br>Logo após o pagamento, você recebe tudo por e-mail ou WhatsApp.</p>
+
+
+
+
 
 
 <script>
-  document.getElementById('botao-compra').addEventListener('click', function() {
-    gtag('event', 'clique_botao_compra', {
-      'event_category': 'Botão',
-      'event_label': 'Clique no botão Quero Garantir Agora',
-      'value': 1
+  document.addEventListener('DOMContentLoaded', function() {
+  const checkoutLink = 'https://pay.kirvano.com/90591aef-0acc-45ec-b289-433142538ba9';
+
+  // Função para capturar parâmetros UTM
+  function getUTMParams() {
+    const params = new URLSearchParams(window.location.search);
+    let utms = [];
+    params.forEach((value, key) => {
+      if (key.startsWith('utm_')) {
+        utms.push(`${key}=${encodeURIComponent(value)}`);
+      }
     });
-  });
+    return utms.length > 0 ? '?' + utms.join('&') : '';
+  }
+
+  // Função para rastrear eventos e redirecionar
+  function handleClick(botaoID, eventName, eventLabel) {
+    event.preventDefault(); // Impede o redirecionamento automático
+
+    // Disparar evento do Google Analytics
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, {
+        'event_category': 'Botão',
+        'event_label': eventLabel,
+        'value': 1
+      });
+    }
+
+    // Disparar evento do Facebook Pixel
+    if (typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout');
+    }
+
+    // Redireciona para o checkout com UTM
+    window.open(checkoutLink + getUTMParams(), '_blank');
+  }
+
+  // Configuração dos botões
+  const botaoHero = document.getElementById('botao-hero');
+  const botaoFinal = document.getElementById('botao-final');
+
+  if (botaoHero) {
+    botaoHero.addEventListener('click', function(event) {
+      handleClick('botao-hero', 'clique_botao_hero', 'Clique no botão Hero');
+    });
+  }
+
+  if (botaoFinal) {
+    botaoFinal.addEventListener('click', function(event) {
+      handleClick('botao-final', 'clique_botao_final', 'Clique no botão Final');
+    });
+  }
+});
 </script>
+
 <script>
+  // Disparar evento ao usuário rolar até o fim da página
   window.addEventListener('scroll', function() {
     let scrollTop = window.scrollY;
     let windowHeight = window.innerHeight;
-    let documentHeight = document.body.offsetHeight;
+    let documentHeight = document.documentElement.scrollHeight;
     let scrollPercent = (scrollTop + windowHeight) / documentHeight;
 
-    if (scrollPercent > 0.95) { // Se chegou a 95% da página
+    if (scrollPercent > 0.95 && typeof gtag === 'function') {
       gtag('event', 'leu_ate_o_fim', {
         'event_category': 'Engajamento',
         'event_label': 'Usuário leu até o fim da página'
@@ -224,42 +766,6 @@ Você não precisa tentar adivinhar o que dá certo. Nós já testamos e organiz
     }
   });
 </script>
-<script>
-// Função para pegar parâmetros UTM da URL
-function getUTMParams() {
-  const params = new URLSearchParams(window.location.search);
-  let utms = [];
-  params.forEach((value, key) => {
-    if (key.startsWith('utm_')) {
-      utms.push(`${key}=${encodeURIComponent(value)}`);
-    }
-  });
-  return utms.join('&');
-}
-
-// Captura o clique no botão
-document.getElementById('botao-compra').addEventListener('click', function(e) {
-  e.preventDefault(); // Impede o redirecionamento automático
-
-  // Base do seu link de checkout
-  let baseCheckoutLink = 'https://pay.kirvano.com/90591aef-0acc-45ec-b289-433142538ba9';
-
-  // Pega os parâmetros UTM
-  let utmParams = getUTMParams();
-
-  // Se existir UTM, adiciona no link
-  if (utmParams) {
-    baseCheckoutLink += '?' + utmParams;
-  }
-
-  // Dispara o evento do Pixel
-  fbq('track', 'InitiateCheckout');
-
-  // Agora redireciona para o link final
-  window.open(baseCheckoutLink, '_blank');
-});
-</script>
-
 
 </body>
 </html>
