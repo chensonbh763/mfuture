@@ -771,25 +771,32 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
       }
     });
 
-    const botao = document.querySelector('.elementor-button[href*="pay.kirvano.com"]');
-    if (botao && utmParams.toString()) {
-      const url = new URL(botao.href);
-      
-      // Mantém o parâmetro "aff"
-      const aff = url.searchParams.get("aff");
-      url.search = ""; // limpa os parâmetros existentes
-      if (aff) url.searchParams.set("aff", aff);
+    // Espera o botão aparecer (caso seja carregado tardiamente)
+    const interval = setInterval(() => {
+      const botao = document.querySelector('.elementor-button[href*="pay.kirvano.com"]');
+      if (botao && utmParams.toString()) {
+        const url = new URL(botao.href);
 
-      // Adiciona os UTM
-      utmParams.forEach((value, key) => {
-        url.searchParams.set(key, value);
-      });
+        // Mantém o parâmetro "aff" se existir
+        const aff = url.searchParams.get("aff");
+        url.search = "";
+        if (aff) url.searchParams.set("aff", aff);
 
-      // Atualiza o botão
-      botao.href = url.toString();
-    }
+        // Adiciona UTM
+        utmParams.forEach((value, key) => {
+          url.searchParams.set(key, value);
+        });
+
+        // Atualiza o botão
+        botao.href = url.toString();
+
+        // Parar o intervalo
+        clearInterval(interval);
+      }
+    }, 300); // Tenta a cada 300ms até achar
   });
 </script>
+
 
 	</body>
 </html>
