@@ -46,59 +46,91 @@
     <div id="listaTarefas"></div>
   </div>
 
+  <div class="box">
+  <h3>🧪 Diagnóstico</h3>
+  <div id="diagnosticoMensagem">Inicializando...</div>
+</div>
+
   <script>
-    const tg = window.Telegram.WebApp;
-    const user = tg.initDataUnsafe?.user;
-    const telegramId = user?.id;
+  const tg = window.Telegram.WebApp;
+  const user = tg.initDataUnsafe?.user;
+  const telegramId = user?.id;
+  const diagnostico = document.getElementById("diagnosticoMensagem");
 
-    document.getElementById("userName").innerText = user?.first_name || "Desconhecido";
+  // Exibe nome imediatamente
+  document.getElementById("userName").innerText = user?.first_name || "Desconhecido";
 
-    async function carregarDados() {
-      try {
-        const url = `https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=status`;
-        const response = await fetch(url);
-        const data = await response.json();
+  // Diagnóstico de Telegram ID
+  if (!telegramId) {
+    diagnostico.innerText = "⚠️ Telegram ID não detectado. Este site precisa ser aberto dentro do Telegram.";
+  } else {
+    diagnostico.innerText = `✅ Telegram ID detectado: ${telegramId}`;
+  }
 
-        document.getElementById("vipStatus").innerText = data.vip ? "Sim" : "Não";
-        document.getElementById("pontos").innerText = data.pontos ?? 0;
-      } catch (err) {
-        document.getElementById("vipStatus").innerText = "Erro";
-        document.getElementById("pontos").innerText = "0";
+  async function carregarDados() {
+    try {
+      const url = `https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=status`;
+      const response = await fetch(url);
+      const data = await response.json();
+
+      document.getElementById("vipStatus").innerText = data.vip ? "Sim" : "Não";
+      document.getElementById("pontos").innerText = data.pontos ?? 0;
+
+      if (data.nome === "Desconhecido") {
+        diagnostico.innerText += "\n⚠️ Usuário não cadastrado na planilha.";
+      } else {
+        diagnostico.innerText += "\n✅ Dados carregados com sucesso.";
       }
+    } catch (err) {
+      document.getElementById("vipStatus").innerText = "Erro";
+      document.getElementById("pontos").innerText = "0";
+      diagnostico.innerText += "\n❌ Erro ao carregar os dados.";
+      console.error(err);
     }
+  }
 
-    async function carregarTarefas() {
-      try {
-        const url = `https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=tarefas`;
-        const response = await fetch(url);
-        const tarefas = await response.json();
+  async function carregarTarefas() {
+    try {
+      const url = `https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=tarefas`;
+      const response = await fetch(url);
+      const tarefas = await response.json();
 
-        if (tarefas.length === 0) {
-          document.getElementById("tarefasStatus").innerText = "Nenhuma tarefa disponível hoje.";
-          return;
-        }
+      if (tarefas.length === 0) {
+        document.getElementById("tarefasStatus").innerText = "Nenhuma tarefa disponível hoje.";
+        diagnostico.innerText += "\n⚠️ Nenhuma tarefa ativa para hoje.";
+        return;
+      }
 
-        document.getElementById("tarefasStatus").innerText = "";
-        const lista = document.getElementById("listaTarefas");
-        tarefas.forEach(tarefa => {
-          const btn = document.createElement("button");
-          btn.innerText = `✔️ ${tarefa.tarefa} (+${tarefa.pontos} ponto${tarefa.pontos > 1 ? 's' : ''})`;
-          btn.onclick = async () => {
+      document.getElementById("tarefasStatus").innerText = "";
+      const lista = document.getElementById("listaTarefas");
+      tarefas.forEach(tarefa => {
+        const btn = document.createElement("button");
+        btn.innerText = `✔️ ${tarefa.tarefa} (+${tarefa.pontos} ponto${tarefa.pontos > 1 ? 's' : ''})`;
+        btn.onclick = async () => {
+          try {
             await fetch(`https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=concluir&tarefaId=${tarefa.id}`);
+            diagnostico.innerText += `\n✅ Tarefa ${tarefa.id} concluída.`;
             window.open(tarefa.link, "_blank");
-          };
-          lista.appendChild(btn);
-        });
-      } catch (err) {
-        document.getElementById("tarefasStatus").innerText = "Erro ao carregar tarefas.";
-        console.error(err);
-      }
-    }
+          } catch (err) {
+            diagnostico.innerText += `\n❌ Erro ao registrar tarefa ${tarefa.id}.`;
+            console.error(err);
+          }
+        };
+        lista.appendChild(btn);
+      });
 
-    window.addEventListener("load", () => {
-      carregarDados();
-      carregarTarefas();
-    });
-  </script>
+      diagnostico.innerText += `\n✅ ${tarefas.length} tarefa(s) carregada(s).`;
+    } catch (err) {
+      document.getElementById("tarefasStatus").innerText = "Erro ao carregar tarefas.";
+      diagnostico.innerText += "\n❌ Erro ao buscar tarefas.";
+      console.error(err);
+    }
+  }
+
+  window.addEventListener("load", () => {
+    carregarDados();
+    carregarTarefas();
+  });
+</script>
 </body>
 </html>
