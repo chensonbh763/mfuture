@@ -52,20 +52,26 @@
 </div>
 
   <script>
-  const tg = window.Telegram.WebApp;
-  const user = tg.initDataUnsafe?.user;
-  const telegramId = user?.id;
   const diagnostico = document.getElementById("diagnosticoMensagem");
 
-  // Exibe nome imediatamente
-  document.getElementById("userName").innerText = user?.first_name || "Desconhecido";
+  let telegramId;
+  let nomeUsuario = "Desconhecido";
 
-  // Diagnóstico de Telegram ID
-  if (!telegramId) {
-    diagnostico.innerText = "⚠️ Telegram ID não detectado. Este site precisa ser aberto dentro do Telegram.";
+  const tg = window.Telegram?.WebApp;
+  if (tg?.initDataUnsafe?.user?.id) {
+    telegramId = tg.initDataUnsafe.user.id;
+    nomeUsuario = tg.initDataUnsafe.user.first_name || "Desconhecido";
+    diagnostico.innerText = `✅ Telegram ID detectado via WebApp: ${telegramId}`;
   } else {
-    diagnostico.innerText = `✅ Telegram ID detectado: ${telegramId}`;
+    const params = new URLSearchParams(window.location.search);
+    telegramId = params.get("id");
+    nomeUsuario = "Visitante";
+    diagnostico.innerText = telegramId
+      ? `⚠️ WebApp não disponível. ID capturado pela URL: ${telegramId}`
+      : "❌ Nenhum Telegram ID detectado.";
   }
+
+  document.getElementById("userName").innerText = nomeUsuario;
 
   async function carregarDados() {
     try {
@@ -128,8 +134,10 @@
   }
 
   window.addEventListener("load", () => {
-    carregarDados();
-    carregarTarefas();
+    if (telegramId) {
+      carregarDados();
+      carregarTarefas();
+    }
   });
 </script>
 </body>
