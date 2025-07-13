@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>LucreMais - Seu Status</title>
+  <title>LucreMais Tasks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -10,29 +10,40 @@
       color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 40px;
+      padding: 30px;
     }
     .box {
-      background: #1c1c1c;
+      background: #1e1e1e;
       padding: 20px;
       border-radius: 10px;
+      margin-bottom: 20px;
       box-shadow: 0 0 10px #000;
     }
-    h1 {
-      margin-bottom: 20px;
-    }
-    .status {
-      font-size: 18px;
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 18px;
       margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>🔎 Status do Usuário</h1>
+  <h1>📋 Tarefas Diárias</h1>
+
   <div class="box">
     <p>👤 Nome: <strong id="userName">Carregando...</strong></p>
     <p>💎 VIP: <strong id="vipStatus">Carregando...</strong></p>
     <p>🏆 Pontos: <strong id="pontos">0</strong></p>
+  </div>
+
+  <div class="box">
+    <h3>🎯 Tarefas do Dia</h3>
+    <div id="tarefasStatus">Carregando tarefas...</div>
+    <div id="listaTarefas"></div>
   </div>
 
   <script>
@@ -40,27 +51,54 @@
     const user = tg.initDataUnsafe?.user;
     const telegramId = user?.id;
 
-    // Mostra o nome na interface
     document.getElementById("userName").innerText = user?.first_name || "Desconhecido";
 
-    // Chama o Apps Script para buscar os dados na planilha
     async function carregarDados() {
       try {
-        const url = "https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=" + telegramId;
+        const url = `https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=status`;
         const response = await fetch(url);
         const data = await response.json();
 
-        // Verifica se usuário existe e atualiza os campos
         document.getElementById("vipStatus").innerText = data.vip ? "Sim" : "Não";
         document.getElementById("pontos").innerText = data.pontos ?? 0;
       } catch (err) {
-        console.error("Erro ao carregar dados:", err);
-        document.getElementById("vipStatus").innerText = "Não encontrado";
+        document.getElementById("vipStatus").innerText = "Erro";
         document.getElementById("pontos").innerText = "0";
       }
     }
 
-    window.addEventListener("load", carregarDados);
+    async function carregarTarefas() {
+      try {
+        const url = `https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=tarefas`;
+        const response = await fetch(url);
+        const tarefas = await response.json();
+
+        if (tarefas.length === 0) {
+          document.getElementById("tarefasStatus").innerText = "Nenhuma tarefa disponível hoje.";
+          return;
+        }
+
+        document.getElementById("tarefasStatus").innerText = "";
+        const lista = document.getElementById("listaTarefas");
+        tarefas.forEach(tarefa => {
+          const btn = document.createElement("button");
+          btn.innerText = `✔️ ${tarefa.tarefa} (+${tarefa.pontos} ponto${tarefa.pontos > 1 ? 's' : ''})`;
+          btn.onclick = async () => {
+            await fetch(`https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=${telegramId}&acao=concluir&tarefaId=${tarefa.id}`);
+            window.open(tarefa.link, "_blank");
+          };
+          lista.appendChild(btn);
+        });
+      } catch (err) {
+        document.getElementById("tarefasStatus").innerText = "Erro ao carregar tarefas.";
+        console.error(err);
+      }
+    }
+
+    window.addEventListener("load", () => {
+      carregarDados();
+      carregarTarefas();
+    });
   </script>
 </body>
 </html>
