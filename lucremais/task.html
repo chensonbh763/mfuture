@@ -2,107 +2,65 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>LucreMais Tasks - Tarefas Diárias</title>
+  <title>LucreMais - Seu Status</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: Arial, sans-serif;
       background-color: #111;
       color: #fff;
-      padding: 20px;
+      font-family: Arial, sans-serif;
       text-align: center;
+      padding: 40px;
     }
     .box {
-      background: #1e1e1e;
-      border-radius: 10px;
+      background: #1c1c1c;
       padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+    h1 {
       margin-bottom: 20px;
-      box-shadow: 0 0 10px #222;
     }
-    button {
-      background-color: #4caf50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
+    .status {
+      font-size: 18px;
       margin-top: 10px;
-    }
-    .vip {
-      background-color: #FFD700;
-      color: #000;
-      font-weight: bold;
-    }
-    .info {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #ccc;
-    }
-    .link-box {
-      background-color: #222;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 5px;
-      font-size: 14px;
-      word-wrap: break-word;
     }
   </style>
 </head>
 <body>
-  <h1>✅ Tarefas Diárias</h1>
+  <h1>🔎 Status do Usuário</h1>
   <div class="box">
-    <p>👋 Olá, <strong id="userName">usuário</strong></p>
-    <p>💎 Status: <strong id="vipStatus">Padrão</strong></p>
-    <p>🏆 Pontos acumulados: <strong id="pontos">0</strong></p>
-    <p>👥 Indicações: <strong id="indicacoes">0</strong></p>
+    <p>👤 Nome: <strong id="userName">Carregando...</strong></p>
+    <p>💎 VIP: <strong id="vipStatus">Carregando...</strong></p>
+    <p>🏆 Pontos: <strong id="pontos">0</strong></p>
   </div>
 
-  <div class="box">
-    <h3>🎯 Tarefa do Dia</h3>
-    <p>📲 Curtir post no Instagram</p>
-    <button onclick="executarTarefa()">Ir para Tarefa</button>
-  </div>
+  <script>
+    const tg = window.Telegram.WebApp;
+    const user = tg.initDataUnsafe?.user;
+    const telegramId = user?.id;
 
-  <div class="box">
-    <h3>📤 Indique Amigos</h3>
-    <p>Compartilhe o link abaixo para ganhar pontos extras!</p>
-    <div class="link-box" id="refLink">Carregando...</div>
-  </div>
+    // Mostra o nome na interface
+    document.getElementById("userName").innerText = user?.first_name || "Desconhecido";
 
-  <div class="box">
-    <h3>💎 Se torne VIP</h3>
-    <p>Desbloqueie mais tarefas, pontos dobrados e acesso exclusivo.</p>
-    <a href="https://mfuture.com.br/lucremais/prevenda.html" target="_blank">
-      <button class="vip">Quero Ser VIP</button>
-    </a>
-  </div>
+    // Chama o Apps Script para buscar os dados na planilha
+    async function carregarDados() {
+      try {
+        const url = "https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=" + telegramId;
+        const response = await fetch(url);
+        const data = await response.json();
 
-<script>
-  const tg = window.Telegram.WebApp;
-  const user = tg.initDataUnsafe.user;
-  document.getElementById("userName").innerText = user?.first_name || "Membro";
-  document.getElementById("refLink").innerText = `https://t.me/LucreMaisTask_bot?start=${user.id}`;
-
-  function executarTarefa() {
-    const link = "https://instagram.com/mfuture.oficial";
-    window.open(link, '_blank');
-  }
-
-  async function carregarDadosUsuario() {
-    try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyBTwPE0af1GrVcJzl25fIigLB7Pk5xr99LNFtDCsM/dev?telegramId=" + user.id);
-      const data = await response.json();
-
-      document.getElementById("vipStatus").innerText = data.vip ? "VIP" : "Padrão";
-      document.getElementById("pontos").innerText = data.pontos;
-      document.getElementById("indicacoes").innerText = data.indicados;
-    } catch (err) {
-      console.error("Erro ao carregar dados:", err);
+        // Verifica se usuário existe e atualiza os campos
+        document.getElementById("vipStatus").innerText = data.vip ? "Sim" : "Não";
+        document.getElementById("pontos").innerText = data.pontos ?? 0;
+      } catch (err) {
+        console.error("Erro ao carregar dados:", err);
+        document.getElementById("vipStatus").innerText = "Não encontrado";
+        document.getElementById("pontos").innerText = "0";
+      }
     }
-  }
 
-  window.addEventListener("load", carregarDadosUsuario);
-</script>
+    window.addEventListener("load", carregarDados);
+  </script>
 </body>
 </html>
