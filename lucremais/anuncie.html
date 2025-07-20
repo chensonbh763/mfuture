@@ -1,47 +1,143 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Anuncie no LucreMaisTask</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; max-width: 700px; margin: auto; }
-    h1 { color: #2a8f43; }
-    section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-    button { background: #2a8f43; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; }
-    .pacote { margin-bottom: 15px; }
+    body {
+      font-family: sans-serif;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1, h2 {
+      color: #2a8f43;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #2a8f43;
+      color: white;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+    button {
+      background: #2a8f43;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1e6e34;
+    }
   </style>
 </head>
 <body>
 
   <h1>📢 Anuncie no LucreMaisTask</h1>
-  <p>Exponha sua marca para milhares de usuários ativos do Telegram. Temos opções para todos os orçamentos!</p>
+  <p style="text-align:center">Escolha uma modalidade de anúncio e leve sua marca a milhares de usuários!</p>
 
-  <section>
-    <h2>🎯 Tipos de Anúncio</h2>
-    <ul>
-      <li><strong>Tarefas Promovidas:</strong> Faça os usuários curtirem, seguirem, entrarem em links.</li>
-      <li><strong>Banner no app:</strong> Mostre sua marca em destaque.</li>
-      <li><strong>Mensagem no Bot:</strong> Divulgue no início da interação com o bot.</li>
-    </ul>
-  </section>
+  <h2>Tabela de Tipos de Anúncio</h2>
+  <table>
+    <tr><th>Tipo de Anúncio</th><th>Descrição</th><th>Modalidade</th><th>Preço</th></tr>
+    <tr><td>📺 Anúncio em vídeo</td><td>Exibe vídeo com recompensa</td><td>Por ação</td><td>R$0,10/view</td></tr>
+    <tr><td>🔗 Direcionamento para link</td><td>Abre página externa</td><td>Por ação</td><td>R$0,07/clique</td></tr>
+    <tr><td>📸 Seguir Instagram</td><td>Visita e segue perfil</td><td>Por ação</td><td>R$0,20</td></tr>
+    <tr><td>❤️ Curtir post Instagram</td><td>Curtir post direto</td><td>Por ação</td><td>R$0,15</td></tr>
+    <tr><td>👍 Curtir canal Facebook</td><td>Curtir página ou post</td><td>Por ação</td><td>R$0,15</td></tr>
+    <tr><td>▶️ Curtir vídeo YouTube</td><td>Usuário curte vídeo</td><td>Por ação</td><td>R$0,20</td></tr>
+    <tr><td>💬 Deixar comentário</td><td>Comentário personalizado</td><td>Por ação</td><td>R$0,25</td></tr>
+    <tr><td>🤖 Divulgar bot Telegram</td><td>Abre outro bot</td><td>Por ação</td><td>R$0,10</td></tr>
+    <tr><td>📱 Grupo WhatsApp</td><td>Entrada no grupo</td><td>Por ação</td><td>R$0,20</td></tr>
+    <tr><td>💬 Grupo Telegram</td><td>Entrar em canal</td><td>Por ação</td><td>R$0,15</td></tr>
+    <tr><td>📢 Banner rodapé</td><td>Banner permanente</td><td>Por tempo</td><td>R$9,90 / 3 dias</td></tr>
+    <tr><td>⏱ Banner antes tarefas</td><td>Banner antes da tarefa</td><td>Por tempo</td><td>R$14,90 / 3 dias</td></tr>
+    <tr><td>📝 Texto no app</td><td>Texto promocional</td><td>Por tempo</td><td>R$7,90 / 3 dias</td></tr>
+    <tr><td>🧾 Anúncio em anuncie.html</td><td>Patrocinador destacado</td><td>Por tempo</td><td>R$9,90 / 7 dias</td></tr>
+    <tr><td>🧨 Tarefa no topo</td><td>Destaca tarefa</td><td>Por tempo</td><td>R$14,90 / 3 dias</td></tr>
+    <tr><td>🥇 Patrocinador do dia</td><td>Mensagem no /start</td><td>Por tempo</td><td>R$12,90 / dia</td></tr>
+    <tr><td>🧑‍🎓 Quiz patrocinado</td><td>Quiz com link</td><td>Por ação</td><td>R$0,25</td></tr>
+    <tr><td>📥 Coleta de leads</td><td>Email/WhatsApp</td><td>Por ação</td><td>R$0,30</td></tr>
+    <tr><td>🧷 Push personalizado</td><td>Notificação no app</td><td>Por tempo</td><td>R$19,90 / 3 dias</td></tr>
+    <tr><td>🎁 Sorteio patrocinado</td><td>Prêmio ofertado</td><td>Por tempo</td><td>Negociável</td></tr>
+  </table>
 
-  <section>
-    <h2>💰 Planos Disponíveis</h2>
-    <div class="pacote">
-      <strong>🟢 Plano Básico - R$9,90</strong><br>
-      Banner por 3 dias no Mini App.
-    </div>
-    <div class="pacote">
-      <strong>🔵 Plano Tarefa - R$19,90</strong><br>
-      Tarefa promovida com até 100 execuções.
-    </div>
-    <div class="pacote">
-      <strong🟣> Plano Premium - R$49,90</strong><br>
-      Banner + Tarefa + Destaque na página inicial do bot.
-    </div>
-    <button onclick="window.location.href='https://wa.me/SEUNUMERO?text=Quero%20anunciar%20no%20LucreMaisTask'">📲 Fale com a equipe</button>
-  </section>
+  <h2>📩 Enviar Pedido de Anúncio</h2>
+  <form action="mailto:lucremaisvip@gmail.com" method="post" enctype="text/plain" onsubmit="return confirmacao();">
+    <label>Tipo de Anúncio:</label>
+    <select name="tipo" required>
+      <option disabled selected>Selecione...</option>
+      <option>📺 Anúncio em vídeo</option>
+      <option>🔗 Direcionamento para link</option>
+      <option>📸 Seguir Instagram</option>
+      <option>❤️ Curtir post Instagram</option>
+      <option>👍 Curtir canal Facebook</option>
+      <option>▶️ Curtir vídeo YouTube</option>
+      <option>💬 Deixar comentário</option>
+      <option>🤖 Divulgar bot Telegram</option>
+      <option>📱 Grupo WhatsApp</option>
+      <option>💬 Grupo Telegram</option>
+      <option>📢 Banner rodapé</option>
+      <option>⏱ Banner antes tarefas</option>
+      <option>📝 Texto no app</option>
+      <option>🧾 Anúncio em anuncie.html</option>
+      <option>🧨 Tarefa no topo</option>
+      <option>🥇 Patrocinador do dia</option>
+      <option>🧑‍🎓 Quiz patrocinado</option>
+      <option>📥 Coleta de leads</option>
+      <option>🧷 Push personalizado</option>
+      <option>🎁 Sorteio patrocinado</option>
+    </select>
+
+    <label>Descrição do Anúncio:</label>
+    <textarea name="descricao" rows="4" required></textarea>
+
+    <label>Link do Conteúdo (ou URL do material):</label>
+    <input type="url" name="link" required>
+
+    <label>Seu Nome ou Marca:</label>
+    <input type="text" name="nome" required>
+
+    <label>Contato (e-mail, Telegram ou WhatsApp):</label>
+    <input type="text" name="contato" required>
+
+    <button type="submit">🚀 Enviar Pedido</button>
+  </form>
+
+  <script>
+    function confirmacao() {
+      alert("✅ Formulário recebido! Nossa equipe irá analisar e entrar em contato.");
+      return true;
+    }
+  </script>
 
 </body>
 </html>
