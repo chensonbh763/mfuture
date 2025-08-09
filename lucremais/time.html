@@ -5,191 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Entre para o Time Lucre Mais e ganhe lucros semanais mesmo sem vender. Acesso vitalício por apenas R$19,90.">
   <title>Time Lucre Mais</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* Estrutura geral */
-    section {
-      padding: 60px 20px;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-
-    h1, h2, h3 {
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 2em;
-      color: #1DB954;
-    }
-
-    h3 {
-      font-size: 1.5em;
-      color: #1DB954;
-    }
-
-    p {
-      font-size: 1.1em;
-      color: #555;
-      margin-bottom: 20px;
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 20px;
-    }
-
-    ul li {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    /* Cabeçalho */
-    .header {
-      background-color: #1DB954;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .logo {
-      max-width: 320px;
-      margin-bottom: 20px;
-    }
-
-    /* Botão */
-    .botao {
-      display: inline-block;
-      background-color: #1DB954;
-      color: white;
-      padding: 15px 30px;
-      font-size: 1.1em;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-
-    /* Sessões com fundo personalizado */
-    .bg-claro { background-color: #fff8f0; }
-    .bg-verde-claro { background-color: #f0fff4; }
-    .bg-bege { background-color: #fef6e4; }
-
-    /* Rodapé */
-    .footer {
-      background-color: #eee;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Segoe UI',sans-serif;background:#f9f9f9;color:#333;line-height:1.6;}
+    img{max-width:100%;height:auto;display:block;margin:0 auto;}
+    section{padding:60px 20px;max-width:900px;margin:auto;text-align:center;}
+    h1,h2,h3{margin-bottom:20px;}
+    h2{font-size:2em;color:#1DB954;}
+    h3{font-size:1.5em;color:#1DB954;}
+    p{font-size:1.1em;color:#555;margin-bottom:20px;}
+    ul{list-style:none;padding:0;margin-top:20px;}
+    ul li{margin-bottom:10px;font-size:18px;}
+    .header{background:#1DB954;color:#fff;text-align:center;padding:40px 20px;}
+    .logo{max-width:320px;margin-bottom:20px;}
+    .botao{display:inline-block;background:#1DB954;color:white;padding:15px 30px;font-size:1.1em;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:20px;transition:0.3s;}
+    .botao:hover{background:#159d47;}
+    .bg-claro{background:#fff8f0;}
+    .bg-verde-claro{background:#f0fff4;}
+    .bg-bege{background:#fef6e4;}
+    .footer{background:#eee;text-align:center;padding:20px;font-size:14px;}
+    /* Depoimentos */
+    .depoimentos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px;}
+    .card-depo{background:white;padding:20px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.05);font-size:0.95em;}
+    .card-depo strong{color:#1DB954;}
+    /* Animação scroll */
+    .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.8s ease,transform 0.8s ease;}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+    /* Barra fixa mobile */
+    .barra-fixa{display:none;position:fixed;bottom:0;left:0;width:100%;background:#1DB954;color:white;text-align:center;padding:10px;}
+    .barra-fixa a{color:white;font-weight:bold;text-decoration:none;}
+    @media(max-width:768px){
+      .barra-fixa{display:block;}
+      body{padding-bottom:60px;}
     }
   </style>
 </head>
 <body>
 
-  <!-- Cabeçalho -->
-  <header class="header">
-    <img src="img/logo-lucre-mais.png" alt="Logo Time Lucre Mais" class="logo">
-    <h1>Time Lucre Mais</h1>
-    <p>Ganhe parte dos lucros de todas as vendas. Juntos, todos ganham.</p>
-  </header>
+<header class="header fade-in">
+  <img src="img/logo-lucre-mais.png" alt="Logo Time Lucre Mais" class="logo">
+  <h1>Time Lucre Mais</h1>
+  <p>Ganhe parte dos lucros de todas as vendas. Juntos, todos ganham.</p>
+</header>
 
-  <!-- Sessão: Dores e Solução -->
-  <section class="bg-claro">
-    <h2 style="color: #d9480f;">Está difícil vender no digital?</h2>
-    <p>Você tenta divulgar, mas não consegue escalar. Gasta tempo, energia e não vê retorno. A frustração cresce e a dúvida aparece: será que isso funciona mesmo?</p>
-    <h3>O Time Lucre Mais é a virada que você precisa.</h3>
-    <p>Aqui você aprende estratégias que funcionam, recebe suporte, participa de uma rede que vende junto — e ganha mesmo sem vender. Com lucros semanais e acesso vitalício, você não está mais sozinho.</p>
-    <p style="font-weight: bold;">🚀 Chega de tentar sozinho. Junte-se ao time que transforma esforço em resultado.</p>
-  </section>
+<section class="bg-claro fade-in">
+  <h2 style="color:#d9480f;">Está difícil vender no digital?</h2>
+  <p>Você divulga, mas não consegue escalar. Gasta tempo e energia sem retorno. A frustração bate e você pensa: "Será que isso realmente funciona?"</p>
+  <h3>O Time Lucre Mais é a virada que você precisa.</h3>
+  <p>Estratégias comprovadas, suporte próximo e uma rede que vende junto — e você ganha mesmo sem vender.</p>
+  <p style="font-weight:bold;">🚀 Pare de lutar sozinho. Junte-se ao time que transforma esforço em lucro.</p>
+  <a href="https://pay.cakto.com.br/d563hmw_519305" class="botao">✅ Quero Entrar Agora</a>
+</section>
 
-  <!-- Sessão: Sobre -->
-  <section>
-    <h2>O que é o Time Lucre Mais?</h2>
-    <p>O Time Lucre Mais é uma comunidade exclusiva onde todos os membros ganham juntos. Ao entrar, você participa da divisão dos lucros totais das vendas de todos os produtos da nossa rede. Mesmo que você ainda não venda, você já começa a lucrar junto com o time.</p>
-  </section>
+<section class="fade-in">
+  <h2>O que é o Time Lucre Mais?</h2>
+  <p>Uma comunidade onde todos lucram juntos. Ao entrar, você participa da divisão dos lucros das vendas de toda a rede. Mesmo sem vender, você já recebe semanalmente.</p>
+</section>
 
-  <!-- Sessão: Benefícios -->
-  <section>
-    <h2>Benefícios do Time</h2>
-    <ul>
-      <li>🔥 Lucros compartilhados com todos os membros</li>
-      <li>💰 Prêmios para os mais engajados</li>
-      <li>🧠 Grupo com dicas e suporte</li>
-      <li>📲 Materiais de divulgação prontos</li>
-      <li>🏆 Sorteios e bonificações semanais</li>
-    </ul>
-  </section>
+<section class="fade-in">
+  <h2>Benefícios do Time</h2>
+  <ul>
+    <li><i class="fas fa-hand-holding-dollar"></i> Lucros compartilhados</li>
+    <li><i class="fas fa-trophy"></i> Prêmios para engajados</li>
+    <li><i class="fas fa-users"></i> Grupo com dicas e suporte</li>
+    <li><i class="fas fa-bullhorn"></i> Materiais prontos</li>
+    <li><i class="fas fa-gift"></i> Sorteios semanais</li>
+  </ul>
+</section>
 
-  <!-- Sessão: Como Funciona -->
-  <section>
-    <h2>Como Funciona?</h2>
-    <p>Ao entrar para o Time Lucre Mais, você ganha acesso ao nosso grupo fechado e começa a participar da distribuição semanal de lucros. Quanto mais o time vende, mais você recebe. Você também pode aprender, divulgar, e ganhar prêmios extras por participação ativa.</p>
-    <img src="img/como-funciona.png" alt="Como funciona" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  </section>
+<section class="bg-verde-claro fade-in">
+  <img src="img/pagamentos.png" alt="Pagamentos" style="max-width:120px;margin-bottom:30px;">
+  <h2 style="color:#2f855a;">Pagamentos Semanais</h2>
+  <p>Toda semana, lucros das vendas são divididos entre todos — com transparência. Mesmo sem vender, você recebe.</p>
+  <p style="font-weight:bold;">💚 Juntos, todos ganhamos.</p>
+</section>
 
-  <!-- Sessão: Pagamentos Semanais -->
-  <section class="bg-verde-claro">
-    <img src="img/pagamentos.png" alt="Carteira com ícones de crescimento e rede" style="max-width: 120px; margin-bottom: 30px;">
-    <h2 style="color: #2f855a;">Pagamentos Semanais</h2>
-    <p>Toda semana, os lucros das vendas são divididos entre todos os membros do Time Lucre Mais — com total transparência. Mesmo que você não venda, você ainda recebe. Isso é possível porque o time cresce junto, e os resultados são compartilhados.</p>
-    <p style="font-weight: bold;">💚 Juntos, todos ganhamos.</p>
-  </section>
+<section class="fade-in">
+  <h2>Depoimentos de quem já está lucrando</h2>
+  <div class="depoimentos">
+    <div class="card-depo">"Nunca imaginei ganhar sem vender. Em 2 semanas já recebi 3 pagamentos. <strong>- Ana P.</strong>"</div>
+    <div class="card-depo">"O suporte é incrível e a rede é muito unida. <strong>- João M.</strong>"</div>
+    <div class="card-depo">"Lucros toda semana, mesmo sem tempo para divulgar. <strong>- Carla S.</strong>"</div>
+  </div>
+</section>
 
-  <!-- Sessão: Chamada para Ação -->
-  <section class="bg-bege">
-    <h2>Quero Fazer Parte</h2>
-    <p>🔥 Oferta exclusiva: entre hoje por <strong>R$19,90</strong> — pagamento único, acesso vitalício.</p>
-    <p>Aprenda a vender no digital, receba lucros semanais mesmo sem vender e faça parte de um time que cresce junto.</p>
-    <a href="https://pay.cakto.com.br/d563hmw_519305" id="botao-cakto" class="botao">
-  ✅ Entrar Agora via Cakto
-   </a>
-    <p style="font-size: 0.9em; color: #777;">Vagas limitadas — garanta seu lugar enquanto ainda está disponível!</p>
-  </section>
+<section class="bg-bege fade-in">
+  <h2>Quero Fazer Parte</h2>
+  <p>🔥 Oferta exclusiva: apenas <strong>R$19,90</strong> — acesso vitalício.</p>
+  <p>Lucros semanais mesmo sem vender. Entre agora!</p>
+  <a href="https://pay.cakto.com.br/d563hmw_519305" class="botao">✅ Garantir Meu Lugar</a>
+</section>
 
-  <!-- Sessão: Garantia e Credibilidade -->
-  <section>
-    <img src="img/juntos.png" alt="Selo de Garantia e Credibilidade" style="max-width: 200px; margin-bottom: 30px;">
-    <h2>Garantia e Credibilidade</h2>
-    <p>Nosso compromisso é com a sua confiança. Trabalhamos com total transparência, oferecendo produtos e serviços de alta qualidade, suporte dedicado e uma relação baseada em resultados reais.</p>
-    <p>O selo <strong>"Juntos Lucramos Mais"</strong> representa nossa missão: crescer junto com você, garantindo segurança em cada etapa do processo.</p>
-  </section>
+<section class="fade-in">
+  <img src="img/juntos.png" alt="Selo de Garantia" style="max-width:200px;margin-bottom:30px;">
+  <h2>Garantia e Credibilidade</h2>
+  <p>Transparência, suporte dedicado e resultados reais. Nosso selo <strong>"Juntos Lucramos Mais"</strong> é o compromisso com sua segurança.</p>
+</section>
 
-  <!-- Rodapé -->
-  <footer class="footer">
-    <p>© 2025 Time Lucre Mais. Todos os direitos reservados.</p>
-  </footer>
+<footer class="footer">
+  <p>© 2025 Time Lucre Mais. Todos os direitos reservados.</p>
+</footer>
 
-</body>
+<!-- Barra fixa mobile -->
+<div class="barra-fixa">
+  <a href="https://pay.cakto.com.br/d563hmw_519305">🚀 Entrar Agora - R$19,90</a>
+</div>
+
 <script>
-  // Captura os parâmetros da URL atual
-  const params = window.location.search;
-  const botao = document.getElementById("botao-cakto");
-
-  if (params && botao) {
-    const baseUrl = "https://pay.cakto.com.br/d563hmw_519305";
-    botao.href = baseUrl + params;
-  }
+  const elements = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.1});
+  elements.forEach(el=>observer.observe(el));
 </script>
-</html>
+</body>
+    </html>
