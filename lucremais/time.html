@@ -124,5 +124,24 @@
   },{threshold:0.1});
   elements.forEach(el=>observer.observe(el));
 </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Captura os parâmetros da URL atual
+    const params = window.location.search;
+
+    if (params) {
+      // Seleciona todos os links que apontam para o checkout
+      const botoesCheckout = document.querySelectorAll('a[href*="pay.cakto.com.br/d563hmw_519305"]');
+
+      botoesCheckout.forEach(botao => {
+        // Remove possíveis parâmetros existentes no href original
+        const urlBase = botao.href.split("?")[0];
+        // Adiciona os parâmetros UTM atuais
+        botao.href = urlBase + params;
+      });
+    }
+  });
+</script>
 </body>
     </html>
