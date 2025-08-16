@@ -1,0 +1,127 @@
+Aqui está um HTML de manutenção simples, bonito e responsivo, com o botão “Comprar Grupo VIP” apontando para www.mfuture.com.br/lucremais/prevenda.html.
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lucre Mais Task — Manutenção</title>
+  <meta name="description" content="O bot Lucre Mais Task está em manutenção para trazer melhorias. Seu saldo está seguro. Enquanto isso, garanta o acesso ao Grupo VIP e a outras ofertas que estão pagando." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root{
+      --bg: #0b1220;
+      --card: #0f172a;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --accent: #22d3ee;
+      --accent-2: #38bdf8;
+      --success: #34d399;
+      --warning: #f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      background: radial-gradient(1200px 800px at 80% -10%, #0ea5e920, transparent) , radial-gradient(1000px 600px at -10% 110%, #22d3ee20, transparent), var(--bg);
+      color: var(--text);
+      display:flex;align-items:center;justify-content:center;padding:24px;
+    }
+    .wrap{max-width:920px;width:100%}
+    .card{
+      background: linear-gradient(180deg, #0f172aee, #0f172acc);
+      backdrop-filter: blur(6px);
+      border: 1px solid #1f2a44;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#0b2538; color:#7dd3fc;
+      border:1px solid #11334d; border-radius:999px;
+      padding:6px 12px; font-size:14px; letter-spacing:.2px;
+    }
+    .title{
+      font-size: clamp(26px, 4vw, 40px);
+      line-height:1.1; margin:16px 0 8px;
+    }
+    .lead{color: var(--muted); font-size: clamp(15px, 2.2vw, 18px); line-height:1.6; margin:0 0 20px}
+    .list{display:grid; gap:10px; margin:18px 0 26px; padding:0; list-style:none}
+    .item{display:flex;align-items:flex-start; gap:10px; color:#cbd5e1}
+    .item b{color:#e2e8f0}
+    .item .dot{width:10px; height:10px; margin-top:7px; border-radius:50%; background: var(--success); box-shadow: 0 0 0 4px #34d39922}
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+    .btn{
+      appearance:none; border:0; cursor:pointer; text-decoration:none;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 18px; border-radius:14px; font-weight:700; letter-spacing:.2px;
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:#06202a; box-shadow: 0 10px 24px #22d3ee40;
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow:0 16px 30px #22d3ee55}
+    .ghost{
+      background:#0b2538; color:#7dd3fc; border:1px solid #12334d;
+      box-shadow:none; font-weight:600;
+    }
+    .meta{margin-top:22px; color:#93c5fd; font-size:14px; display:flex; gap:14px; flex-wrap:wrap}
+    .tiny{color: var(--muted); font-size:12px; margin-top:10px}
+    .icon{
+      width:28px;height:28px;border-radius:8px; display:inline-grid;place-items:center;
+      background:#092231;border:1px solid #12334d; color:#7dd3fc; margin-right:6px
+    }
+    footer{margin-top:18px; color:#64748b; font-size:12px; text-align:center}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" role="status" aria-live="polite">
+      <span class="badge">
+        <span class="icon">🛠️</span> Bot em manutenção programada
+      </span>
+
+      <h1 class="title">Voltamos em breve — estamos melhorando o <span style="color:#7dd3fc">Lucre Mais Task</span> 💙</h1>
+
+      <p class="lead">
+        Estamos realizando ajustes técnicos para deixar o bot mais estável, seguro e com novas formas de ganhar.
+        <br/>Fique tranquilo: <b>seu saldo e progresso estão salvos</b> e não serão afetados.
+      </p>
+
+      <ul class="list" aria-label="O que está acontecendo">
+        <li class="item"><span class="dot" aria-hidden="true"></span> Reforço de segurança e estabilidade do sistema</li>
+        <li class="item"><span class="dot" aria-hidden="true"></span> Otimização das tarefas e da Roleta da Sorte</li>
+        <li class="item"><span class="dot" aria-hidden="true"></span> Preparação para novas ofertas e parcerias</li>
+      </ul>
+
+      <div class="cta-row">
+        <a class="btn" href="https://www.mfuture.com.br/lucremais/prevenda.html" target="_blank" rel="noopener noreferrer">
+          🔒 Comprar Grupo VIP & acessar ofertas que estão pagando
+        </a>
+        <a class="btn ghost" href="https://t.me/LucreMaisTask_bot" target="_blank" rel="noopener noreferrer">
+          📲 Abrir o bot no Telegram (assim que voltar)
+        </a>
+      </div>
+
+      <div class="meta">
+        <span>✅ Saldos preservados</span>
+        <span>✅ Aviso no Telegram quando voltar</span>
+        <span>✅ Sem perda de progresso</span>
+      </div>
+
+      <p class="tiny">Dica: salve este link para voltar depois. Se tiver dúvidas, fale com o suporte pelo Telegram.</p>
+
+      <footer>© <span id="y"></span> Lucre Mais Task • Todos os direitos reservados</footer>
+    </section>
+  </main>
+
+  <script>
+    // Atualiza ano automaticamente
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+Se quiser, eu também posso adaptar esse HTML para a sua página existente (incluir header/footer atuais) ou converter em um banner/landing no mesmo estilo do seu site principal. Quer que eu crie uma versão com seu logo e cores exatas?
+
