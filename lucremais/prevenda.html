@@ -733,7 +733,33 @@
   });
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Botão 1: Garanta Agora por R$ 9,90
+    const botaoComprar = document.getElementById("botao-comprar");
+    if (botaoComprar) {
+      botaoComprar.addEventListener("click", function () {
+        clarity("set", "botao_comprar", "clicado");
+      });
+    }
 
+    // Botão 2: Garanta seu Acesso
+    const botaoOferta = document.querySelector(".btn-oferta");
+    if (botaoOferta) {
+      botaoOferta.addEventListener("click", function () {
+        clarity("set", "botao_oferta", "clicado");
+      });
+    }
+
+    // Botão 3: Quero Garantir Meu Acesso!
+    const botaoChamada = document.querySelector(".btn-chamada");
+    if (botaoChamada) {
+      botaoChamada.addEventListener("click", function () {
+        clarity("set", "botao_chamada", "clicado");
+      });
+    }
+  });
+</script>
 
 
 
