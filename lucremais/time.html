@@ -47,7 +47,25 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "t13ksbq7ug");
 </script>
-
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src='https://connect.facebook.net/en_US/fbevents.js';
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script');
+  
+  fbq('init', '644970451354591');
+  fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=644970451354591&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
 </head>
 <body>
 
@@ -254,34 +272,29 @@
 </div>
 
 <script>
-  const elements = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  },{threshold:0.1});
-  elements.forEach(el=>observer.observe(el));
-</script>
-
-  <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Captura os parâmetros da URL atual
     const params = window.location.search;
 
-    if (params) {
-      // Seleciona todos os links que apontam para o checkout
-      const botoesCheckout = document.querySelectorAll('a[href*="pay.cakto.com.br/d563hmw_519305"]');
+    // Seleciona todos os links que apontam para o checkout
+    const botoesCheckout = document.querySelectorAll('a[href*="pay.cakto.com.br/d563hmw_519305"]');
 
-      botoesCheckout.forEach(botao => {
-        // Remove possíveis parâmetros existentes no href original
-        const urlBase = botao.href.split("?")[0];
-        // Adiciona os parâmetros UTM atuais
-        botao.href = urlBase + params;
+    botoesCheckout.forEach(botao => {
+      // Remove possíveis parâmetros existentes no href original
+      const urlBase = botao.href.split("?")[0];
+      // Adiciona os parâmetros UTM atuais
+      botao.href = urlBase + params;
+
+      // Adiciona o evento do pixel ao clique
+      botao.addEventListener("click", function () {
+        if (typeof fbq === "function") {
+          fbq('track', 'InitiateCheckout', {
+            value: 19.90,
+            currency: 'BRL'
+          });
+        }
       });
-    }
+    });
   });
 </script>
 </body>
