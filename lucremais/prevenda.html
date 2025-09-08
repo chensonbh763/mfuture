@@ -765,15 +765,7 @@
     scrollAmount += scrollStep;
     carrossel.style.transform = `translateX(-${scrollAmount}px)`;
   });
-<script>
-  // Captura todos os botões com a classe .btn-comprar e .btn-oferta
-  document.querySelectorAll('.btn-comprar, .btn-oferta').forEach(function(button) {
-    button.addEventListener('click', function() {
-      // Substitua 'PurchaseIntent' por um nome de evento que você quiser rastrear
-      fbq('track', 'checkout');
-    });
-  });
-</script>
+
 
 </script>
 </html>
