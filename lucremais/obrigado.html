@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obrigado por sua compra | Grupo VIP Lucre Mais</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Marker+Hatch&family=Sugar+Pie&display=swap" rel="stylesheet">
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "rpjvfuhn3k");
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d0d0d;
+      color: #ffffff;
+    }
+    .hero {
+      background: #2d005b;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      color: #00ffcc;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+    .upsell {
+      background: #1a1a1a;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .upsell h2 {
+      font-size: 2.2rem;
+      color: #a84dff;
+      margin-bottom: 20px;
+    }
+    .upsell p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+    .botao-upsell {
+      background: #00ffcc;
+      color: #000;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+    .botao-upsell:hover {
+      background: #00e6b8;
+    }
+    .recusar {
+      display: block;
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: #888;
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p, .upsell p {
+        font-size: 1rem;
+      }
+      .botao-upsell {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <h1>🎉 Parabéns pela sua compra!</h1>
+    <p>Você garantiu seu acesso vitalício ao <strong>Grupo VIP Lucre Mais</strong>. A Cakto enviará seu acesso por e-mail nas próximas horas.</p>
+    <p><strong>Mas antes de fechar esta página...</strong></p>
+  </section>
+
+  <section class="upsell">
+    <h2>🔥 Oferta Irrecusável: Time Lucre Mais</h2>
+    <p>Imagine ganhar parte da renda gerada pelas vendas dos nossos produtos — mesmo sem vender nada.</p>
+    <p>Ao entrar para o <strong>Time Lucre Mais</strong>, você participa da divisão de lucros semanais, recebe suporte, materiais prontos e ainda pode lucrar junto com toda a rede.</p>
+    <p><strong>Acesso vitalício por apenas R$ 19,90</strong> — disponível somente agora, nesta página.</p>
+    <a id="btn-upsell" href="https://pay.cakto.com.br/d563hmw_519305?utm_source=grupo_vip&utm_medium=pagina_obrigado&utm_campaign=upsell_time_lucre_mais" class="botao-upsell">✅ Quero Entrar para o Time Lucre Mais</a>
+    <a href="#" class="recusar">Não quero aproveitar esta oferta</a>
+  </section>
+
+  <script>
+    // Evento personalizado: usuário chegou à página de obrigado
+    clarity("set", "compra_grupo_vip", "true");
+
+    // Evento personalizado: clique no botão de upsell
+    document.getElementById("btn-upsell").addEventListener("click", function () {
+      clarity("set", "upsell_time_lucre_mais", "clicado");
+    });
+  </script>
+
+</body>
+</html>
