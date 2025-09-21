@@ -90,22 +90,24 @@
       margin-top: 20px;
       color: #555;
     }
-    /* Grid funcionalidades */
-    .grid-func {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-    .grid-func img {
-      width: 32%;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
-    }
-    .grid-func img:hover {
-      transform: scale(1.05);
-    }
+/* Grid funcionalidades */
+.grid-func {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.grid-func img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.grid-func img:hover {
+  transform: scale(1.05);
+}
     /* Seções em vídeo */
     .section {
       display: flex;
@@ -156,14 +158,15 @@
   </div>
 
   <!-- Grid de funcionalidades -->
-  <div class="container">
-    <h2>✨ Veja o que o Automazap faz por você</h2>
-    <div class="grid-func">
-      <img src="func1.png" alt="Funcionalidade 1" />
-      <img src="func2.png" alt="Funcionalidade 2" />
-      <img src="func3.png" alt="Funcionalidade 3" />
-    </div>
+<div class="container">
+  <h2>✨ Veja o que o Automazap faz por você</h2>
+  <div class="grid-func">
+    <img src="func1.png" alt="Funcionalidade 1" />
+    <img src="func2.png" alt="Funcionalidade 2" />
+    <img src="func3.png" alt="Funcionalidade 3" />
+    <img src="func4.png" alt="Funcionalidade 4" />
   </div>
+</div>
 
   <!-- Oferta especial -->
   <div class="container">
