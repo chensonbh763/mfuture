@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automazap - Envio Inteligente no WhatsApp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #e6f4ff; /* azul claro */
+      margin: 0;
+      padding: 0;
+      color: #1a2b4d; /* azul escuro */
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 60px 30px;
+      text-align: center;
+    }
+    h1, h2, h3 {
+      color: #1a2b4d;
+    }
+    .logo {
+      width: 100px;
+    }
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+      animation: fadeInDown 1s ease;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      animation: fadeIn 1.2s ease;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 30px;
+    }
+    li {
+      font-size: 17px;
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+      animation: fadeInUp 0.8s ease;
+    }
+    li::before {
+      content: "✅";
+      position: absolute;
+      left: 0;
+      color: #00c853; /* verde */
+    }
+    .preco {
+      font-size: 22px;
+      font-weight: bold;
+      color: #00c853;
+      margin-bottom: 30px;
+    }
+    .botao-compra {
+      background-color: #00c853;
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .botao-compra:hover {
+      background-color: #009624;
+      transform: scale(1.05);
+    }
+    .garantia {
+      font-size: 15px;
+      margin-top: 20px;
+      color: #555;
+    }
+    /* Grid funcionalidades */
+    .grid-func {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .grid-func img {
+      width: 32%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .grid-func img:hover {
+      transform: scale(1.05);
+    }
+    /* Seções em vídeo */
+    .section {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+    .section video {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cabeçalho com logo e título -->
+  <div class="container header">
+    <div class="header-flex">
+      <img src="sua-logo.png" alt="Logo Automazap" class="logo" />
+      <div>
+        <h1>🚀 Automazap</h1>
+        <p><strong>A forma mais inteligente e segura de crescer no WhatsApp</strong></p>
+      </div>
+    </div>
+    <p>
+      O <strong>Automazap</strong> é sua ferramenta definitiva para <u>economizar tempo</u>, <u>alcançar mais pessoas</u> e <u>vender todos os dias</u>.  
+      Com tecnologia exclusiva, você dispara mensagens, extrai contatos e automatiza seu atendimento sem dor de cabeça.
+    </p>
+    <p>
+      📢 Chega de perder clientes! Agora você tem um aliado que trabalha por você 24h, enquanto foca no que realmente importa: fazer dinheiro no automático.
+    </p>
+  </div>
+
+  <!-- Grid de funcionalidades -->
+  <div class="container">
+    <h2>✨ Veja o que o Automazap faz por você</h2>
+    <div class="grid-func">
+      <img src="func1.png" alt="Funcionalidade 1" />
+      <img src="func2.png" alt="Funcionalidade 2" />
+      <img src="func3.png" alt="Funcionalidade 3" />
+    </div>
+  </div>
+
+  <!-- Oferta especial -->
+  <div class="container">
+    <h2>🔥 Oferta Especial de Lançamento</h2>
+    <ul>
+      <li>📤 Envio em massa para até 20 grupos com intervalo inteligente</li>
+      <li>📇 Extração de contatos de grupos e conversas</li>
+      <li>🤖 Respostas automáticas para atendimento 24h</li>
+      <li>🔒 Evite bloqueios com envio seguro e controlado</li>
+      <li>⚙️ Interface simples e conexão rápida com seu WhatsApp</li>
+    </ul>
+    <p style="font-size: 18px; margin-bottom: 20px;">
+      De <s>R$49,90</s> por apenas <span style="color:#00c853;"><strong>R$19,90</strong></span>  
+      <em>(pagamento único, oferta por tempo limitado!)</em>
+    </p>
+    <a href="https://pay.cakto.com.br/ctmrniq_558685" class="botao-compra" target="_blank">✅ Quero Garantir Meu Automazap</a>
+    <p class="garantia">⏳ Vagas limitadas | 📞 Suporte dedicado | 🔄 Atualizações incluídas | ✅ Garantia de funcionamento</p>
+  </div>
+
+  <!-- Seção envio em massa -->
+  <div class="container section">
+    <video src="envio-em-massa.mp4" controls></video>
+    <div>
+      <h3>📤 Envio em Massa Inteligente</h3>
+      <p>Dispare mensagens personalizadas com texto, imagem e temporizador para vários grupos de forma <strong>rápida e segura</strong>, sem risco de bloqueio.</p>
+    </div>
+  </div>
+
+  <!-- Seção extrator -->
+  <div class="container section">
+    <video src="extrator-contatos.mp4" controls></video>
+    <div>
+      <h3>📇 Extrator de Contatos</h3>
+      <p>Extraia contatos reais dos grupos e mantenha sua lista sempre atualizada. Em poucos cliques, você já pode <strong>enviar campanhas e salvar leads</strong> direto no seu WhatsApp.</p>
+    </div>
+  </div>
+
+  <!-- Seção respostas -->
+  <div class="container section">
+    <video src="resposta-automatica.mp4" controls></video>
+    <div>
+      <h3>🤖 Resposta Automática</h3>
+      <p>Configure respostas rápidas para grupos e conversas privadas, garantindo <strong>atendimento 24h</strong> mesmo quando você estiver ocupado.</p>
+    </div>
+  </div>
+
+  <!-- Segundo botão de compra -->
+  <div class="container">
+    <a href="https://pay.cakto.com.br/ctmrniq_558685" class="botao-compra" target="_blank">✅ Quero Garantir Meu Automazap</a>
+    <p style="font-size: 16px; margin-top: 20px;">
+      Ideal para <strong>empreendedores, afiliados, prestadores de serviço</strong> e qualquer pessoa que queira <u>dominar o WhatsApp</u>.
+    </p>
+  </div>
+</body>
+</html>
