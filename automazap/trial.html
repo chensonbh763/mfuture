@@ -96,33 +96,37 @@
     });
 
     async function carregarVersao() {
-      try {
-        const sql = "SELECT version, download_link, changelog, created_at FROM updates ORDER BY created_at DESC LIMIT 1";
+  try {
+    const emailRes = await fetch("https://whatsapp-api-backend-j7kn.onrender.com/emailDisponivel");
+    const emailData = await emailRes.json();
+    const emailTrial = emailData.email || "trial@email.com";
 
-        const res = await fetch("https://whatsapp-api-backend-j7kn.onrender.com/admin/sql", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sql })
-        });
+    const sql = "SELECT version, download_link, changelog, created_at FROM updates ORDER BY created_at DESC LIMIT 1";
 
-        const data = await res.json();
+    const res = await fetch("https://whatsapp-api-backend-j7kn.onrender.com/admin/sql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sql })
+    });
 
-        if (Array.isArray(data) && data.length > 0) {
-          const v = data[0];
-          document.getElementById("resultadoVersao").innerHTML = `
-            <p><strong>✅ E-mail de teste liberado:</strong> trial@email.com</p>
-            <p><strong>Versão atual:</strong> ${v.version}</p>
-            <p><strong>Data:</strong> ${v.created_at}</p>
-            <p><strong>Alterações:</strong><br>${v.changelog || "Nenhum changelog informado"}</p>
-            <p><a href="${v.download_link}" target="_blank">🔗 Clique aqui para baixar</a></p>
-          `;
-        } else {
-          document.getElementById("resultadoVersao").innerHTML = "<p>Nenhuma versão encontrada</p>";
-        }
-      } catch (err) {
-        document.getElementById("resultadoVersao").innerHTML = "<p>❌ Erro ao carregar versão: " + err + "</p>";
-      }
+    const data = await res.json();
+
+    if (Array.isArray(data) && data.length > 0) {
+      const v = data[0];
+      document.getElementById("resultadoVersao").innerHTML = `
+        <p><strong>✅ E-mail de teste liberado:</strong> ${emailTrial}</p>
+        <p><strong>Versão atual:</strong> ${v.version}</p>
+        <p><strong>Data:</strong> ${v.created_at}</p>
+        <p><strong>Alterações:</strong><br>${v.changelog || "Nenhum changelog informado"}</p>
+        <p><a href="${v.download_link}" target="_blank">🔗 Clique aqui para baixar</a></p>
+      `;
+    } else {
+      document.getElementById("resultadoVersao").innerHTML = "<p>Nenhuma versão encontrada</p>";
     }
+  } catch (err) {
+    document.getElementById("resultadoVersao").innerHTML = "<p>❌ Erro ao carregar versão: " + err + "</p>";
+  }
+}
   </script>
 </body>
 </html>
