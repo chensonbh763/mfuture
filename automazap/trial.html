@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Grátis - Automazap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e6f4ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    h1 {
+      color: #1a2b4d;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background: #00c853;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #009624;
+    }
+    .resultado {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Teste Grátis do Automazap 🚀</h1>
+    <form id="formTrial">
+      <input type="text" id="nome" placeholder="Seu Nome" required>
+      <input type="email" id="email" placeholder="Seu E-mail" required>
+      <input type="text" id="whatsapp" placeholder="WhatsApp (opcional)">
+      <button type="submit">Liberar Acesso</button>
+    </form>
+    <div class="resultado" id="resultadoVersao"></div>
+  </div>
+
+  <script>
+    document.getElementById("formTrial").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const whatsapp = document.getElementById("whatsapp").value;
+
+      const sql = `
+        INSERT INTO trial (nome, email, whatsapp)
+        VALUES ('${nome}', '${email}', '${whatsapp}')
+        ON CONFLICT (email) DO NOTHING;
+      `;
+
+      try {
+        await fetch("https://whatsapp-api-backend-j7kn.onrender.com/admin/sql", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sql })
+        });
+
+        carregarVersao();
+      } catch (err) {
+        document.getElementById("resultadoVersao").innerHTML = "<p>❌ Erro ao salvar: " + err + "</p>";
+      }
+    });
+
+    async function carregarVersao() {
+      try {
+        const sql = "SELECT version, download_link, changelog, created_at FROM updates ORDER BY created_at DESC LIMIT 1";
+
+        const res = await fetch("https://whatsapp-api-backend-j7kn.onrender.com/admin/sql", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sql })
+        });
+
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+          const v = data[0];
+          document.getElementById("resultadoVersao").innerHTML = `
+            <p><strong>✅ E-mail de teste liberado:</strong> trial@email.com</p>
+            <p><strong>Versão atual:</strong> ${v.version}</p>
+            <p><strong>Data:</strong> ${v.created_at}</p>
+            <p><strong>Alterações:</strong><br>${v.changelog || "Nenhum changelog informado"}</p>
+            <p><a href="${v.download_link}" target="_blank">🔗 Clique aqui para baixar</a></p>
+          `;
+        } else {
+          document.getElementById("resultadoVersao").innerHTML = "<p>Nenhuma versão encontrada</p>";
+        }
+      } catch (err) {
+        document.getElementById("resultadoVersao").innerHTML = "<p>❌ Erro ao carregar versão: " + err + "</p>";
+      }
+    }
+  </script>
+</body>
+</html>
