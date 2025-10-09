@@ -91,105 +91,55 @@
 
 <script src="config.js"></script>
 <script>
-  document.getElementById("formAbastecimento").addEventListener("submit", async function (e) {
-    e.preventDefault();
+document.getElementById("formAbastecimento").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const data = document.getElementById("data").value;
-    const valor = parseFloat(document.getElementById("valor").value) || 0;
-    const litros = parseFloat(document.getElementById("litros").value) || 0;
-    const kmAtual = parseFloat(document.getElementById("km").value) || 0;
+  const data = document.getElementById("data").value;
+  const valor = parseFloat(document.getElementById("valor").value) || 0;
+  const litros = parseFloat(document.getElementById("litros").value) || 0;
+  const kmAtual = parseFloat(document.getElementById("km").value) || 0;
 
-    const historico = await fetch(`${scriptURL}?sheet=Abastecimentos`);
-    const registros = await historico.json();
-    let kmAnterior = 0;
+  const historico = await fetch(`${scriptURL}?sheet=Abastecimentos`);
+  const registros = await historico.json();
+  let kmAnterior = 0;
 
-    for (let i = registros.length - 1; i >= 1; i--) {
-      const km = parseFloat(registros[i][3]);
-      if (!isNaN(km)) {
-        kmAnterior = km;
-        break;
-      }
-    }
-
-    const kmRodado = kmAtual - kmAnterior;
-    const kmPorLitro = litros > 0 ? (kmRodado / litros).toFixed(2) : "0";
-
-    const payload = {
-      sheet: "Abastecimentos",
-      values: [data, valor, litros, kmAtual, kmPorLitro, ""]
-    };
-
-    try {
-      const res = await fetch(scriptURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (res.ok) {
-        alert("Abastecimento registrado com sucesso!");
-        carregarResumo();
-        carregarTabela();
-      } else {
-        alert("Erro ao registrar abastecimento.");
-      }
-    } catch (error) {
-      console.error("Erro:", error);
-      alert("Erro de conexão com o servidor.");
-    }
-  });
-
-  async function carregarResumo() {
-    try {
-      const response = await fetch(`${scriptURL}?sheet=Abastecimentos`);
-      const dados = await response.json();
-
-      if (dados.length > 1) {
-        const ultimo = dados[dados.length - 1];
-        const dataFormatada = ultimo[0].split("T")[0];
-        const texto = `Data: ${dataFormatada} | Valor: R$ ${parseFloat(ultimo[1]).toFixed(2)} | Litros: ${ultimo[2]} | Km/L: ${ultimo[4]}`;
-        document.getElementById("resumo").textContent = texto;
-      } else {
-        document.getElementById("resumo").textContent = "Nenhum abastecimento registrado ainda.";
-      }
-    } catch (error) {
-      console.error("Erro ao carregar resumo:", error);
-      document.getElementById("resumo").textContent = "Erro ao carregar dados.";
+  for (let i = registros.length - 1; i >= 1; i--) {
+    const km = parseFloat(registros[i][3]);
+    if (!isNaN(km)) {
+      kmAnterior = km;
+      break;
     }
   }
 
-  async function carregarTabela() {
-    try {
-      const response = await fetch(`${scriptURL}?sheet=Abastecimentos`);
-      const dados = await response.json();
-      const tbody = document.getElementById("tabelaAbastecimento");
-      tbody.innerHTML = "";
+  const kmRodado = kmAtual - kmAnterior;
+  const kmPorLitro = litros > 0 ? (kmRodado / litros).toFixed(2) : "0";
 
-      dados.slice(1).reverse().forEach(linha => {
-        const dataFormatada = linha[0].split("T")[0];
-        const tr = document.createElement("tr");
-        tr.classList.add("border-b", "border-gray-700");
+  const payload = {
+    sheet: "Abastecimentos",
+    values: [data, valor, litros, kmAtual, kmPorLitro, ""]
+  };
 
-        tr.innerHTML = `
-          <td>${dataFormatada}</td>
-          <td>R$ ${parseFloat(linha[1]).toFixed(2)}</td>
-          <td>${linha[2]}</td>
-          <td>${linha[4]}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    } catch (error) {
-      console.error("Erro ao carregar tabela:", error);
+  try {
+    const res = await fetch("https://www.mfuture.com.br/aiuber/proxy.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      alert("Abastecimento registrado com sucesso!");
+      carregarResumo();
+      carregarTabela();
+    } else {
+      alert("Erro ao registrar abastecimento.");
     }
+  } catch (error) {
+    console.error("Erro:", error);
+    alert("Erro de conexão com o servidor.");
   }
-
-  window.addEventListener("load", () => {
-    const hoje = new Date().toISOString().split("T")[0];
-    document.getElementById("data").value = hoje;
-    carregarResumo();
-    carregarTabela();
-  });
+});
 </script>
 
 </body>
 </html>
+
