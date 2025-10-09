@@ -91,7 +91,6 @@
 
 <script src="config.js"></script>
 <script>
-const PROXY_URL = "https://www.mfuture.com.br/aiuber/proxy.php";
 const SHEET_NAME = "Abastecimentos";
 
 // Função principal de envio do formulário
@@ -108,12 +107,11 @@ document.getElementById("formAbastecimento").addEventListener("submit", async fu
     return;
   }
 
-  // 🔹 1. Obter o último registro do Google Sheets (para calcular o km anterior)
+  // 🔹 Obter o último registro do Google Sheets (para calcular km anterior)
   let kmAnterior = 0;
   try {
-    const res = await fetch(`https://script.google.com/macros/s/AKfycbwkP0X6LZTlu_CS459Z3m9SU8SO239kG9kZnUAmbc9uz9Udbn7OV8jeD40WH6XUo-ux/exec?sheet=${SHEET_NAME}`);
+    const res = await fetch(`${scriptURL}?sheet=${SHEET_NAME}`);
     const registros = await res.json();
-
     if (registros.length > 1) {
       for (let i = registros.length - 1; i >= 1; i--) {
         const km = parseFloat(registros[i][3]);
@@ -127,46 +125,44 @@ document.getElementById("formAbastecimento").addEventListener("submit", async fu
     console.warn("Não foi possível obter o último registro:", error);
   }
 
-  // 🔹 2. Calcular km rodado e consumo médio
   const kmRodado = kmAtual - kmAnterior;
   const kmPorLitro = litros > 0 ? (kmRodado / litros).toFixed(2) : "0";
 
-  // 🔹 3. Montar o payload para envio
   const payload = {
     sheet: SHEET_NAME,
     values: [data, valor, litros, kmAtual, kmPorLitro]
   };
 
-  // 🔹 4. Enviar via proxy PHP para o Apps Script
   try {
-    const res = await fetch(PROXY_URL, {
+    const res = await fetch(scriptURL, {
       method: "POST",
+      mode: "cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
 
-    const text = await res.text();
-    if (res.ok && text.includes("sucesso")) {
+    const result = await res.json();
+    if (result.success) {
       alert("✅ Abastecimento registrado com sucesso!");
       formAbastecimento.reset();
       carregarResumo();
       carregarTabela();
     } else {
-      alert("⚠️ Erro ao registrar: " + text);
+      alert("⚠️ Erro ao registrar: " + (result.error || "Erro desconhecido"));
     }
   } catch (error) {
-    console.error("Erro ao conectar com o proxy:", error);
-    alert("❌ Erro de conexão com o servidor.");
+    console.error("Erro ao enviar dados:", error);
+    alert("❌ Falha ao conectar com o servidor.");
   }
 });
 
-// 🔹 5. Carregar resumo do consumo total
+// 🔹 Carregar resumo
 async function carregarResumo() {
   const resumo = document.getElementById("resumo");
   resumo.textContent = "Carregando...";
 
   try {
-    const res = await fetch(`https://script.google.com/macros/s/AKfycbwkP0X6LZTlu_CS459Z3m9SU8SO239kG9kZnUAmbc9uz9Udbn7OV8jeD40WH6XUo-ux/exec?sheet=${SHEET_NAME}`);
+    const res = await fetch(`${scriptURL}?sheet=${SHEET_NAME}`);
     const data = await res.json();
 
     if (data.length <= 1) {
@@ -191,40 +187,35 @@ async function carregarResumo() {
   }
 }
 
-// 🔹 6. Carregar tabela de abastecimentos
+// 🔹 Carregar tabela
 async function carregarTabela() {
   const tabela = document.getElementById("tabelaAbastecimento");
   tabela.innerHTML = "<tr><td colspan='4'>Carregando...</td></tr>";
 
   try {
-    const res = await fetch(`https://script.google.com/macros/s/AKfycbwkP0X6LZTlu_CS459Z3m9SU8SO239kG9kZnUAmbc9uz9Udbn7OV8jeD40WH6XUo-ux/exec?sheet=${SHEET_NAME}`);
+    const res = await fetch(`${scriptURL}?sheet=${SHEET_NAME}`);
     const data = await res.json();
 
     tabela.innerHTML = "";
     for (let i = 1; i < data.length; i++) {
       const [dataAb, valor, litros, km, kmL] = data[i];
-      const row = `
+      tabela.insertAdjacentHTML("beforeend", `
         <tr class="border-b border-gray-700">
           <td>${dataAb}</td>
           <td>R$ ${(parseFloat(valor) || 0).toFixed(2)}</td>
           <td>${(parseFloat(litros) || 0).toFixed(2)} L</td>
           <td>${kmL || "-"}</td>
         </tr>
-      `;
-      tabela.insertAdjacentHTML("beforeend", row);
+      `);
     }
   } catch (error) {
     tabela.innerHTML = "<tr><td colspan='4'>Erro ao carregar dados.</td></tr>";
   }
 }
 
-// Inicializar ao abrir a página
 carregarResumo();
 carregarTabela();
 </script>
 
-
 </body>
 </html>
-
-
