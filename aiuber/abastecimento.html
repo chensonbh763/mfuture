@@ -6,13 +6,7 @@
   <title>Controle de Abastecimento</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-
-
-
-<style>
-
+  <style>
     nav {
       background: #161b22;
       display: flex;
@@ -37,14 +31,7 @@
       font-size: 1.3rem;
       margin-bottom: 0.2rem;
     }
-
-
-
-
-
-
-</style>
-
+  </style>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
   <header class="bg-gray-800 p-4 text-center text-xl font-bold">Abastecimento</header>
@@ -95,18 +82,15 @@
   </main>
 
   <nav>
-    <a href="index.html" class="active"><i>🏠</i>Início</a>
+    <a href="index.html"><i>🏠</i>Início</a>
     <a href="ganhos.html"><i>💰</i>Ganhos</a>
-    <a href="abastecimento.html"><i>⛽</i>Abastecimento</a>
+    <a href="abastecimento.html" class="active"><i>⛽</i>Abastecimento</a>
     <a href="gastos.html"><i>💳</i>Gastos</a>
     <a href="relatorios.html"><i>📊</i>Relatórios</a>
   </nav>
 
 <script src="config.js"></script>
-  
 <script>
-  
-  // Registrar abastecimento
   document.getElementById("formAbastecimento").addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -115,7 +99,6 @@
     const litros = parseFloat(document.getElementById("litros").value) || 0;
     const kmAtual = parseFloat(document.getElementById("km").value) || 0;
 
-    // Buscar último KM registrado
     const historico = await fetch(`${scriptURL}?sheet=Abastecimentos`);
     const registros = await historico.json();
     let kmAnterior = 0;
@@ -139,8 +122,8 @@
     try {
       const res = await fetch(scriptURL, {
         method: "POST",
-        body: JSON.stringify(payload),
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
       });
 
       if (res.ok) {
@@ -156,7 +139,6 @@
     }
   });
 
-  // Carregar resumo do último abastecimento
   async function carregarResumo() {
     try {
       const response = await fetch(`${scriptURL}?sheet=Abastecimentos`);
@@ -164,7 +146,8 @@
 
       if (dados.length > 1) {
         const ultimo = dados[dados.length - 1];
-        const texto = `Data: ${ultimo[0]} | Valor: R$ ${parseFloat(ultimo[1]).toFixed(2)} | Litros: ${ultimo[2]} | Km/L: ${ultimo[4]}`;
+        const dataFormatada = ultimo[0].split("T")[0];
+        const texto = `Data: ${dataFormatada} | Valor: R$ ${parseFloat(ultimo[1]).toFixed(2)} | Litros: ${ultimo[2]} | Km/L: ${ultimo[4]}`;
         document.getElementById("resumo").textContent = texto;
       } else {
         document.getElementById("resumo").textContent = "Nenhum abastecimento registrado ainda.";
@@ -175,7 +158,6 @@
     }
   }
 
-  // Carregar histórico na tabela
   async function carregarTabela() {
     try {
       const response = await fetch(`${scriptURL}?sheet=Abastecimentos`);
@@ -184,11 +166,12 @@
       tbody.innerHTML = "";
 
       dados.slice(1).reverse().forEach(linha => {
+        const dataFormatada = linha[0].split("T")[0];
         const tr = document.createElement("tr");
         tr.classList.add("border-b", "border-gray-700");
 
         tr.innerHTML = `
-          <td>${linha[0]}</td>
+          <td>${dataFormatada}</td>
           <td>R$ ${parseFloat(linha[1]).toFixed(2)}</td>
           <td>${linha[2]}</td>
           <td>${linha[4]}</td>
@@ -200,7 +183,6 @@
     }
   }
 
-  // Inicialização
   window.addEventListener("load", () => {
     const hoje = new Date().toISOString().split("T")[0];
     document.getElementById("data").value = hoje;
@@ -209,8 +191,5 @@
   });
 </script>
 
- 
 </body>
-
 </html>
-
