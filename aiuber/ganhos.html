@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ganhos - Meu Assistente de Corridas</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body { font-family: 'Poppins', sans-serif; margin: 0; background: #0d1117; color: #fff; }
+    header { background: #161b22; text-align: center; padding: 1rem; font-size: 1.4rem; color: #58a6ff; font-weight: 600; }
+    main { padding: 1rem; }
+    form { background: #161b22; padding: 1rem; border-radius: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+    input { width: 100%; padding: .6rem; margin-bottom: .8rem; border: none; border-radius: .5rem; background: #0d1117; color: #fff; }
+    button { background: #238636; color: #fff; padding: .7rem; border: none; width: 100%; border-radius: .5rem; cursor: pointer; font-weight: 600; }
+    button:hover { background: #2ea043; }
+    .resumo { background: #161b22; border-radius: 1rem; padding: 1rem; margin-top: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.4); text-align: center; }
+    nav { background: #161b22; display: flex; justify-content: space-around; padding: .6rem 0; border-top: 1px solid #30363d; position: sticky; bottom: 0; }
+    nav a { color: #8b949e; text-decoration: none; font-size: .9rem; display: flex; flex-direction: column; align-items: center; }
+    nav a.active { color: #58a6ff; }
+  </style>
+</head>
+<body>
+
+  <header>Ganhos Diários</header>
+
+  <main>
+    <form id="formGanhos">
+      <label>Data</label>
+      <input type="date" id="data" required>
+
+      <label>Uber (R$)</label>
+      <input type="number" id="uber" step="0.01" required>
+
+      <label>99 (R$)</label>
+      <input type="number" id="noventaNove" step="0.01" required>
+
+      <label>Gorjetas (R$)</label>
+      <input type="number" id="gorjetas" step="0.01" required>
+
+      <button type="submit">Registrar Ganhos</button>
+    </form>
+
+    <div class="resumo">
+      <h3>Resumo do Dia</h3>
+      <p id="resumoDia">Carregando...</p>
+    </div>
+  </main>
+
+  <nav>
+    <a href="index.html"><i>🏠</i>Início</a>
+    <a href="ganhos.html" class="active"><i>💰</i>Ganhos</a>
+    <a href="abastecimento.html"><i>⛽</i>Abastecimento</a>
+    <a href="gastos.html"><i>💳</i>Gastos</a>
+    <a href="relatorios.html"><i>📊</i>Relatórios</a>
+  </nav>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwkWOCOhnxW9pmQTJOImsnZGNLVBasnLmO_j4CBaWwKhzKftpyM5V54lfx2oIvvDL66sg/exec";
+
+    document.getElementById("formGanhos").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const data = document.getElementById("data").value;
+      const uber = parseFloat(document.getElementById("uber").value) || 0;
+      const noventaNove = parseFloat(document.getElementById("noventaNove").value) || 0;
+      const gorjetas = parseFloat(document.getElementById("gorjetas").value) || 0;
+      const total = uber + noventaNove + gorjetas;
+
+      const payload = {
+        sheet: "Ganhos",
+        values: [data, uber, noventaNove, gorjetas, total, ""]
+      };
+
+      try {
+        const res = await fetch(scriptURL, {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: { "Content-Type": "application/json" }
+        });
+
+        if (res.ok) {
+          alert("Ganhos registrados com sucesso!");
+          carregarResumo(data);
+        } else {
+          alert("Erro ao registrar ganhos.");
+        }
+      } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro de conexão com o servidor.");
+      }
+    });
+
+    async function carregarResumo(dataSelecionada) {
+      const urlConsulta = `${scriptURL}?sheet=Ganhos`;
+
+      try {
+        const response = await fetch(urlConsulta);
+        const dados = await response.json();
+
+        let totalUber = 0, total99 = 0, totalGorjetas = 0;
+
+        dados.forEach(linha => {
+          const data = linha[0];
+          if (data === dataSelecionada) {
+            totalUber += parseFloat(linha[1]) || 0;
+            total99 += parseFloat(linha[2]) || 0;
+            totalGorjetas += parseFloat(linha[3]) || 0;
+          }
+        });
+
+        const total = totalUber + total99 + totalGorjetas;
+
+        document.getElementById("resumoDia").textContent =
+          `Uber: R$ ${totalUber.toFixed(2)} | 99: R$ ${total99.toFixed(2)} | Gorjetas: R$ ${totalGorjetas.toFixed(2)} | Total: R$ ${total.toFixed(2)}`;
+      } catch (error) {
+        console.error("Erro ao carregar resumo:", error);
+        document.getElementById("resumoDia").textContent = "Erro ao carregar dados.";
+      }
+    }
+
+    window.addEventListener("load", () => {
+      const hoje = new Date().toISOString().split("T")[0];
+      document.getElementById("data").value = hoje;
+      carregarResumo(hoje);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatórios - Meu Assistente de Corridas</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #0d1117;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #161b22;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #58a6ff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    main {
+      flex: 1;
+      padding: 1rem;
+    }
+    .card {
+      background: #161b22;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .card h3 {
+      color: #58a6ff;
+      margin-bottom: 0.5rem;
+    }
+    .valor {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    canvas {
+      margin-top: 1rem;
+      background: #161b22;
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+    nav {
+      background: #161b22;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.6rem 0;
+      border-top: 1px solid #30363d;
+      position: sticky;
+      bottom: 0;
+    }
+    nav a {
+      color: #8b949e;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    nav a.active {
+      color: #58a6ff;
+    }
+    nav i {
+      font-size: 1.3rem;
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>Relatórios e Estatísticas</header>
+
+  <main>
+    <section class="cards">
+      <div class="card">
+        <h3>💰 Ganhos Totais</h3>
+        <p class="valor" id="ganhosTotal">R$ 0,00</p>
+      </div>
+      <div class="card">
+        <h3>💸 Despesas Totais</h3>
+        <p class="valor" id="despesasTotal">R$ 0,00</p>
+      </div>
+      <div class="card">
+        <h3>⛽ Gasto com Combustível</h3>
+        <p class="valor" id="combustivelTotal">R$ 0,00</p>
+      </div>
+      <div class="card">
+        <h3>📈 Lucro Estimado</h3>
+        <p class="valor" id="lucroEstimado">R$ 0,00</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Comparativo Mensal</h3>
+      <canvas id="graficoMensal"></canvas>
+    </section>
+
+    <section class="card">
+      <h3>Distribuição de Custos</h3>
+      <canvas id="graficoPizza"></canvas>
+    </section>
+  </main>
+
+  <nav>
+    <a href="index.html"><i>🏠</i>Início</a>
+    <a href="ganhos.html" class="active"><i>💰</i>Ganhos</a>
+    <a href="abastecimento.html"><i>⛽</i>Abastecimento</a>
+    <a href="gastos.html"><i>💳</i>Gastos</a>
+    <a href="relatorios.html"><i>📊</i>Relatórios</a>
+  </nav>
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwkWOCOhnxW9pmQTJOImsnZGNLVBasnLmO_j4CBaWwKhzKftpyM5V54lfx2oIvvDL66sg/exec";
+
+  async function carregarRelatorio() {
+    try {
+      const [ganhosRes, despesasRes, abastecimentosRes] = await Promise.all([
+        fetch(`${scriptURL}?sheet=Ganhos`),
+        fetch(`${scriptURL}?sheet=Despesas`),
+        fetch(`${scriptURL}?sheet=Abastecimentos`)
+      ]);
+
+      const ganhos = await ganhosRes.json();
+      const despesas = await despesasRes.json();
+      const abastecimentos = await abastecimentosRes.json();
+
+      // Totais
+      const totalGanhos = ganhos.slice(1).reduce((acc, linha) => acc + (parseFloat(linha[4]) || 0), 0);
+      const totalDespesas = despesas.slice(1).reduce((acc, linha) => acc + (parseFloat(linha[2]) || 0), 0);
+      const totalCombustivel = abastecimentos.slice(1).reduce((acc, linha) => acc + (parseFloat(linha[1]) || 0), 0);
+      const lucro = totalGanhos - (totalDespesas + totalCombustivel);
+
+      // Atualiza os cards
+      document.getElementById('ganhosTotal').textContent = `R$ ${totalGanhos.toFixed(2)}`;
+      document.getElementById('despesasTotal').textContent = `R$ ${totalDespesas.toFixed(2)}`;
+      document.getElementById('combustivelTotal').textContent = `R$ ${totalCombustivel.toFixed(2)}`;
+      document.getElementById('lucroEstimado').textContent = `R$ ${lucro.toFixed(2)}`;
+
+      // Gráfico de barras
+      const ctx1 = document.getElementById('graficoMensal');
+      new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: ['Ganhos', 'Despesas', 'Combustível', 'Lucro'],
+          datasets: [{
+            label: 'R$',
+            data: [totalGanhos, totalDespesas, totalCombustivel, lucro],
+            backgroundColor: ['#238636', '#da3633', '#f0ad4e', '#58a6ff'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#fff' } },
+            x: { ticks: { color: '#fff' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Gráfico de pizza
+      const ctx2 = document.getElementById('graficoPizza');
+      new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+          labels: ['Despesas', 'Combustível', 'Lucro Líquido'],
+          datasets: [{
+            data: [totalDespesas, totalCombustivel, lucro],
+            backgroundColor: ['#da3633', '#f0ad4e', '#238636']
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { labels: { color: '#fff' } }
+          }
+        }
+      });
+
+    } catch (error) {
+      console.error("Erro ao carregar relatório:", error);
+    }
+  }
+
+  window.addEventListener("load", carregarRelatorio);
+</script>
+</body>
+</html>

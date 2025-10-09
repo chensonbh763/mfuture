@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Assistente de Corridas</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #0d1117;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #161b22;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #58a6ff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    main {
+      flex: 1;
+      padding: 1rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #161b22;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    .card h3 {
+      margin: 0.5rem 0;
+      color: #58a6ff;
+    }
+    .card p {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    canvas {
+      margin-top: 2rem;
+      background: #161b22;
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+    nav {
+      background: #161b22;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.6rem 0;
+      border-top: 1px solid #30363d;
+      position: sticky;
+      bottom: 0;
+    }
+    nav a {
+      color: #8b949e;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    nav a.active {
+      color: #58a6ff;
+    }
+    nav i {
+      font-size: 1.3rem;
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>🚗 Meu Assistente de Corridas</header>
+  <main>
+    <section class="cards">
+      <div class="card">
+        <h3>Ganhos</h3>
+        <p id="ganhosDia">R$ 0,00</p>
+      </div>
+      <div class="card">
+        <h3>Gastos</h3>
+        <p id="gastosDia">R$ 0,00</p>
+      </div>
+      <div class="card">
+        <h3>Lucro</h3>
+        <p id="lucroDia">R$ 0,00</p>
+      </div>
+      <div class="card">
+        <h3>Km Rodados</h3>
+        <p id="kmDia">0 km</p>
+      </div>
+    </section>
+
+    <canvas id="graficoSemanal" height="150"></canvas>
+  </main>
+
+  <nav>
+    <a href="index.html" class="active"><i>🏠</i>Início</a>
+    <a href="ganhos.html"><i>💰</i>Ganhos</a>
+    <a href="abastecimento.html"><i>⛽</i>Abastecimento</a>
+    <a href="gastos.html"><i>💳</i>Gastos</a>
+    <a href="relatorios.html"><i>📊</i>Relatórios</a>
+  </nav>
+
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwkWOCOhnxW9pmQTJOImsnZGNLVBasnLmO_j4CBaWwKhzKftpyM5V54lfx2oIvvDL66sg/exec";
+
+  async function carregarDashboard() {
+    const hoje = new Date().toISOString().split("T")[0];
+
+    try {
+      const [ganhosRes, despesasRes, abastecimentosRes] = await Promise.all([
+        fetch(`${scriptURL}?sheet=Ganhos`),
+        fetch(`${scriptURL}?sheet=Despesas`),
+        fetch(`${scriptURL}?sheet=Abastecimentos`)
+      ]);
+
+      const ganhos = await ganhosRes.json();
+      const despesas = await despesasRes.json();
+      const abastecimentos = await abastecimentosRes.json();
+
+      // Ganhos do dia
+      let ganhosDia = 0;
+      ganhos.forEach(linha => {
+        if (linha[0] === hoje) {
+          ganhosDia += parseFloat(linha[4]) || 0;
+        }
+      });
+
+      // Gastos do dia
+      let gastosDia = 0;
+      despesas.forEach(linha => {
+        if (linha[0] === hoje) {
+          gastosDia += parseFloat(linha[2]) || 0;
+        }
+      });
+
+      // Combustível do dia
+      let combustivelDia = 0;
+      abastecimentos.forEach(linha => {
+        if (linha[0] === hoje) {
+          combustivelDia += parseFloat(linha[1]) || 0;
+        }
+      });
+
+      const totalGastos = gastosDia + combustivelDia;
+      const lucroDia = ganhosDia - totalGastos;
+
+      // Km rodados do dia
+      let kmRodado = 0;
+      const abastecimentosHoje = abastecimentos.filter(linha => linha[0] === hoje);
+      if (abastecimentosHoje.length >= 2) {
+        const km1 = parseFloat(abastecimentosHoje[0][3]) || 0;
+        const km2 = parseFloat(abastecimentosHoje[1][3]) || 0;
+        kmRodado = Math.abs(km2 - km1);
+      } else if (abastecimentosHoje.length === 1) {
+        kmRodado = parseFloat(abastecimentosHoje[0][3]) || 0;
+      }
+
+      // Atualiza os cards
+      document.getElementById("ganhosDia").textContent = `R$ ${ganhosDia.toFixed(2)}`;
+      document.getElementById("gastosDia").textContent = `R$ ${totalGastos.toFixed(2)}`;
+      document.getElementById("lucroDia").textContent = `R$ ${lucroDia.toFixed(2)}`;
+      document.getElementById("kmDia").textContent = `${kmRodado.toFixed(0)} km`;
+
+      // Gráfico semanal
+      const dias = {};
+      ganhos.slice(1).forEach(linha => {
+        const data = linha[0];
+        const valor = parseFloat(linha[4]) || 0;
+        if (!dias[data]) dias[data] = 0;
+        dias[data] += valor;
+      });
+
+      const ultimos7 = Object.entries(dias)
+        .sort((a, b) => new Date(b[0]) - new Date(a[0]))
+        .slice(0, 7)
+        .reverse();
+
+      const labels = ultimos7.map(item => item[0].slice(5)); // mostra MM-DD
+      const valores = ultimos7.map(item => item[1]);
+
+      const ctx = document.getElementById("graficoSemanal");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Ganhos R$",
+            data: valores,
+            borderColor: "#58a6ff",
+            backgroundColor: "rgba(88,166,255,0.2)",
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: "#fff" } },
+            x: { ticks: { color: "#fff" } }
+          },
+          plugins: {
+            legend: { labels: { color: "#fff" } }
+          }
+        }
+      });
+
+    } catch (error) {
+      console.error("Erro ao carregar dashboard:", error);
+    }
+  }
+
+  window.addEventListener("load", carregarDashboard);
+</script>
+
+</body>
+</html>
