@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 // URL do seu Apps Script publicado (troque pelo seu ID)
-$googleScriptUrl = "https://script.google.com/macros/s/AKfycbwkP0X6LZTlu_CS459Z3m9SU8SO239kG9kZnUAmbc9uz9Udbn7OV8jeD40WH6XUo-ux/exec";
+$googleScriptUrl = "https://script.google.com/macros/s/AKfycby_tLjwMvBWSnIbRjkA03bDjcthsgfdg_q1KWKk0cJ2zZBbfvy_lvD8FZuyy5XCMFaTXQ/exec";
 
 function enviarRequisicao($url, $metodo = 'GET', $dados = null) {
   $ch = curl_init($url);
