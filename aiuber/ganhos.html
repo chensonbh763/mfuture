@@ -53,78 +53,76 @@
     <a href="gastos.html"><i>💳</i>Gastos</a>
     <a href="relatorios.html"><i>📊</i>Relatórios</a>
   </nav>
+
 <script src="config.js"></script>
-  <script>
-    
-    document.getElementById("formGanhos").addEventListener("submit", async function (e) {
-      e.preventDefault();
+<script>
+  document.getElementById("formGanhos").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      const data = document.getElementById("data").value;
-      const uber = parseFloat(document.getElementById("uber").value) || 0;
-      const noventaNove = parseFloat(document.getElementById("noventaNove").value) || 0;
-      const gorjetas = parseFloat(document.getElementById("gorjetas").value) || 0;
-      const total = uber + noventaNove + gorjetas;
+    const data = document.getElementById("data").value;
+    const uber = parseFloat(document.getElementById("uber").value) || 0;
+    const noventaNove = parseFloat(document.getElementById("noventaNove").value) || 0;
+    const gorjetas = parseFloat(document.getElementById("gorjetas").value) || 0;
+    const total = uber + noventaNove + gorjetas;
 
-      const payload = {
-        sheet: "Ganhos",
-        values: [data, uber, noventaNove, gorjetas, total, ""]
-      };
+    const payload = {
+      sheet: "Ganhos",
+      values: [data, uber, noventaNove, gorjetas, total, ""]
+    };
 
-      try {
-        const res = await fetch(scriptURL, {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: { "Content-Type": "application/json" }
-        });
+    try {
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-        if (res.ok) {
-          alert("Ganhos registrados com sucesso!");
-          carregarResumo(data);
-        } else {
-          alert("Erro ao registrar ganhos.");
-        }
-      } catch (error) {
-        console.error("Erro:", error);
-        alert("Erro de conexão com o servidor.");
+      if (res.ok) {
+        alert("Ganhos registrados com sucesso!");
+        carregarResumo(data);
+      } else {
+        alert("Erro ao registrar ganhos.");
       }
-    });
-
-    async function carregarResumo(dataSelecionada) {
-      const urlConsulta = `${scriptURL}?sheet=Ganhos`;
-
-      try {
-        const response = await fetch(urlConsulta);
-        const dados = await response.json();
-
-        let totalUber = 0, total99 = 0, totalGorjetas = 0;
-
-        dados.forEach(linha => {
-          const data = linha[0];
-          if (data === dataSelecionada) {
-            totalUber += parseFloat(linha[1]) || 0;
-            total99 += parseFloat(linha[2]) || 0;
-            totalGorjetas += parseFloat(linha[3]) || 0;
-          }
-        });
-
-        const total = totalUber + total99 + totalGorjetas;
-
-        document.getElementById("resumoDia").textContent =
-          `Uber: R$ ${totalUber.toFixed(2)} | 99: R$ ${total99.toFixed(2)} | Gorjetas: R$ ${totalGorjetas.toFixed(2)} | Total: R$ ${total.toFixed(2)}`;
-      } catch (error) {
-        console.error("Erro ao carregar resumo:", error);
-        document.getElementById("resumoDia").textContent = "Erro ao carregar dados.";
-      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro de conexão com o servidor.");
     }
+  });
 
-    window.addEventListener("load", () => {
-      const hoje = new Date().toISOString().split("T")[0];
-      document.getElementById("data").value = hoje;
-      carregarResumo(hoje);
-    });
-  </script>
+  async function carregarResumo(dataSelecionada) {
+    const urlConsulta = `${scriptURL}?sheet=Ganhos`;
+
+    try {
+      const response = await fetch(urlConsulta);
+      const dados = await response.json();
+
+      let totalUber = 0, total99 = 0, totalGorjetas = 0;
+
+      dados.slice(1).forEach(linha => {
+        const data = linha[0].split("T")[0]; // extrai apenas a parte da data
+        if (data === dataSelecionada) {
+          totalUber += parseFloat(linha[1]) || 0;
+          total99 += parseFloat(linha[2]) || 0;
+          totalGorjetas += parseFloat(linha[3]) || 0;
+        }
+      });
+
+      const total = totalUber + total99 + totalGorjetas;
+
+      document.getElementById("resumoDia").textContent =
+        `Uber: R$ ${totalUber.toFixed(2)} | 99: R$ ${total99.toFixed(2)} | Gorjetas: R$ ${totalGorjetas.toFixed(2)} | Total: R$ ${total.toFixed(2)}`;
+    } catch (error) {
+      console.error("Erro ao carregar resumo:", error);
+      document.getElementById("resumoDia").textContent = "Erro ao carregar dados.";
+    }
+  }
+
+  window.addEventListener("load", () => {
+    const hoje = new Date().toISOString().split("T")[0];
+    document.getElementById("data").value = hoje;
+    carregarResumo(hoje);
+  });
+</script>
 
 </body>
-
 </html>
-
