@@ -116,41 +116,54 @@
 
 <script src="config.js"></script>
 <script>
-  
+  const proxyURL = "https://www.mfuture.com.br/aiuber/proxy.php";
+
   async function carregarDashboard() {
     const hoje = new Date().toISOString().split("T")[0];
 
     try {
       const [ganhosRes, despesasRes, abastecimentosRes] = await Promise.all([
-        fetch(`${scriptURL}?sheet=Ganhos`),
-        fetch(`${scriptURL}?sheet=Despesas`),
-        fetch(`${scriptURL}?sheet=Abastecimentos`)
+        fetch(proxyURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheet: "Ganhos", method: "GET" })
+        }),
+        fetch(proxyURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheet: "Despesas", method: "GET" })
+        }),
+        fetch(proxyURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheet: "Abastecimentos", method: "GET" })
+        })
       ]);
 
       const ganhos = await ganhosRes.json();
       const despesas = await despesasRes.json();
       const abastecimentos = await abastecimentosRes.json();
 
-      // Ganhos do dia
       let ganhosDia = 0;
       ganhos.forEach(linha => {
-        if (linha[0] === hoje) {
+        const data = linha[0].split("T")[0];
+        if (data === hoje) {
           ganhosDia += parseFloat(linha[4]) || 0;
         }
       });
 
-      // Gastos do dia
       let gastosDia = 0;
       despesas.forEach(linha => {
-        if (linha[0] === hoje) {
+        const data = linha[0].split("T")[0];
+        if (data === hoje) {
           gastosDia += parseFloat(linha[2]) || 0;
         }
       });
 
-      // Combustível do dia
       let combustivelDia = 0;
       abastecimentos.forEach(linha => {
-        if (linha[0] === hoje) {
+        const data = linha[0].split("T")[0];
+        if (data === hoje) {
           combustivelDia += parseFloat(linha[1]) || 0;
         }
       });
@@ -158,9 +171,8 @@
       const totalGastos = gastosDia + combustivelDia;
       const lucroDia = ganhosDia - totalGastos;
 
-      // Km rodados do dia
       let kmRodado = 0;
-      const abastecimentosHoje = abastecimentos.filter(linha => linha[0] === hoje);
+      const abastecimentosHoje = abastecimentos.filter(linha => linha[0].split("T")[0] === hoje);
       if (abastecimentosHoje.length >= 2) {
         const km1 = parseFloat(abastecimentosHoje[0][3]) || 0;
         const km2 = parseFloat(abastecimentosHoje[1][3]) || 0;
@@ -169,16 +181,14 @@
         kmRodado = parseFloat(abastecimentosHoje[0][3]) || 0;
       }
 
-      // Atualiza os cards
       document.getElementById("ganhosDia").textContent = `R$ ${ganhosDia.toFixed(2)}`;
       document.getElementById("gastosDia").textContent = `R$ ${totalGastos.toFixed(2)}`;
       document.getElementById("lucroDia").textContent = `R$ ${lucroDia.toFixed(2)}`;
       document.getElementById("kmDia").textContent = `${kmRodado.toFixed(0)} km`;
 
-      // Gráfico semanal
       const dias = {};
       ganhos.slice(1).forEach(linha => {
-        const data = linha[0];
+        const data = linha[0].split("T")[0];
         const valor = parseFloat(linha[4]) || 0;
         if (!dias[data]) dias[data] = 0;
         dias[data] += valor;
@@ -189,7 +199,7 @@
         .slice(0, 7)
         .reverse();
 
-      const labels = ultimos7.map(item => item[0].slice(5)); // mostra MM-DD
+      const labels = ultimos7.map(item => item[0].slice(5));
       const valores = ultimos7.map(item => item[1]);
 
       const ctx = document.getElementById("graficoSemanal");
@@ -227,5 +237,6 @@
 
 </body>
 </html>
+
 
 
