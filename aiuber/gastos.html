@@ -90,6 +90,8 @@
 
 <script src="config.js"></script>
 <script>
+  const proxyURL = "https://www.mfuture.com.br/aiuber/proxy.php";
+
   document.getElementById("formGastos").addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -104,7 +106,7 @@
     };
 
     try {
-      const res = await fetch(scriptURL, {
+      const res = await fetch(proxyURL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -179,3 +181,4 @@
 
 </body>
 </html>
+
