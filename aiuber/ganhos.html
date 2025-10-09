@@ -56,6 +56,8 @@
 
 <script src="config.js"></script>
 <script>
+  const proxyURL = "https://www.mfuture.com.br/aiuber/proxy.php";
+
   document.getElementById("formGanhos").addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -71,7 +73,7 @@
     };
 
     try {
-      const res = await fetch(scriptURL, {
+      const res = await fetch(proxyURL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -99,7 +101,7 @@
       let totalUber = 0, total99 = 0, totalGorjetas = 0;
 
       dados.slice(1).forEach(linha => {
-        const data = linha[0].split("T")[0]; // extrai apenas a parte da data
+        const data = linha[0].split("T")[0];
         if (data === dataSelecionada) {
           totalUber += parseFloat(linha[1]) || 0;
           total99 += parseFloat(linha[2]) || 0;
@@ -126,3 +128,4 @@
 
 </body>
 </html>
+
