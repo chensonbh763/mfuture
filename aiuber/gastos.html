@@ -87,94 +87,95 @@
     <a href="gastos.html" class="active"><i>💳</i>Gastos</a>
     <a href="relatorios.html"><i>📊</i>Relatórios</a>
   </nav>
+
 <script src="config.js"></script>
-  <script>
-   
-    document.getElementById("formGastos").addEventListener("submit", async function (e) {
-      e.preventDefault();
+<script>
+  document.getElementById("formGastos").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      const data = document.getElementById("data").value;
-      const tipo = document.getElementById("tipo").value;
-      const valor = parseFloat(document.getElementById("valor").value) || 0;
-      const descricao = document.getElementById("descricao").value;
+    const data = document.getElementById("data").value;
+    const tipo = document.getElementById("tipo").value;
+    const valor = parseFloat(document.getElementById("valor").value) || 0;
+    const descricao = document.getElementById("descricao").value;
 
-      const payload = {
-        sheet: "Despesas",
-        values: [data, tipo, valor, descricao]
-      };
+    const payload = {
+      sheet: "Despesas",
+      values: [data, tipo, valor, descricao]
+    };
 
-      try {
-        const res = await fetch(scriptURL, {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: { "Content-Type": "application/json" }
-        });
+    try {
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-        if (res.ok) {
-          alert("Gasto registrado com sucesso!");
-          carregarResumo();
-          carregarTabela();
-        } else {
-          alert("Erro ao registrar gasto.");
-        }
-      } catch (error) {
-        console.error("Erro:", error);
-        alert("Erro de conexão com o servidor.");
+      if (res.ok) {
+        alert("Gasto registrado com sucesso!");
+        carregarResumo();
+        carregarTabela();
+      } else {
+        alert("Erro ao registrar gasto.");
       }
-    });
-
-    async function carregarResumo() {
-      try {
-        const response = await fetch(`${scriptURL}?sheet=Despesas`);
-        const dados = await response.json();
-        const hoje = new Date().toISOString().split("T")[0];
-
-        let total = 0;
-        dados.forEach(linha => {
-          if (linha[0] === hoje) {
-            total += parseFloat(linha[2]) || 0;
-          }
-        });
-
-        document.getElementById("resumoGastos").textContent = `Total gasto hoje: R$ ${total.toFixed(2)}`;
-      } catch (error) {
-        console.error("Erro ao carregar resumo:", error);
-        document.getElementById("resumoGastos").textContent = "Erro ao carregar dados.";
-      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro de conexão com o servidor.");
     }
+  });
 
-    async function carregarTabela() {
-      try {
-        const response = await fetch(`${scriptURL}?sheet=Despesas`);
-        const dados = await response.json();
-        const tbody = document.getElementById("tabelaGastos");
-        tbody.innerHTML = "";
-
-        dados.slice(1).reverse().forEach(linha => {
-          const tr = document.createElement("tr");
-          tr.classList.add("border-b", "border-gray-700");
-
-          tr.innerHTML = `
-            <td>${linha[0]}</td>
-            <td>${linha[1]}</td>
-            <td>R$ ${parseFloat(linha[2]).toFixed(2)}</td>
-            <td>${linha[3]}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-      } catch (error) {
-        console.error("Erro ao carregar tabela:", error);
-      }
-    }
-
-    window.addEventListener("load", () => {
+  async function carregarResumo() {
+    try {
+      const response = await fetch(`${scriptURL}?sheet=Despesas`);
+      const dados = await response.json();
       const hoje = new Date().toISOString().split("T")[0];
-      document.getElementById("data").value = hoje;
-      carregarResumo();
-      carregarTabela();
-    });
-  </script>
+
+      let total = 0;
+      dados.slice(1).forEach(linha => {
+        const dataLinha = linha[0].split("T")[0];
+        if (dataLinha === hoje) {
+          total += parseFloat(linha[2]) || 0;
+        }
+      });
+
+      document.getElementById("resumoGastos").textContent = `Total gasto hoje: R$ ${total.toFixed(2)}`;
+    } catch (error) {
+      console.error("Erro ao carregar resumo:", error);
+      document.getElementById("resumoGastos").textContent = "Erro ao carregar dados.";
+    }
+  }
+
+  async function carregarTabela() {
+    try {
+      const response = await fetch(`${scriptURL}?sheet=Despesas`);
+      const dados = await response.json();
+      const tbody = document.getElementById("tabelaGastos");
+      tbody.innerHTML = "";
+
+      dados.slice(1).reverse().forEach(linha => {
+        const dataFormatada = linha[0].split("T")[0];
+        const tr = document.createElement("tr");
+        tr.classList.add("border-b", "border-gray-700");
+
+        tr.innerHTML = `
+          <td>${dataFormatada}</td>
+          <td>${linha[1]}</td>
+          <td>R$ ${parseFloat(linha[2]).toFixed(2)}</td>
+          <td>${linha[3]}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar tabela:", error);
+    }
+  }
+
+  window.addEventListener("load", () => {
+    const hoje = new Date().toISOString().split("T")[0];
+    document.getElementById("data").value = hoje;
+    carregarResumo();
+    carregarTabela();
+  });
+</script>
+
 </body>
-
 </html>
-
