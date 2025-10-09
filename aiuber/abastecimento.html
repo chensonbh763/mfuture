@@ -91,6 +91,10 @@
 
 <script src="config.js"></script>
 <script>
+const PROXY_URL = "https://www.mfuture.com.br/aiuber/proxy.php";
+const SHEET_NAME = "Abastecimentos";
+
+// Função principal de envio do formulário
 document.getElementById("formAbastecimento").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -99,47 +103,128 @@ document.getElementById("formAbastecimento").addEventListener("submit", async fu
   const litros = parseFloat(document.getElementById("litros").value) || 0;
   const kmAtual = parseFloat(document.getElementById("km").value) || 0;
 
-  const historico = await fetch(`${scriptURL}?sheet=Abastecimentos`);
-  const registros = await historico.json();
-  let kmAnterior = 0;
-
-  for (let i = registros.length - 1; i >= 1; i--) {
-    const km = parseFloat(registros[i][3]);
-    if (!isNaN(km)) {
-      kmAnterior = km;
-      break;
-    }
+  if (!data || !valor || !litros || !kmAtual) {
+    alert("Preencha todos os campos antes de registrar!");
+    return;
   }
 
+  // 🔹 1. Obter o último registro do Google Sheets (para calcular o km anterior)
+  let kmAnterior = 0;
+  try {
+    const res = await fetch(`https://script.google.com/macros/s/AKfycbwkP0X6LZTlu_CS459Z3m9SU8SO239kG9kZnUAmbc9uz9Udbn7OV8jeD40WH6XUo-ux/exec?sheet=${SHEET_NAME}`);
+    const registros = await res.json();
+
+    if (registros.length > 1) {
+      for (let i = registros.length - 1; i >= 1; i--) {
+        const km = parseFloat(registros[i][3]);
+        if (!isNaN(km)) {
+          kmAnterior = km;
+          break;
+        }
+      }
+    }
+  } catch (error) {
+    console.warn("Não foi possível obter o último registro:", error);
+  }
+
+  // 🔹 2. Calcular km rodado e consumo médio
   const kmRodado = kmAtual - kmAnterior;
   const kmPorLitro = litros > 0 ? (kmRodado / litros).toFixed(2) : "0";
 
+  // 🔹 3. Montar o payload para envio
   const payload = {
-    sheet: "Abastecimentos",
-    values: [data, valor, litros, kmAtual, kmPorLitro, ""]
+    sheet: SHEET_NAME,
+    values: [data, valor, litros, kmAtual, kmPorLitro]
   };
 
+  // 🔹 4. Enviar via proxy PHP para o Apps Script
   try {
-    const res = await fetch("https://www.mfuture.com.br/aiuber/proxy.php", {
+    const res = await fetch(PROXY_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
 
-    if (res.ok) {
-      alert("Abastecimento registrado com sucesso!");
+    const text = await res.text();
+    if (res.ok && text.includes("sucesso")) {
+      alert("✅ Abastecimento registrado com sucesso!");
+      formAbastecimento.reset();
       carregarResumo();
       carregarTabela();
     } else {
-      alert("Erro ao registrar abastecimento.");
+      alert("⚠️ Erro ao registrar: " + text);
     }
   } catch (error) {
-    console.error("Erro:", error);
-    alert("Erro de conexão com o servidor.");
+    console.error("Erro ao conectar com o proxy:", error);
+    alert("❌ Erro de conexão com o servidor.");
   }
 });
+
+// 🔹 5. Carregar resumo do consumo total
+async function carregarResumo() {
+  const resumo = document.getElementById("resumo");
+  resumo.textContent = "Carregando...";
+
+  try {
+    const res = await fetch(`https://script.google.com/macros/s/AKfycbwkP0X6LZTlu_CS459Z3m9SU8SO239kG9kZnUAmbc9uz9Udbn7OV8jeD40WH6XUo-ux/exec?sheet=${SHEET_NAME}`);
+    const data = await res.json();
+
+    if (data.length <= 1) {
+      resumo.textContent = "Nenhum registro encontrado.";
+      return;
+    }
+
+    let totalLitros = 0, totalValor = 0;
+    for (let i = 1; i < data.length; i++) {
+      totalLitros += parseFloat(data[i][2]) || 0;
+      totalValor += parseFloat(data[i][1]) || 0;
+    }
+
+    const media = totalValor > 0 && totalLitros > 0 ? (totalValor / totalLitros).toFixed(2) : "0.00";
+    resumo.innerHTML = `
+      <p><strong>Total abastecido:</strong> ${totalLitros.toFixed(2)} L</p>
+      <p><strong>Total gasto:</strong> R$ ${totalValor.toFixed(2)}</p>
+      <p><strong>Média de preço por litro:</strong> R$ ${media}</p>
+    `;
+  } catch (error) {
+    resumo.textContent = "Erro ao carregar resumo.";
+  }
+}
+
+// 🔹 6. Carregar tabela de abastecimentos
+async function carregarTabela() {
+  const tabela = document.getElementById("tabelaAbastecimento");
+  tabela.innerHTML = "<tr><td colspan='4'>Carregando...</td></tr>";
+
+  try {
+    const res = await fetch(`https://script.google.com/macros/s/AKfycbwkP0X6LZTlu_CS459Z3m9SU8SO239kG9kZnUAmbc9uz9Udbn7OV8jeD40WH6XUo-ux/exec?sheet=${SHEET_NAME}`);
+    const data = await res.json();
+
+    tabela.innerHTML = "";
+    for (let i = 1; i < data.length; i++) {
+      const [dataAb, valor, litros, km, kmL] = data[i];
+      const row = `
+        <tr class="border-b border-gray-700">
+          <td>${dataAb}</td>
+          <td>R$ ${(parseFloat(valor) || 0).toFixed(2)}</td>
+          <td>${(parseFloat(litros) || 0).toFixed(2)} L</td>
+          <td>${kmL || "-"}</td>
+        </tr>
+      `;
+      tabela.insertAdjacentHTML("beforeend", row);
+    }
+  } catch (error) {
+    tabela.innerHTML = "<tr><td colspan='4'>Erro ao carregar dados.</td></tr>";
+  }
+}
+
+// Inicializar ao abrir a página
+carregarResumo();
+carregarTabela();
 </script>
+
 
 </body>
 </html>
+
 
