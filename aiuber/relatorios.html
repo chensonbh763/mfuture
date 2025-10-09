@@ -120,32 +120,42 @@
   </nav>
 <script src="config.js"></script>
 <script>
-  
+  const proxyURL = "https://www.mfuture.com.br/aiuber/proxy.php";
+
   async function carregarRelatorio() {
     try {
       const [ganhosRes, despesasRes, abastecimentosRes] = await Promise.all([
-        fetch(`${scriptURL}?sheet=Ganhos`),
-        fetch(`${scriptURL}?sheet=Despesas`),
-        fetch(`${scriptURL}?sheet=Abastecimentos`)
+        fetch(proxyURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheet: "Ganhos", method: "GET" })
+        }),
+        fetch(proxyURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheet: "Despesas", method: "GET" })
+        }),
+        fetch(proxyURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheet: "Abastecimentos", method: "GET" })
+        })
       ]);
 
       const ganhos = await ganhosRes.json();
       const despesas = await despesasRes.json();
       const abastecimentos = await abastecimentosRes.json();
 
-      // Totais
       const totalGanhos = ganhos.slice(1).reduce((acc, linha) => acc + (parseFloat(linha[4]) || 0), 0);
       const totalDespesas = despesas.slice(1).reduce((acc, linha) => acc + (parseFloat(linha[2]) || 0), 0);
       const totalCombustivel = abastecimentos.slice(1).reduce((acc, linha) => acc + (parseFloat(linha[1]) || 0), 0);
       const lucro = totalGanhos - (totalDespesas + totalCombustivel);
 
-      // Atualiza os cards
       document.getElementById('ganhosTotal').textContent = `R$ ${totalGanhos.toFixed(2)}`;
       document.getElementById('despesasTotal').textContent = `R$ ${totalDespesas.toFixed(2)}`;
       document.getElementById('combustivelTotal').textContent = `R$ ${totalCombustivel.toFixed(2)}`;
       document.getElementById('lucroEstimado').textContent = `R$ ${lucro.toFixed(2)}`;
 
-      // Gráfico de barras
       const ctx1 = document.getElementById('graficoMensal');
       new Chart(ctx1, {
         type: 'bar',
@@ -167,7 +177,6 @@
         }
       });
 
-      // Gráfico de pizza
       const ctx2 = document.getElementById('graficoPizza');
       new Chart(ctx2, {
         type: 'doughnut',
@@ -194,5 +203,6 @@
 </script>
 </body>
 </html>
+
 
 
