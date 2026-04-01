@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Privado</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .telegram { background: #229ED9; color: white; }
+    .bot { background: #ff0033; color: white; }
+    .whatsapp { background: #25D366; color: white; }
+
+    .warning {
+      font-size: 12px;
+      color: #888;
+      margin-top: 15px;
+    }
+
+    .contador {
+      font-size: 18px;
+      color: #ff4444;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .online {
+      font-size: 13px;
+      color: #00ff99;
+      margin-bottom: 10px;
+    }
+
+    .popup {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a1a;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #fff;
+      display: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🔒 Acesso Privado</h1>
+
+  <div class="contador">
+    ⏳ Oferta expira em: <span id="timer">05:00</span>
+  </div>
+
+  <div class="online" id="onlineUsers">
+    🔥 91 pessoas acessaram hoje
+  </div>
+
+  <p>Escolha como deseja acessar 👇</p>
+
+  <a id="telegramBtn" class="btn telegram" href="#">
+    🔥 Ver prévias no Telegram
+  </a>
+
+  <a id="botBtn" class="btn bot" href="#">
+    😈 Entrar direto no VIP
+  </a>
+
+  <a id="whatsBtn" class="btn whatsapp" href="#">
+    💬 Falar no WhatsApp
+  </a>
+
+  <p class="warning">
+    ⚠️ Conteúdo exclusivo e limitado
+  </p>
+
+</div>
+
+<div class="popup" id="popup"></div>
+
+<script>
+
+  // ==============================
+  // 🔥 CONFIG TRACKING (SEU LINK)
+  // ==============================
+
+  const TRACK_URL = "https://script.google.com/macros/s/AKfycbzBSk4dhPkf0vBDPZ6_I4DKj3nWyBoEwDSjs0_Felisny4sMbpPewbO9qYFAbBB5TvQVg/exec";
+
+  function track(evento) {
+    fetch(TRACK_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        evento: evento,
+        utm_source: utm_source,
+        utm_medium: utm_medium,
+        utm_campaign: utm_campaign,
+        utm_content: utm_content,
+        data: new Date().toISOString()
+      })
+    });
+  }
+
+  // ==============================
+  // 🔥 UTMs
+  // ==============================
+
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const utm_source = urlParams.get('utm_source') || 'direct';
+  const utm_medium = urlParams.get('utm_medium') || 'none';
+  const utm_campaign = urlParams.get('utm_campaign') || 'none';
+  const utm_content = urlParams.get('utm_content') || 'default';
+
+  // ==============================
+  // 🔥 LINKS
+  // ==============================
+
+  document.getElementById("telegramBtn").href =
+    "https://t.me/+ng_hkgSPhXxkYjFh";
+
+  document.getElementById("botBtn").href =
+    "https://redirect.vipgram.app/bo1a20w5" +
+    "?utm_source=" + utm_source +
+    "&utm_medium=" + utm_medium +
+    "&utm_campaign=" + utm_campaign +
+    "&utm_content=" + utm_content;
+
+  const mensagem = encodeURIComponent(
+    "oi vi o anúncio (" + utm_content + ") e quero saber a tabela de conteúdos 🔥"
+  );
+
+  document.getElementById("whatsBtn").href =
+    "https://wa.me/5531995472765?text=" + mensagem;
+
+  // ==============================
+  // 🔥 TRACKING EVENTOS
+  // ==============================
+
+  track("visita");
+
+  document.getElementById("telegramBtn").addEventListener("click", () => {
+    track("click_telegram");
+  });
+
+  document.getElementById("botBtn").addEventListener("click", () => {
+    track("click_bot");
+  });
+
+  document.getElementById("whatsBtn").addEventListener("click", () => {
+    track("click_whatsapp");
+  });
+
+  // ==============================
+  // ⏳ CONTADOR
+  // ==============================
+
+  let tempo = 300;
+
+  setInterval(() => {
+    let min = Math.floor(tempo / 60);
+    let sec = tempo % 60;
+
+    document.getElementById("timer").innerText =
+      String(min).padStart(2, '0') + ":" + String(sec).padStart(2, '0');
+
+    tempo--;
+    if (tempo < 0) tempo = 300;
+  }, 1000);
+
+  // ==============================
+  // 👥 ONLINE CRESCENTE
+  // ==============================
+
+  let numero = 91;
+
+  setInterval(() => {
+    numero += Math.floor(Math.random() * 2) + 1;
+
+    if (numero > 180) numero = 150;
+
+    document.getElementById("onlineUsers").innerText =
+      "🔥 " + numero + " pessoas acessaram hoje";
+  }, 5000);
+
+  // ==============================
+  // 💰 POPUP COMPRAS
+  // ==============================
+
+  const nomes = ["Carlos", "João", "Lucas", "Felipe", "André", "Rafael", "Bruno", "Marcos"];
+
+  function mostrarPopup() {
+    const nome = nomes[Math.floor(Math.random() * nomes.length)];
+    const popup = document.getElementById("popup");
+
+    popup.innerText = nome + " comprou agora 🔥";
+    popup.style.display = "block";
+
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 3000);
+  }
+
+  setInterval(mostrarPopup, 7000);
+
+</script>
+
+</body>
+</html>
