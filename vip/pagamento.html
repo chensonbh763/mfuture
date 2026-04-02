@@ -3,55 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <title>Gerador PIX</title>
-</head>
-<body>
-<h2>Gerar PIX</h2>
-<form id="pixForm">
-  <input name="nome" placeholder="Nome" required>
-  <input name="email" placeholder="Email" required>
-  <input name="cpf" placeholder="CPF" required>
-  <input name="valor" placeholder="Valor" required>
-  <button type="submit">Gerar PIX</button>
-</form>
 
-<div id="resultado"></div>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    background: #111827;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #1f2937;
+    color: white;
+}
+
+input::placeholder {
+    color: #9ca3af;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #22c55e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #16a34a;
+}
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.qr {
+    margin-top: 15px;
+}
+
+.copy-box {
+    background: #1f2937;
+    padding: 10px;
+    border-radius: 8px;
+    word-break: break-all;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.status {
+    margin-top: 10px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>💰 Gerar PIX</h2>
+
+    <form id="pixForm">
+        <input name="nome" placeholder="Nome completo" required>
+        <input name="email" placeholder="Email" required>
+        <input name="cpf" placeholder="CPF" required>
+        <input name="valor" placeholder="Valor (ex: 27)" required>
+        <button type="submit">Gerar Cobrança</button>
+    </form>
+
+    <div class="result" id="resultado"></div>
+</div>
 
 <script>
+const API_URL = "https://api.quantumpayments.com.br/v1/transactions";
+
+// ⚠️ NUNCA USE ISSO EM PRODUÇÃO (exposto)
+const API_KEY = "SUA_CHAVE_PRIVADA_AQUI";
+
 document.getElementById("pixForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const data = Object.fromEntries(formData.entries());
+    e.preventDefault();
 
-  try {
-    const res = await fetch("https://api.quantumpayments.com.br/v1/transactions", {
-      method: "POST",
-      headers: {
-        "Authorization": "Basic sk_nI4bptfQQx0qXk0rf6rQ5XTrojMbW2QtP8R5X-GvD0TVY4_-", // cuidado: expõe a chave
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        amount: parseInt(data.valor) * 100,
-        paymentMethod: "pix",
-        pix: { expiresInDays: 1 },
-        customer: {
-          name: data.nome,
-          email: data.email,
-          document: data.cpf
-        },
-        items: [{
-          title: "Pagamento",
-          unitPrice: parseInt(data.valor) * 100,
-          quantity: 1
-        }]
-      })
-    });
+    const btn = e.target.querySelector("button");
+    btn.innerText = "Gerando...";
+    btn.disabled = true;
 
-    const json = await res.json();
-    document.getElementById("resultado").innerText = JSON.stringify(json, null, 2);
-  } catch (err) {
-    alert("Erro: " + err.message);
-  }
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Authorization": "Basic " + btoa(API_KEY + ":"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                amount: parseInt(data.valor) * 100,
+                paymentMethod: "pix",
+                pix: { expiresInDays: 1 },
+                customer: {
+                    name: data.nome,
+                    email: data.email,
+                    document: data.cpf
+                },
+                items: [{
+                    title: "Pagamento",
+                    unitPrice: parseInt(data.valor) * 100,
+                    quantity: 1
+                }]
+            })
+        });
+
+        const json = await res.json();
+
+        if (!json.id) {
+            throw new Error("Erro ao gerar PIX");
+        }
+
+        renderResultado(json);
+
+    } catch (err) {
+        alert("Erro: " + err.message);
+    }
+
+    btn.innerText = "Gerar Cobrança";
+    btn.disabled = false;
 });
+
+function renderResultado(data) {
+    const div = document.getElementById("resultado");
+
+    let html = `
+        <div class="status">Status: ${data.status}</div>
+        <div>ID: ${data.id}</div>
+    `;
+
+    if (data.pix) {
+        html += `
+            <div class="qr">
+                <img src="data:image/png;base64,${data.pix.qrcode}" width="200">
+            </div>
+
+            <div class="copy-box" id="pixCode">${data.pix.emv}</div>
+
+            <button onclick="copiar()">Copiar Código PIX</button>
+        `;
+    }
+
+    div.innerHTML = html;
+
+    iniciarAutoCheck(data.id);
+}
+
+function copiar() {
+    const text = document.getElementById("pixCode").innerText;
+    navigator.clipboard.writeText(text);
+    alert("Código copiado!");
+}
+
+function iniciarAutoCheck(id) {
+    setInterval(async () => {
+        try {
+            const res = await fetch(`${API_URL}/${id}`, {
+                headers: {
+                    "Authorization": "Basic " + btoa(API_KEY + ":")
+                }
+            });
+
+            const json = await res.json();
+
+            document.querySelector(".status").innerText = "Status: " + json.status;
+
+            if (json.status === "paid") {
+                alert("✅ Pagamento aprovado!");
+            }
+
+        } catch (e) {}
+    }, 5000);
+}
 </script>
+
 </body>
 </html>
