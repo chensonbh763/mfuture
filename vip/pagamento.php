@@ -1,5 +1,5 @@
 <?php
-
+// Defina sua chave de API corretamente
 $chave = "sk_nI4bptfQQx0qXk0rf6rQ5XTrojMbW2QtP8R5X-GvD0TVY4_-";
 
 function criarPix($nome, $email, $cpf, $valor, $chave) {
@@ -28,8 +28,8 @@ function criarPix($nome, $email, $cpf, $valor, $chave) {
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => json_encode($data),
         CURLOPT_HTTPHEADER => [
-            "authorization: Basic $chave",
-            "content-type: application/json"
+            "Authorization: Basic $chave",
+            "Content-Type: application/json"
         ],
     ]);
 
@@ -45,7 +45,7 @@ function buscarPix($id, $chave) {
         CURLOPT_URL => "https://api.quantumpayments.com.br/v1/transactions/$id",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => [
-            "authorization: Basic $chave"
+            "Authorization: Basic $chave"
         ],
     ]);
 
@@ -58,7 +58,6 @@ function buscarPix($id, $chave) {
 $resultado = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     if (isset($_POST['gerar'])) {
         $resultado = criarPix(
             $_POST['nome'],
@@ -80,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="UTF-8">
 <title>Gerador PIX</title>
-
 <style>
 body {
     font-family: Arial;
@@ -89,7 +87,6 @@ body {
     text-align: center;
     padding: 30px;
 }
-
 .container {
     max-width: 400px;
     margin: auto;
@@ -97,7 +94,6 @@ body {
     padding: 20px;
     border-radius: 12px;
 }
-
 input, button {
     width: 100%;
     padding: 12px;
@@ -105,18 +101,15 @@ input, button {
     border-radius: 8px;
     border: none;
 }
-
 button {
     background: #22c55e;
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
-
 .qr {
     margin-top: 20px;
 }
-
 .copy {
     background: #334155;
     padding: 10px;
@@ -126,53 +119,39 @@ button {
 }
 </style>
 </head>
-
 <body>
-
 <div class="container">
+    <h2>Gerar PIX</h2>
+    <form method="POST">
+        <input name="nome" placeholder="Nome" required>
+        <input name="email" placeholder="Email" required>
+        <input name="cpf" placeholder="CPF" required>
+        <input name="valor" placeholder="Valor (ex: 27)" required>
+        <button type="submit" name="gerar">Gerar PIX</button>
+    </form>
 
-<h2>Gerar PIX</h2>
+    <hr>
 
-<form method="POST">
-<input name="nome" placeholder="Nome" required>
-<input name="email" placeholder="Email" required>
-<input name="cpf" placeholder="CPF" required>
-<input name="valor" placeholder="Valor (ex: 27)" required>
-<button type="submit" name="gerar">Gerar PIX</button>
-</form>
+    <h3>Consultar Status</h3>
+    <form method="POST">
+        <input name="txid" placeholder="ID da Transação">
+        <button type="submit" name="consultar">Ver Status</button>
+    </form>
 
-<hr>
+    <?php if ($resultado): ?>
+    <div class="qr">
+        <p><b>Status:</b> <?= htmlspecialchars($resultado['status'] ?? 'N/A') ?></p>
+        <p><b>ID:</b> <?= htmlspecialchars($resultado['id'] ?? 'N/A') ?></p>
 
-<h3>Consultar Status</h3>
-
-<form method="POST">
-<input name="txid" placeholder="ID da Transação">
-<button type="submit" name="consultar">Ver Status</button>
-</form>
-
-<?php if ($resultado): ?>
-
-<div class="qr">
-
-<p><b>Status:</b> <?= $resultado['status'] ?></p>
-<p><b>ID:</b> <?= $resultado['id'] ?></p>
-
-<?php if (isset($resultado['pix'])): ?>
-
-<img src="data:image/png;base64,<?= $resultado['pix']['qrcode'] ?>">
-
-<div class="copy" id="pixCode">
-<?= $resultado['pix']['emv'] ?>
-</div>
-
-<button onclick="copiar()">Copiar Código</button>
-
-<?php endif; ?>
-
-</div>
-
-<?php endif; ?>
-
+        <?php if (isset($resultado['pix'])): ?>
+            <img src="data:image/png;base64,<?= htmlspecialchars($resultado['pix']['qrcode']) ?>">
+            <div class="copy" id="pixCode">
+                <?= htmlspecialchars($resultado['pix']['emv']) ?>
+            </div>
+            <button onclick="copiar()">Copiar Código</button>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
 </div>
 
 <script>
@@ -181,12 +160,6 @@ function copiar() {
     navigator.clipboard.writeText(text);
     alert("Copiado!");
 }
-
-// auto refresh opcional
-setInterval(() => {
-    location.reload();
-}, 5000);
 </script>
-
 </body>
 </html>
