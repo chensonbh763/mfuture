@@ -1,86 +1,82 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Gerador PIX</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pagamento via PIX</title>
 
 <style>
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-    width: 100%;
-    max-width: 420px;
-    background: #111827;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 
 h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: none;
-    background: #1f2937;
-    color: white;
-}
-
-input::placeholder {
-    color: #9ca3af;
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background: #22c55e;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 button:hover {
-    background: #16a34a;
-}
-
-.result {
-    margin-top: 20px;
-    text-align: center;
+  opacity: 0.9;
 }
 
 .qr {
-    margin-top: 15px;
+  margin-top: 20px;
 }
 
-.copy-box {
-    background: #1f2937;
-    padding: 10px;
-    border-radius: 8px;
-    word-break: break-all;
-    margin-top: 10px;
-    font-size: 12px;
+.copy {
+  background: #334155;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 12px;
+  word-break: break-all;
 }
 
 .status {
-    margin-top: 10px;
-    font-weight: bold;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.loading {
+  margin-top: 10px;
+  color: #facc15;
 }
 </style>
 </head>
@@ -88,126 +84,112 @@ button:hover {
 <body>
 
 <div class="container">
-    <h2>💰 Gerar PIX</h2>
 
-    <form id="pixForm">
-        <input name="nome" placeholder="Nome completo" required>
-        <input name="email" placeholder="Email" required>
-        <input name="cpf" placeholder="CPF" required>
-        <input name="valor" placeholder="Valor (ex: 27)" required>
-        <button type="submit">Gerar Cobrança</button>
-    </form>
+<h2>💰 Gerar PIX</h2>
 
-    <div class="result" id="resultado"></div>
+<form id="pixForm">
+  <input name="nome" placeholder="Nome" required>
+  <input name="email" placeholder="Email" required>
+  <input name="cpf" placeholder="CPF" required>
+  <input name="valor" placeholder="Valor (ex: 15)" required>
+  <button type="submit">Gerar PIX</button>
+</form>
+
+<div id="resultado"></div>
+
 </div>
 
 <script>
-const API_URL = "https://api.quantumpayments.com.br/v1/transactions";
 
-// ⚠️ NUNCA USE ISSO EM PRODUÇÃO (exposto)
-const API_KEY = "SUA_CHAVE_PRIVADA_AQUI";
+const API_URL = "https://wallace-nontypographic-unskilfully.ngrok-free.dev";
+
+let transactionId = null;
+
+// ============================
+// GERAR PIX
+// ============================
 
 document.getElementById("pixForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const btn = e.target.querySelector("button");
-    btn.innerText = "Gerando...";
-    btn.disabled = true;
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+  document.getElementById("resultado").innerHTML =
+    "<p class='loading'>Gerando pagamento...</p>";
 
-    try {
-        const res = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-                "Authorization": "Basic " + btoa(API_KEY + ":"),
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                amount: parseInt(data.valor) * 100,
-                paymentMethod: "pix",
-                pix: { expiresInDays: 1 },
-                customer: {
-                    name: data.nome,
-                    email: data.email,
-                    document: data.cpf
-                },
-                items: [{
-                    title: "Pagamento",
-                    unitPrice: parseInt(data.valor) * 100,
-                    quantity: 1
-                }]
-            })
-        });
+  try {
 
-        const json = await res.json();
+    const res = await fetch(API_URL + "/criar-pix", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
 
-        if (!json.id) {
-            throw new Error("Erro ao gerar PIX");
-        }
+    const json = await res.json();
 
-        renderResultado(json);
+    transactionId = json.id;
 
-    } catch (err) {
-        alert("Erro: " + err.message);
-    }
+    document.getElementById("resultado").innerHTML = `
+      <div class="qr">
+        <p><b>Status:</b> <span id="status">${json.status}</span></p>
 
-    btn.innerText = "Gerar Cobrança";
-    btn.disabled = false;
-});
+        <img src="data:image/png;base64,${json.pix.qrcode}" width="200">
 
-function renderResultado(data) {
-    const div = document.getElementById("resultado");
+        <div class="copy" id="pixCode">${json.pix.emv}</div>
 
-    let html = `
-        <div class="status">Status: ${data.status}</div>
-        <div>ID: ${data.id}</div>
+        <button onclick="copiar()">Copiar Código</button>
+
+        <p class="loading">Aguardando pagamento...</p>
+      </div>
     `;
 
-    if (data.pix) {
-        html += `
-            <div class="qr">
-                <img src="data:image/png;base64,${data.pix.qrcode}" width="200">
-            </div>
+    verificarStatus();
 
-            <div class="copy-box" id="pixCode">${data.pix.emv}</div>
+  } catch (err) {
+    document.getElementById("resultado").innerHTML =
+      "<p style='color:red'>Erro ao gerar PIX</p>";
+  }
+});
 
-            <button onclick="copiar()">Copiar Código PIX</button>
-        `;
-    }
-
-    div.innerHTML = html;
-
-    iniciarAutoCheck(data.id);
-}
+// ============================
+// COPIAR PIX
+// ============================
 
 function copiar() {
-    const text = document.getElementById("pixCode").innerText;
-    navigator.clipboard.writeText(text);
-    alert("Código copiado!");
+  const text = document.getElementById("pixCode").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Código PIX copiado!");
 }
 
-function iniciarAutoCheck(id) {
-    setInterval(async () => {
-        try {
-            const res = await fetch(`${API_URL}/${id}`, {
-                headers: {
-                    "Authorization": "Basic " + btoa(API_KEY + ":")
-                }
-            });
+// ============================
+// VERIFICAR STATUS
+// ============================
 
-            const json = await res.json();
+async function verificarStatus() {
+  if (!transactionId) return;
 
-            document.querySelector(".status").innerText = "Status: " + json.status;
+  try {
+    const res = await fetch(API_URL + "/status/" + transactionId);
+    const json = await res.json();
 
-            if (json.status === "paid") {
-                alert("✅ Pagamento aprovado!");
-            }
+    document.getElementById("status").innerText = json.status;
 
-        } catch (e) {}
-    }, 5000);
+    if (json.status === "paid") {
+      document.getElementById("resultado").innerHTML +=
+        "<p style='color:#22c55e; font-weight:bold'>✅ PAGAMENTO APROVADO</p>";
+      return;
+    }
+
+    setTimeout(verificarStatus, 5000);
+
+  } catch (err) {
+    setTimeout(verificarStatus, 5000);
+  }
 }
+
 </script>
 
 </body>
