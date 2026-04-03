@@ -1,133 +1,152 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acesso Privado</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acesso Privado</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
 
-    .container {
-      max-width: 400px;
-      margin: auto;
-    }
+.container {
+  max-width: 400px;
+  margin: auto;
+}
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
-    p {
-      font-size: 14px;
-      color: #ccc;
-    }
+.sub {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
 
-    .btn {
-      display: block;
-      width: 100%;
-      margin: 12px 0;
-      padding: 14px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 15px;
-    }
+.btn {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  padding: 15px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
 
-    .telegram { background: #229ED9; color: white; }
-    .bot { background: #ff0033; color: white; }
-    .whatsapp { background: #25D366; color: white; }
+.bot {
+  background: #ff0033;
+  box-shadow: 0 0 15px rgba(255,0,51,0.5);
+}
 
-    .warning {
-      font-size: 12px;
-      color: #888;
-      margin-top: 15px;
-    }
+.whatsapp {
+  background: #25D366;
+}
 
-    .contador {
-      font-size: 18px;
-      color: #ff4444;
-      margin: 10px 0;
-      font-weight: bold;
-    }
+.telegram {
+  background: #229ED9;
+  opacity: 0.5;
+  font-size: 13px;
+}
 
-    .online {
-      font-size: 13px;
-      color: #00ff99;
-      margin-bottom: 10px;
-    }
+.timer {
+  font-size: 20px;
+  color: #ff4444;
+  font-weight: bold;
+  margin: 10px 0;
+}
 
-    .popup {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1a1a1a;
-      padding: 10px 15px;
-      border-radius: 10px;
-      font-size: 13px;
-      color: #fff;
-      display: none;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-  </style>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "w4sxa4yh0i");
+.online {
+  color: #00ff99;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.prova {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.warning {
+  font-size: 12px;
+  color: #888;
+  margin-top: 15px;
+}
+
+.popup {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  display: none;
+}
+</style>
+
+<script>
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "w4sxa4yh0i");
 </script>
-  
+
 </head>
 
 <body>
 
 <div class="container">
 
-  <h1>🔒 Acesso Privado Liberado</h1>
+<h1>🔒 Acesso Privado</h1>
 
-<div class="contador">
-  ⏳ Oferta expira em: <span id="timer">05:00</span>
+<p class="sub">
+Você já viu o suficiente…<br>
+O restante está disponível apenas no VIP 🔥
+</p>
+
+<div class="timer">
+⏳ Liberação expira em: <span id="timer">05:00</span>
 </div>
 
 <div class="online" id="onlineUsers">
-  🔥 91 pessoas acessando agora
+🔥 127 pessoas acessando agora
 </div>
 
-<p><b>Conteúdo exclusivo +18 disponível agora</b></p>
-
-<!-- BOTÃO PRINCIPAL -->
+<!-- BOT PRINCIPAL -->
 <a id="botBtn" class="btn bot" href="#">
-  🔥 ACESSAR VIP AGORA
+🔥 Comprar vip no TELEGRAM
 </a>
 
-<!-- PROVA SOCIAL -->
-<p style="font-size:13px;color:#00ff99;">
-✔ Acesso imediato após pagamento  
-✔ Conteúdo atualizado diariamente  
-✔ Mais de 1.000 membros ativos  
+<p class="prova">
+✔ Acesso imediato após confirmação  
+✔ Conteúdo exclusivo e atualizado  
+✔ Grupo no telegram   
 </p>
 
 <!-- WHATS -->
 <a id="whatsBtn" class="btn whatsapp" href="#">
-  💬 Tirar dúvida no WhatsApp
+💬 Comprar packs no whatsapp
 </a>
 
-<!-- TELEGRAM (REBAIXADO) -->
-<a id="telegramBtn" class="btn telegram" href="#" style="opacity:0.7;">
-  👀 Ver prévias grátis
-</a>
+<!-- TELEGRAM (BAIXO FOCO) desabilitado  
+<a id="telegramBtn" class="btn telegram" href="#">
+👀 Acesso limitado
+ </a>-->
 
 <p class="warning">
-⚠️ Últimas vagas disponíveis hoje
+⚠️ Disponível por tempo limitado hoje
 </p>
 
 </div>
@@ -136,131 +155,97 @@
 
 <script>
 
-  // ==============================
-  // 🔥 CONFIG TRACKING (SEU LINK)
-  // ==============================
+// TRACK
+const TRACK_URL = "https://script.google.com/macros/s/AKfycbzBSk4dhPkf0vBDPZ6_I4DKj3nWyBoEwDSjs0_Felisny4sMbpPewbO9qYFAbBB5TvQVg/exec";
 
-  const TRACK_URL = "https://script.google.com/macros/s/AKfycbzBSk4dhPkf0vBDPZ6_I4DKj3nWyBoEwDSjs0_Felisny4sMbpPewbO9qYFAbBB5TvQVg/exec";
-
-  function track(evento) {
-    fetch(TRACK_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        evento: evento,
-        utm_source: utm_source,
-        utm_medium: utm_medium,
-        utm_campaign: utm_campaign,
-        utm_content: utm_content,
-        data: new Date().toISOString()
-      })
-    });
-  }
-
-  // ==============================
-  // 🔥 UTMs
-  // ==============================
-
-  const urlParams = new URLSearchParams(window.location.search);
-
-  const utm_source = urlParams.get('utm_source') || 'direct';
-  const utm_medium = urlParams.get('utm_medium') || 'none';
-  const utm_campaign = urlParams.get('utm_campaign') || 'none';
-  const utm_content = urlParams.get('utm_content') || 'default';
-
-  // ==============================
-  // 🔥 LINKS
-  // ==============================
-
-  document.getElementById("telegramBtn").href =
-    "https://t.me/+ng_hkgSPhXxkYjFh";
-
-  document.getElementById("botBtn").href =
-    "https://redirect.vipgram.app/bo1a20w5" +
-    "?utm_source=" + utm_source +
-    "&utm_medium=" + utm_medium +
-    "&utm_campaign=" + utm_campaign +
-    "&utm_content=" + utm_content;
-
-  const mensagem = encodeURIComponent(
-    "oi vi o anúncio (" + utm_content + ") e quero saber a tabela de conteúdos 🔥"
-  );
-
-  document.getElementById("whatsBtn").href =
-    "https://wa.me/5531995472765?text=" + mensagem;
-
-  // ==============================
-  // 🔥 TRACKING EVENTOS
-  // ==============================
-
-  track("visita");
-
-  document.getElementById("telegramBtn").addEventListener("click", () => {
-    track("click_telegram");
+function track(evento) {
+  fetch(TRACK_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      evento,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_content,
+      data: new Date().toISOString()
+    })
   });
+}
 
-  document.getElementById("botBtn").addEventListener("click", () => {
-    track("click_bot");
-  });
+// UTMs
+const urlParams = new URLSearchParams(window.location.search);
 
-  document.getElementById("whatsBtn").addEventListener("click", () => {
-    track("click_whatsapp");
-  });
+const utm_source = urlParams.get('utm_source') || 'direct';
+const utm_medium = urlParams.get('utm_medium') || 'none';
+const utm_campaign = urlParams.get('utm_campaign') || 'none';
+const utm_content = urlParams.get('utm_content') || 'default';
 
-  // ==============================
-  // ⏳ CONTADOR
-  // ==============================
+// LINKS
+document.getElementById("botBtn").href =
+"https://redirect.vipgram.app/bo1a20w5" +
+"?utm_source=" + utm_source +
+"&utm_medium=" + utm_medium +
+"&utm_campaign=" + utm_campaign +
+"&utm_content=" + utm_content;
 
-  let tempo = 300;
+const msg = encodeURIComponent(
+"oi vi o anúncio (" + utm_content + ") e quero saber os preços 🔥"
+);
 
-  setInterval(() => {
-    let min = Math.floor(tempo / 60);
-    let sec = tempo % 60;
+document.getElementById("whatsBtn").href =
+"https://wa.me/5531995472765?text=" + msg;
 
-    document.getElementById("timer").innerText =
-      String(min).padStart(2, '0') + ":" + String(sec).padStart(2, '0');
+document.getElementById("telegramBtn").href =
+"https://t.me/+ng_hkgSPhXxkYjFh";
 
-    tempo--;
-    if (tempo < 0) tempo = 300;
-  }, 1000);
+// TRACK
+track("visita");
 
-  // ==============================
-  // 👥 ONLINE CRESCENTE
-  // ==============================
+document.getElementById("botBtn").onclick = () => track("click_bot");
+document.getElementById("whatsBtn").onclick = () => track("click_whatsapp");
+document.getElementById("telegramBtn").onclick = () => track("click_telegram");
 
-  let numero = 91;
+// TIMER
+let tempo = 300;
 
-  setInterval(() => {
-    numero += Math.floor(Math.random() * 2) + 1;
+setInterval(() => {
+  let min = Math.floor(tempo / 60);
+  let sec = tempo % 60;
 
-    if (numero > 180) numero = 150;
+  document.getElementById("timer").innerText =
+  String(min).padStart(2, '0') + ":" + String(sec).padStart(2, '0');
 
-    document.getElementById("onlineUsers").innerText =
-      "🔥 " + numero + " pessoas acessaram hoje";
-  }, 5000);
+  tempo--;
+  if (tempo < 0) tempo = 300;
+}, 1000);
 
-  // ==============================
-  // 💰 POPUP COMPRAS
-  // ==============================
+// ONLINE
+let numero = 127;
 
-  const nomes = ["Carlos", "João", "Lucas", "Felipe", "André", "Rafael", "Bruno", "Marcos"];
+setInterval(() => {
+  numero += Math.floor(Math.random() * 3);
+  if (numero > 230) numero = 140;
 
-  function mostrarPopup() {
-    const nome = nomes[Math.floor(Math.random() * nomes.length)];
-    const popup = document.getElementById("popup");
+  document.getElementById("onlineUsers").innerText =
+  "🔥 " + numero + " pessoas acessando agora";
+}, 4000);
 
-    popup.innerText = nome + " comprou agora 🔥";
-    popup.style.display = "block";
+// POPUP
+const nomes = ["Carlos","João","Lucas","Felipe","Rafael","Bruno"];
 
-    setTimeout(() => {
-      popup.style.display = "none";
-    }, 3000);
-  }
+function popup() {
+  const nome = nomes[Math.floor(Math.random() * nomes.length)];
+  const el = document.getElementById("popup");
 
-  setInterval(mostrarPopup, 7000);
+  el.innerText = nome + " entrou agora 🔥";
+  el.style.display = "block";
+
+  setTimeout(() => el.style.display = "none", 3000);
+}
+
+setInterval(popup, 8000);
 
 </script>
 
