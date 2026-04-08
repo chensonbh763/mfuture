@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubra sua Renda com IA</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #0d0d0d;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+h1 {
+  color: #00ffcc;
+}
+
+.btn {
+  display: block;
+  background: #1a1a1a;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #00ffcc;
+  color: #000;
+}
+
+.result {
+  display: none;
+}
+
+.cta {
+  background: #00ffcc;
+  color: #000;
+  padding: 15px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+ul {
+  text-align: left;
+  max-width: 400px;
+  margin: 15px auto;
+}
+
+li {
+  margin: 8px 0;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🤖 Descubra Como Você Pode Ganhar Dinheiro com IA</h1>
+
+<div id="quiz">
+
+  <div class="question" id="q1">
+    <p>Você quer aparecer ou prefere ficar anônimo?</p>
+    <div class="btn" onclick="next()">Prefiro não aparecer</div>
+    <div class="btn" onclick="next()">Posso aparecer</div>
+  </div>
+
+  <div class="question" id="q2" style="display:none;">
+    <p>Quanto tempo você tem por dia?</p>
+    <div class="btn" onclick="next()">Menos de 2h</div>
+    <div class="btn" onclick="next()">2 a 4h</div>
+    <div class="btn" onclick="next()">Mais de 4h</div>
+  </div>
+
+  <div class="question" id="q3" style="display:none;">
+    <p>Qual seu objetivo principal?</p>
+    <div class="btn" onclick="finish('rapido')">Ganhar dinheiro rápido</div>
+    <div class="btn" onclick="finish('escala')">Construir renda crescente</div>
+  </div>
+
+</div>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<script>
+
+let step = 1;
+
+function next(){
+  document.getElementById("q"+step).style.display = "none";
+  step++;
+  document.getElementById("q"+step).style.display = "block";
+}
+
+function finish(type){
+  document.getElementById("quiz").style.display = "none";
+
+  let resultTitle = "";
+  let resultDesc = "";
+
+  if(type === "rapido"){
+    resultTitle = "💰 Seu caminho ideal: Renda Rápida com IA";
+    resultDesc = "Você tem o perfil perfeito para começar rápido usando inteligência artificial e gerar dinheiro sem aparecer.";
+  } else {
+    resultTitle = "🚀 Seu caminho ideal: Renda Escalável com IA";
+    resultDesc = "Você tem o perfil ideal para construir uma renda crescente com automações e sistemas inteligentes.";
+  }
+
+  document.getElementById("result").innerHTML = `
+    <h2>${resultTitle}</h2>
+    <p>${resultDesc}</p>
+
+    <p style="color:#aaa; font-size:14px;">
+      +1.000 pessoas já começaram com esse método
+    </p>
+
+    <h3>🔥 O que você vai conseguir:</h3>
+    <ul>
+      <li>✔️ Criar renda mesmo começando do zero</li>
+      <li>✔️ Usar IA pra trabalhar por você 24h</li>
+      <li>✔️ Criar vídeos, apps e automações</li>
+      <li>✔️ Possibilidade real de ganhar dinheiro online</li>
+    </ul>
+
+    <p style="color:#00ffcc; font-weight:bold;">
+      ⚠️ Essa oportunidade pode sair do ar a qualquer momento
+    </p>
+
+    <h3>⏳ Oferta expira em:</h3>
+    <div id="timer" style="font-size:28px; color:#ff4d4d; font-weight:bold;">05:00</div>
+
+    <a class="cta" href="https://pay.cakto.com.br/pk4nopv?affiliate=eZb3s6En&utm_source=quiz&utm_medium=site&utm_campaign=ia_academy" target="_blank">
+      🔥 QUERO COMEÇAR AGORA
+    </a>
+  `;
+
+  document.getElementById("result").style.display = "block";
+
+  startTimer(300);
+}
+
+function startTimer(duration) {
+  let timer = duration, minutes, seconds;
+
+  const interval = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    document.getElementById("timer").textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      clearInterval(interval);
+      document.getElementById("timer").textContent = "Encerrado!";
+    }
+  }, 1000);
+}
+
+</script>
+
+</body>
+</html>
